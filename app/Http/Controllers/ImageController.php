@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use Illuminate\Http\Request;
 use App\Image;
 
@@ -25,10 +26,15 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
-        $img = new Image();
-        $img->name = "The first image";
-        $img->caption = "This is a magnificent caption!";
+        $rules = [
+            'name' => 'required'
+        ];
+
+        $request->validate($rules);
+
+        $img = new Image($request->all());
         $img->save();
+
         return Response("OK!");
     }
 
