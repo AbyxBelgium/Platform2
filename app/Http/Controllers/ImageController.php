@@ -15,7 +15,15 @@ class ImageController extends Controller
      */
     public function index()
     {
-        return Response(Image::all());
+        $images = [];
+        foreach (Image::all() as $img) {
+            if (request()->wantsJson()) {
+                array_push($images, $img->toJson());
+            } else {
+                // TODO fix for HTML view
+            }
+        }
+        return Response($images);
     }
 
     /**
@@ -35,7 +43,7 @@ class ImageController extends Controller
         $img = new Image($request->all());
         $img->save();
 
-        return Response("OK!");
+        return $this->convertImageToRequest($img);
     }
 
     /**
@@ -48,11 +56,13 @@ class ImageController extends Controller
     {
         $img = Image::find($id);
         if (request()->wantsJson()) {
-            return ["name" => $img->name];
+            return Response($img->toJson());
         }
 
         return Response($img->name);
     }
+
+
 
     /**
      * Update the specified resource in storage.
@@ -63,7 +73,8 @@ class ImageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $img = Image::find($id)->update($request->all());
+        return $this->convertImageToRequest($img);
     }
 
     /**
@@ -74,6 +85,20 @@ class ImageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Image::destroy($id);
+    }
+
+    /**
+     * Prepare an HTTP response based on the given image model. This method returns JSON if needed or an HTML view
+     * otherwise.
+     *
+     * @param Image $img
+     * @return \Illuminate\Http\Response
+     */
+    private function convertImageToRequest(Image $img) {
+        if (request()->wantsJson()) {
+            return Response($img->toJson());
+        }
+        return Response($img->name);
     }
 }
