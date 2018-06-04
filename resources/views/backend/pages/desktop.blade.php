@@ -9,9 +9,9 @@
         <div title="Categories" class="material-icons mdl-badge mdl-badge--overlap statistic-badge" data-badge="2">toc</div>
         <div title="Total pageviews" class="material-icons mdl-badge mdl-badge--overlap statistic-badge" data-badge="312">remove_red_eye</div>
         <div title="Platform version" class="material-icons mdl-badge mdl-badge--overlap statistic-badge" data-badge="1.3">update</div>
-        <div title="Memory usage" class="material-icons mdl-badge mdl-badge--overlap statistic-badge" id="mem-badge" data-badge="52%">memory</div>
-        <div title="Storage usage" class="material-icons mdl-badge mdl-badge--overlap statistic-badge" id="storage-badge" data-badge="75%">storage</div>
-        <div title="Current CPU load" class="material-icons mdl-badge mdl-badge--overlap statistic-badge" id="cpu-badge" data-badge="10%">settings_applications</div>
+        <div title="Memory usage" class="material-icons mdl-badge mdl-badge--overlap statistic-badge" id="mem-badge" data-badge="{{ $resourceManager->getMemoryLoad() }}%">memory</div>
+        <div title="Storage usage" class="material-icons mdl-badge mdl-badge--overlap statistic-badge" id="storage-badge" data-badge="{{ $resourceManager->getStorageUsage() }}%">storage</div>
+        <div title="Current CPU load" class="material-icons mdl-badge mdl-badge--overlap statistic-badge" id="cpu-badge" data-badge="{{ $resourceManager->getCPULoad()  }}%">settings_applications</div>
     </div>
 
     <div class="mdl-cell mdl-cell--12-col">

@@ -11,8 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('backend.pages.desktop');
-});
+Route::get('/', 'DesktopController@show');
 
 Route::resource('image', 'ImageController');
