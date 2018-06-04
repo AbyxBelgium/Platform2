@@ -3,12 +3,12 @@
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
     <head>
-        @include('includes.head')
+        @include('backend.includes.head')
     </head>
     <body>
         <div class="mdl-layout content mdl-js-layout mdl-layout--fixed-header">
-            @include('includes.navbar')
-            @include('includes.sidenav')
+            @include('backend.includes.navbar')
+            @include('backend.includes.sidenav')
             <main class="mdl-layout__content" style="flex: 1 0 auto;">
                 <div class="mdl-grid page-content">
                     @yield('content')

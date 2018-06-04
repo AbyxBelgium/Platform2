@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('pages.home');
+    return view('backend.pages.desktop');
 });
 
 Route::resource('image', 'ImageController');
