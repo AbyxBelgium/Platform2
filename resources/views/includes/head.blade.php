@@ -4,7 +4,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>This is a title!</title>
+<title>@yield('title')</title>
 
 <!-- Material Design Lite stylesheets -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -12,3 +12,6 @@
 
 <!-- Material Design Lite script -->
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+<!-- Own style -->
+<link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
