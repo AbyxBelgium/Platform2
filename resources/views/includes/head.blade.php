@@ -15,3 +15,6 @@
 
 <!-- Own style -->
 <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
+<!-- All supported icons -->
+<link rel="stylesheet" href="{{ URL::asset('css/icons.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('css/icon-font.css') }}">

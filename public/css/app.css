@@ -2,3 +2,14 @@
   max-width: 1400px;
 }
 
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.mdl-navigation__link .icon {
+  /* Fix the positioning of this element (This is screwed up by default in Material Design Lite) */
+  position: relative;
+  top: 5px;
+  left: -3px;
+}
+
