@@ -63,3 +63,22 @@
         </table>
     </div>
 @stop()
+
+@section('javascript')
+    <script>
+        let $cpuBadge = $("#cpu-badge");
+        let $memBadge = $("#mem-badge");
+        let $storageBadge = $("#storage-badge");
+
+        let refresh = function() {
+            $.ajax("/api/system-resources")
+                .done(function(data) {
+                    $memBadge.attr("data-badge", data["memory"] + "%");
+                    $cpuBadge.attr("data-badge", data["cpu"] + "%");
+                    $storageBadge.attr("data-badge", data["storage"] + "%");
+                })
+        };
+
+        setInterval(refresh, 5000);
+    </script>
+@stop()
