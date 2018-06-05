@@ -16,5 +16,6 @@
             </main>
         </div>
     </body>
+    @yield('custom-style')
     @yield('javascript')
 </html>

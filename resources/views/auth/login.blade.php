@@ -29,10 +29,29 @@
                         <span class="mdl-textfield__error">Cannot be blank!</span>
                     @endif
                 </div>
+
+                <a id="reset_password_link" href="/password/reset"><span class="icon icon-help_outline"></span> Forgot password?</a>
+
                 <div class="mdl-layout-spacer"></div>
                 <button id="login" type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">Sign in</button>
             </form>
         </div>
 
     </div>
+@stop()
+
+@section('custom-style')
+    <style>
+        #reset_password_link {
+            position: relative;
+            top: -15px;
+            text-decoration: none;
+        }
+
+        #reset_password_link > span {
+            position: relative;
+            top: 2px;
+            font-size: 16px;
+        }
+    </style>
 @stop()

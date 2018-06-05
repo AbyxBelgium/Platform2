@@ -10,7 +10,7 @@
     </div>
     <div class="mdl-cell mdl-cell--9-col">
         <span class="mdl-layout__title">
-            <h3>Register:</h3>
+            <h3>Reset password:</h3>
         </span>
         <div class="input-form-group email">
             <form method="POST" action="{{ route('password.email') }}">

@@ -45,8 +45,6 @@
                     <input id="password-confirm" type="password" class="mdl-textfield__input" required name="password_confirmation">
                 </div>
 
-                <a href="/"></a>
-
                 <div class="mdl-layout-spacer"></div>
                 <button id="register" type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">Register</button>
             </form>
