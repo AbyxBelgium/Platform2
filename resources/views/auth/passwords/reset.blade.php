@@ -12,7 +12,7 @@
         <span class="mdl-layout__title">
             <h3>Register:</h3>
         </span>
-        <div class="input-form-group register">
+        <div class="input-form-group reset">
             <form method="POST" action="{{ route('password.request') }}">
                 @csrf
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -37,7 +37,7 @@
                 </div>
 
                 <div class="mdl-layout-spacer"></div>
-                <button id="register" type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">{{ __('Reset Password') }}</button>
+                <button id="reset" type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">{{ __('Reset Password') }}</button>
             </form>
         </div>
     </div>
