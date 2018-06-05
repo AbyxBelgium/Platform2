@@ -14,6 +14,7 @@
                     @yield('content')
                 </div>
             </main>
+            @include('backend.includes.footer')
         </div>
     </body>
     @yield('custom-style')
