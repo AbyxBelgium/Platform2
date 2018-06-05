@@ -9,5 +9,8 @@
         <nav class="mdl-navigation mdl-layout--large-screen-only">
             <a class="mdl-navigation__link" href="/"><span class="icon icon-home"></span>Desktop</a>
         </nav>
+        <nav class="mdl-navigation mdl-layout--large-screen-only">
+            <a class="mdl-navigation__link" href="/logout"><span class="icon icon-play_for_work"></span>Logout</a>
+        </nav>
     </div>
 </header>

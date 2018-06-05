@@ -14,3 +14,7 @@
 Route::get('/', 'DesktopController@show');
 
 Route::resource('image', 'ImageController');
+
+Auth::routes();
+
+Route::get('/logout', 'Auth\LoginController@logout');

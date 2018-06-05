@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Response;
 
 class DesktopController extends Controller
 {
+    public function __construct() {
+        $this->middleware("auth");
+    }
+
     /**
      * Initialize the desktop page.
      *
