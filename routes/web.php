@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'DesktopController@show');
+Route::get('/backend', 'DesktopController@show');
 
 Route::resource('image', 'ImageController');
 
