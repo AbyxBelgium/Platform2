@@ -30,7 +30,8 @@
                     @endif
                 </div>
 
-                <a id="reset_password_link" href="/password/reset"><span class="icon icon-help_outline"></span> Forgot password?</a>
+                <a class="account-helper" id="register-link" href="/register"><span class="icon icon-vpn_key"></span> Register</a>
+                <a class="account-helper" id="reset-password-link" href="/password/reset"><span class="icon icon-help_outline"></span> Forgot password?</a>
 
                 <div class="mdl-layout-spacer"></div>
                 <button id="login" type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">Sign in</button>
@@ -42,13 +43,13 @@
 
 @section('custom-style')
     <style>
-        #reset_password_link {
+        .account-helper {
             position: relative;
             top: -15px;
             text-decoration: none;
         }
 
-        #reset_password_link > span {
+        .account-helper > span {
             position: relative;
             top: 2px;
             font-size: 16px;
