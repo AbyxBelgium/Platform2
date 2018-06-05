@@ -54,5 +54,9 @@
             top: 2px;
             font-size: 16px;
         }
+
+        #reset-password-link {
+            float: right;
+        }
     </style>
 @stop()
