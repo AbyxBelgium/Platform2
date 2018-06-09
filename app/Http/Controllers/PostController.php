@@ -43,7 +43,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        // TODO: Fix categories!
+        // TODO: Fix categories! Fix tags!
         $rules = [
             'title' => 'required',
             'content' => 'required',
