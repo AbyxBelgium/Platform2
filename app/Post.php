@@ -10,7 +10,11 @@ class Post extends Model
         return $this->belongsToMany('App\Tag');
     }
 
-    public function user() {
-        return $this->belongsTo('App\User');
+    public function user($user=null) {
+        if ($user == null) {
+            return $this->belongsTo('App\User');
+        } else {
+            $this->user()->associate($user);
+        }
     }
 }

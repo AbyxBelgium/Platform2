@@ -17,7 +17,7 @@
                 @csrf
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <label class="mdl-textfield__label" for="email">E-mail:</label>
-                    <input id="email" type="email" class="mdl-textfield__input" value="{{ old('email') }}" required autofocus name="email" pattern=".+">
+                    <input id="email" type="email" class="mdl-textfield__input" value="{{ old('email') }}" required name="email" pattern=".+">
                     @if ($errors->has('email'))
                         <span class="mdl-textfield__error">Must be a valid email address!</span>
                     @endif

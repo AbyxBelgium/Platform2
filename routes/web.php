@@ -11,10 +11,21 @@
 |
 */
 
-Route::get('/backend', 'DesktopController@show');
+$BACKEND_ROOT = "/backend";
 
+// Authentication
+Auth::routes();
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
+
+// Custom backend pages
+Route::get($BACKEND_ROOT, 'DesktopController@show')->name('backend/index');
+
+// Images
+// TODO modify to use correct backend and frontend path
 Route::resource('image', 'ImageController');
 
-Auth::routes();
-
-Route::get('/logout', 'Auth\LoginController@logout');
+// Posts
+Route::get('/post/{id}', 'PostController@show')->name('post/show');
+Route::get($BACKEND_ROOT . '/post/create', 'PostController@create')->name('backend/post/create');
+Route::post($BACKEND_ROOT . '/post', 'PostController@store')->name('backend/post/store');
+Route::get($BACKEND_ROOT . '/posts', 'PostController@index')->name('backend/post/index');
