@@ -15,33 +15,33 @@
     </div>
 
     <div class="mdl-cell mdl-cell--12-col">
-                <span class="mdl-layout__title">
-                    <h3>Recent posts:</h3>
-                </span>
+        <span class="mdl-layout__title">
+            <h3>Recent posts:</h3>
+        </span>
         <div>
-            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp" id="post-list" data-upgraded=",MaterialDataTable">
+            <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" id="post-list">
                 <thead>
-                    <tr>
-                        <th class="mdl-data-table__cell--non-numeric">Title</th>
-                        <th class="mdl-data-table__cell--non-numeric action-col">Actions</th>
-                    </tr>
+                <tr>
+                    <th class="mdl-data-table__cell--non-numeric">Title</th>
+                    <th class="mdl-data-table__cell--non-numeric action-col">Actions</th>
+                </tr>
                 </thead>
                 <tbody>
+                @foreach($posts as $post)
+                    <tr>
+                        <td class="resizable-col">{{ $post->title }}</td>
+                        <td class="action-col">
+                            <a class="action" href="{{ route('backend/post/edit', ['id' => $post->id]) }}">
+                                <span class="icon icon-mode_edit icon-colored" title="Edit post"></span>
+                            </a>
+                            <a class="action" href="{{ route('post/show', ['id' => $post->id]) }}">
+                                <span class="icon icon-pageview icon-colored" title="View post"></span>
+                            </a>
+                        </td>
+                    </tr>
+                @endforeach
                 </tbody>
             </table>
-        </div>
-        <div class="center nav-buttons">
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect small-button" id="post-previous-btn" data-upgraded=",MaterialButton">
-                <span class="icon icon-keyboard_arrow_left"></span>
-                <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></button>
-            <a class="no-link" id="post-start">000</a>
-            <a class="no-link"> - </a>
-            <a class="no-link" id="post-end">015</a>
-            <a class="no-link"> from </a>
-            <a class="no-link" id="post-total">017</a>
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect small-button" id="post-next-btn" data-upgraded=",MaterialButton">
-                <span class="icon icon-keyboard_arrow_right"></span>
-                <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></button>
         </div>
     </div>
 

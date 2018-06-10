@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Managers\SystemResourceManager;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 
 class DesktopController extends Controller
@@ -19,6 +20,7 @@ class DesktopController extends Controller
      * @return Response
      */
     public function show(SystemResourceManager $resourceManager) {
-        return view('backend.pages.desktop', ["resourceManager" => $resourceManager]);
+        $posts = DB::table('posts')->take(10)->get();
+        return view('backend.pages.desktop', ["resourceManager" => $resourceManager, 'posts' => $posts]);
     }
 }
