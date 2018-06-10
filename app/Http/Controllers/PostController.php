@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 
@@ -22,7 +23,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = DB::table('posts')->simplePaginate(15);
+        return view('backend.pages.post.index', ["posts" => $posts]);
     }
 
     /**

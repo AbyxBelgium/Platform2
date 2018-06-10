@@ -8,10 +8,7 @@
         <!-- Navigation. We hide it in small screens. -->
         @if(Auth::check())
             <nav class="mdl-navigation mdl-layout--large-screen-only">
-                <a class="mdl-navigation__link" href="/"><span class="icon icon-home"></span>Desktop</a>
-            </nav>
-            <nav class="mdl-navigation mdl-layout--large-screen-only">
-                <a class="mdl-navigation__link" href="/logout"><span class="icon icon-play_for_work"></span>Logout</a>
+                @include('backend.includes.nav')
             </nav>
         @endif()
     </div>
