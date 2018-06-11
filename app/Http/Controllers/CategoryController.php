@@ -2,20 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Post;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Validator;
 
-class PostController extends Controller
+class CategoryController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth', ['except' => 'show']);
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -23,8 +13,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = DB::table('posts')->simplePaginate(15);
-        return view('backend.pages.post.index', ["posts" => $posts]);
+        $categories = DB::table('categories')->simplePaginate(15);
+        return view('backend.pages.category.index', ['categories' => $categories]);
     }
 
     /**
@@ -34,7 +24,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('backend.pages.post.create');
+        //
     }
 
     /**
@@ -45,27 +35,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        // TODO: Fix categories! Fix tags!
-        $rules = [
-            'title' => 'required',
-            'content' => 'required',
-            'tags' => 'required'
-        ];
-
-        $validator = Validator::make(Input::all(), $rules);
-
-        if ($validator->fails()) {
-            return redirect()->route('backend/post/create')->withErrors($validator->errors())->withInput(Input::all());
-        } else {
-            $post = new Post();
-            $post->title = Input::get('title');
-            $post->content = Input::get('content');
-            $post->user(Auth::user());
-            $post->save();
-
-            return redirect()->route('backend/post/index');
-        }
-
+        //
     }
 
     /**
@@ -76,7 +46,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -87,7 +57,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-
+        //
     }
 
     /**

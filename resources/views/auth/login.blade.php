@@ -12,6 +12,16 @@
         <span class="mdl-layout__title">
             <h3>Sign in:</h3>
         </span>
+        @if($errors->count())
+            <div class="error">
+                <p>Following errors occurred:</p>
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="input-form-group login">
             <form method="POST" action="{{ route('login') }}">
                 @csrf

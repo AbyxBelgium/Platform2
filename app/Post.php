@@ -17,4 +17,12 @@ class Post extends Model
             $this->user()->associate($user);
         }
     }
+
+    public function category($category=null) {
+        if ($category == null) {
+            return $this->belongsTo('App\Category');
+        } else {
+            $this->category()->associate($category);
+        }
+    }
 }
