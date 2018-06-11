@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Managers\IconManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -28,9 +29,9 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(IconManager $iconManager)
     {
-        return view('backend.pages.category.create');
+        return view('backend.pages.category.create', ['iconManager' => $iconManager]);
     }
 
     /**
