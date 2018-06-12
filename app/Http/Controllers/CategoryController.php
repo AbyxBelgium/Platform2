@@ -55,7 +55,7 @@ class CategoryController extends Controller
         if ($validator->fails()) {
             return redirect()->route('backend/category/create')->withErrors($validator->errors())->withInput();
         } else if (!in_array(Input::get('icon'), $iconManager->icons)) {
-            return redirect()->route('backend/category/create')->withErrors(['icon', 'The provided icon is not a valid icon!']);
+            return redirect()->route('backend/category/create')->withErrors(['icon' => 'The provided icon is not a valid icon!'])->withInput();
         } else {
             $category = new Category();
             $category->name = Input::get('name');
