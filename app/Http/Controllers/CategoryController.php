@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Managers\IconManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
@@ -42,7 +45,23 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'name' => 'required',
+            'icon' => 'required'
+        ];
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return redirect()->route('backend/category/create')->withErrors($validator->errors())->withInput(Input::all());
+        } else {
+            $category = new Category();
+            $category->name = Input::get('name');
+            $category->icon = Input::get('icon');
+            $category->save();
+
+            return redirect()->route('backend/category/index');
+        }
     }
 
     /**

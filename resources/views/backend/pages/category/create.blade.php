@@ -1,7 +1,7 @@
 @extends('backend.layouts.default')
 
 @section('title')
-    Create new post
+    Create new category
 @stop()
 
 @section('content')
@@ -79,7 +79,7 @@
         }
 
         .selected-icon {
-            color: red;
+            color: rgb(255,82,82);
         }
 
         #icons {
