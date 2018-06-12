@@ -21,6 +21,17 @@ class DesktopController extends Controller
      */
     public function show(SystemResourceManager $resourceManager) {
         $posts = DB::table('posts')->take(10)->get();
-        return view('backend.pages.desktop', ["resourceManager" => $resourceManager, 'posts' => $posts]);
+
+        $categoryCount = DB::table('categories')->count();
+        $postCount = DB::table('posts')->count();
+        $userCount = DB::table('users')->count();
+
+        return view('backend.pages.desktop', [
+            'resourceManager' => $resourceManager,
+            'categoryCount' => $categoryCount,
+            'postCount' => $postCount,
+            'userCount' => $userCount,
+            'posts' => $posts
+        ]);
     }
 }
