@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
+    private $rules = [
+        'name' => 'required',
+        'icon' => 'required'
+    ];
+
     public function __construct()
     {
         $this->middleware('auth', ['except' => 'show']);
@@ -45,25 +50,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request, IconManager $iconManager)
     {
-        $rules = [
-            'name' => 'required',
-            'icon' => 'required'
-        ];
-
-        $validator = Validator::make(Input::all(), $rules);
-
-        if ($validator->fails()) {
-            return redirect()->route('backend/category/create')->withErrors($validator->errors())->withInput();
-        } else if (!in_array(Input::get('icon'), $iconManager->icons)) {
-            return redirect()->route('backend/category/create')->withErrors(['icon' => 'The provided icon is not a valid icon!'])->withInput();
-        } else {
-            $category = new Category();
-            $category->name = Input::get('name');
-            $category->icon = Input::get('icon');
-            $category->save();
-
-            return redirect()->route('backend/category/index');
-        }
+        return $this->storeOrUpdate(new Category(), $iconManager);
     }
 
     /**
@@ -83,9 +70,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, IconManager $iconManager)
     {
-        //
+        $category = Category::find($id);
+        return view('backend.pages.category.edit', ['category' => $category, 'iconManager' => $iconManager]);
     }
 
     /**
@@ -95,9 +83,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, IconManager $iconManager)
     {
-        //
+        $category = Category::find($id);
+        return $this->storeOrUpdate($category, $iconManager);
     }
 
     /**
@@ -109,5 +98,21 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    private function storeOrUpdate(Category $category, IconManager $iconManager) {
+        $validator = Validator::make(Input::all(), $this->rules);
+
+        if ($validator->fails()) {
+            return redirect()->route('backend/category/create')->withErrors($validator->errors())->withInput();
+        } else if (!in_array(Input::get('icon'), $iconManager->icons)) {
+            return redirect()->route('backend/category/create')->withErrors(['icon' => 'The provided icon is not a valid icon!'])->withInput();
+        } else {
+            $category->name = Input::get('name');
+            $category->icon = Input::get('icon');
+            $category->save();
+
+            return redirect()->route('backend/category/index');
+        }
     }
 }

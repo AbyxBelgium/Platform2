@@ -37,3 +37,4 @@ Route::get($BACKEND_ROOT . '/category/create', 'CategoryController@create')->nam
 Route::post($BACKEND_ROOT . '/category', 'CategoryController@store')->name('backend/category/store');
 Route::get($BACKEND_ROOT . '/categories', 'CategoryController@index')->name('backend/category/index');
 Route::get($BACKEND_ROOT . '/category/edit/{id}', 'CategoryController@edit')->name('backend/category/edit');
+Route::put($BACKEND_ROOT . '/category/{id}', 'CategoryController@update')->name('backend/category/update');
