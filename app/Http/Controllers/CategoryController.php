@@ -43,7 +43,7 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, IconManager $iconManager)
     {
         $rules = [
             'name' => 'required',
@@ -53,7 +53,9 @@ class CategoryController extends Controller
         $validator = Validator::make(Input::all(), $rules);
 
         if ($validator->fails()) {
-            return redirect()->route('backend/category/create')->withErrors($validator->errors())->withInput(Input::all());
+            return redirect()->route('backend/category/create')->withErrors($validator->errors())->withInput();
+        } else if (!in_array(Input::get('icon'), $iconManager->icons)) {
+            return redirect()->route('backend/category/create')->withErrors(['icon', 'The provided icon is not a valid icon!']);
         } else {
             $category = new Category();
             $category->name = Input::get('name');

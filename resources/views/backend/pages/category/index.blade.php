@@ -13,6 +13,7 @@
         <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" id="post-list">
             <thead>
             <tr>
+                <th class="mdl-data-table__cell--non-numeric">Icon</th>
                 <th class="mdl-data-table__cell--non-numeric">Name</th>
                 <th class="mdl-data-table__cell--non-numeric action-col">Actions</th>
             </tr>
@@ -20,7 +21,12 @@
             <tbody>
             @foreach($categories as $category)
                 <tr>
-                    <td class="resizable-col">{{ $category->name }}</td>
+                    <td class="resizable-col">
+                        <span class="icon icon-{{ $category->icon }}"></span>
+                    </td>
+                    <td class="resizable-col">
+                        {{ $category->name }}
+                    </td>
                     <td class="action-col">
                         <a class="action" href="{{ route('backend/category/edit', ['id' => $category->id]) }}">
                             <span class="icon icon-mode_edit icon-colored" title="Edit category"></span>
@@ -35,4 +41,10 @@
         </table>
         {{ $categories->links('backend.includes.pagination') }}
     </div>
+@stop()
+
+@section('custom-style')
+    <style>
+
+    </style>
 @stop()

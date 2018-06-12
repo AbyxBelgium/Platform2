@@ -12,13 +12,13 @@
         <form method="POST" action="{{ route('backend/category/store') }}">
             @csrf
 
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @if($errors->has('name')) is-invalid @endif">
                 <label class="mdl-textfield__label" for="name">Name:</label>
                 <input class="mdl-textfield__input" type="text" id="name" name="name" value="{{ old('name') }}" required />
                 <span class="mdl-textfield__error">Name cannot be empty!</span>
             </div>
 
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="icon-input">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @if($errors->has('icon')) is-invalid @endif" id="icon-input">
                 <label class="mdl-textfield__label" for="icon">Icon:</label>
                 <input class="mdl-textfield__input" type="text" id="icon" name="icon" value="{{ old('icon') }}" required />
                 <span class="mdl-textfield__error">Please enter a valid icon!</span>

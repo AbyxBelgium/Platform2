@@ -25,19 +25,17 @@
         <div class="input-form-group login">
             <form method="POST" action="{{ route('login') }}">
                 @csrf
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @if($errors->has('email')) is-invalid @endif">
                     <label class="mdl-textfield__label" for="email">E-mail:</label>
                     <input id="email" type="email" class="mdl-textfield__input" value="{{ old('email') }}" required name="email" pattern=".+">
                     @if ($errors->has('email'))
                         <span class="mdl-textfield__error">Must be a valid email address!</span>
                     @endif
                 </div>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @if($errors->has('password')) is-invalid @endif">
                     <label class="mdl-textfield__label" for="password">Password:</label>
                     <input id="password" type="password" class="mdl-textfield__input" required name="password">
-                    @if ($errors->has('password'))
-                        <span class="mdl-textfield__error">Cannot be blank!</span>
-                    @endif
+                    <span class="mdl-textfield__error">Please provide a valid password!</span>
                 </div>
 
                 <a class="account-helper" id="register-link" href="/register"><span class="icon icon-vpn_key"></span> Register</a>

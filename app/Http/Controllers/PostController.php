@@ -55,7 +55,7 @@ class PostController extends Controller
         $validator = Validator::make(Input::all(), $rules);
 
         if ($validator->fails()) {
-            return redirect()->route('backend/post/create')->withErrors($validator->errors())->withInput(Input::all());
+            return redirect()->route('backend/post/create')->withErrors($validator->errors())->withInput();
         } else {
             $post = new Post();
             $post->title = Input::get('title');
