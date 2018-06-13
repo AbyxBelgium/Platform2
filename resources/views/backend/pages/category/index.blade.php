@@ -28,7 +28,7 @@
                         {{ $category->name }}
                     </td>
                     <td class="action-col">
-                        <form method="POST" action="{{ route('backend/category/destroy', ['id' => $category->id]) }}">
+                        <form method="POST" class="delete-form" action="{{ route('backend/category/destroy', ['id' => $category->id]) }}">
                             @csrf
                             {{ method_field('DELETE') }}
                             <button type="submit"><span class="icon icon-delete icon-colored" title="Delete category"></span></button>

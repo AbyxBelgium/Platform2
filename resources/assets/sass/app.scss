@@ -205,3 +205,18 @@ footer {
 .error > li {
     font-size: 16px;
 }
+
+.delete-form {
+    display: inline;
+}
+
+.delete-form > button {
+    border: none;
+    background: none;
+    padding: 0;
+    color: rgb(255,82,82);
+}
+
+.delete-form > button:hover {
+    cursor: pointer;
+}
