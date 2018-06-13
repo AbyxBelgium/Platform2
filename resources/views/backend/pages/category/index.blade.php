@@ -28,9 +28,11 @@
                         {{ $category->name }}
                     </td>
                     <td class="action-col">
-                        <a class="action delete-button" data-href="{{ route('backend/category/destroy', ['id' => $category->id]) }}">
-                            <span class="icon icon-delete icon-colored" title="Delete category"></span>
-                        </a>
+                        <form method="POST" action="{{ route('backend/category/destroy', ['id' => $category->id]) }}">
+                            @csrf
+                            {{ method_field('DELETE') }}
+                            <button type="submit"><span class="icon icon-delete icon-colored" title="Delete category"></span></button>
+                        </form>
                         <a class="action" href="{{ route('backend/category/edit', ['id' => $category->id]) }}">
                             <span class="icon icon-mode_edit icon-colored" title="Edit category"></span>
                         </a>
@@ -44,19 +46,4 @@
         </table>
         {{ $categories->links('backend.includes.pagination') }}
     </div>
-@stop()
-
-@section('javascript')
-    <script>
-        let $deleteButton = $('.delete-button');
-        $deleteButton.click(function() {
-            let $button = $(this);
-            $.post({
-                    url: $button.data('href'),
-                    type: 'delete'
-                }).done(function(data) {
-                    //location.reload();
-                });
-        })
-    </script>
 @stop()
