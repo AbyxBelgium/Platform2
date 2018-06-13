@@ -92,7 +92,7 @@
         let $categories = $(".mdl-radio__button");
 
         if ($categories.length === 0) {
-            $publishButton.disable();
+            $publishButton.disable(true);
         } else {
             let $selected = null;
             $.each($categories, function(index, element) {
