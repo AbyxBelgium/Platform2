@@ -5,83 +5,118 @@
 @stop()
 
 @section('content')
-    <div class="mdl-cell mdl-cell--12-col">
+    <div class="mdl-cell mdl-cell--9-col">
         <span class="mdl-layout__title">
             <h3>Add post:</h3>
         </span>
-        <form method="POST" action="{{ route('backend/post/store') }}">
-            @csrf
 
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <label class="mdl-textfield__label" for="title">Title:</label>
-                <input class="mdl-textfield__input" type="text" id="title" name="title" value="{{ old('title') }}" />
-            </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <label class="mdl-textfield__label" for="title">Title:</label>
+            <input class="mdl-textfield__input" type="text" id="title" name="title" value="{{ old('title') }}" />
+        </div>
 
-            <div id="markdown-editor">
-                <div id="icons">
-                    <button title="bold" id="bold-button" aria-label="Bold">
-                        <span class="icon icon-format_bold" aria-hidden="true"></span>
-                    </button>
-                    <button title="italic" id="italic-button" aria-label="Italic">
-                        <span class="icon icon-format_italic" aria-hidden="true"></span>
-                    </button>
-                    <button title="unordered list" id="list-button" aria-label="List">
-                        <span class="icon icon-list" aria-hidden="true"></span>
-                    </button>
-                    <button title="H1" class="text-button" id="h1-button" aria-label="H1">
-                        <div class="button-text">H1</div>
-                    </button>
-                    <button title="H2" class="text-button" id="h2-button" aria-label="H2">
-                        <div class="button-text">H2</div>
-                    </button>
-                    <button title="H3" class="text-button" id="h3-button" aria-label="H3">
-                        <div class="button-text">H3</div>
-                    </button>
-                    <button title="H4" class="text-button" id="h4-button" aria-label="H4">
-                        <div class="button-text">H4</div>
-                    </button>
-                    <button title="insert image" id="image-button" aria-label="Left Align">
-                        <span class="icon icon-photo_library" aria-hidden="true"></span>
-                    </button>
-                    <button title="quote" id="quote-button" aria-label="Left Align">
-                        <span class="icon icon-format_quote"></span>
-                    </button>
-                    <button title="code" id="code-button" aria-label="Left Align">
-                        <span class="icon icon-code" aria-hidden="true"></span>
-                    </button>
-                    <button title="link" id="link-button" aria-label="Left Align">
-                        <span class="icon icon-link" aria-hidden="true"></span>
-                    </button>
-                    <button title="help" id="help-button" aria-label="Help">
-                        <span class="icon icon-help"></span>
-                    </button>
-                </div>
-                <textarea rows="14" class="form-control" id="markdown-data" name="content">{{ old('content') }}</textarea>
+        <div id="markdown-editor">
+            <div id="icons">
+                <button title="bold" id="bold-button" aria-label="Bold">
+                    <span class="icon icon-format_bold" aria-hidden="true"></span>
+                </button>
+                <button title="italic" id="italic-button" aria-label="Italic">
+                    <span class="icon icon-format_italic" aria-hidden="true"></span>
+                </button>
+                <button title="unordered list" id="list-button" aria-label="List">
+                    <span class="icon icon-list" aria-hidden="true"></span>
+                </button>
+                <button title="H1" class="text-button" id="h1-button" aria-label="H1">
+                    <div class="button-text">H1</div>
+                </button>
+                <button title="H2" class="text-button" id="h2-button" aria-label="H2">
+                    <div class="button-text">H2</div>
+                </button>
+                <button title="H3" class="text-button" id="h3-button" aria-label="H3">
+                    <div class="button-text">H3</div>
+                </button>
+                <button title="H4" class="text-button" id="h4-button" aria-label="H4">
+                    <div class="button-text">H4</div>
+                </button>
+                <button title="insert image" id="image-button" aria-label="Left Align">
+                    <span class="icon icon-photo_library" aria-hidden="true"></span>
+                </button>
+                <button title="quote" id="quote-button" aria-label="Left Align">
+                    <span class="icon icon-format_quote"></span>
+                </button>
+                <button title="code" id="code-button" aria-label="Left Align">
+                    <span class="icon icon-code" aria-hidden="true"></span>
+                </button>
+                <button title="link" id="link-button" aria-label="Left Align">
+                    <span class="icon icon-link" aria-hidden="true"></span>
+                </button>
+                <button title="help" id="help-button" aria-label="Help">
+                    <span class="icon icon-help"></span>
+                </button>
             </div>
+            <textarea rows="14" class="form-control" id="markdown-data" name="content">{{ old('content') }}</textarea>
+        </div>
 
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <label for="tags" class="mdl-textfield__label">Tags (Separated by comma):</label>
-                <input type="text" class="mdl-textfield__input" id="tags" name="tags" onkeyup="updateTags(this)">
-            </div>
-            <div id="chips" style="margin-bottom: 10px;">
-            </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <label for="tags" class="mdl-textfield__label">Tags (Separated by comma):</label>
+            <input type="text" class="mdl-textfield__input" id="tags" name="tags" onkeyup="updateTags(this)">
+        </div>
+        <div id="chips" style="margin-bottom: 10px;">
+        </div>
 
-            <span class="mdl-layout__title">
-                <h3>Category:</h3>
-            </span>
-            <!-- TODO fix categories! -->
-
-            <div class="center" style="padding-top: 10px;">
-                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id="publish-button" type="submit">Publish post</button>
-            </div>
-        </form>
+        <div class="center" style="padding-top: 10px;">
+            <button class="mdl-button mld-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id="save-button">Save post</button>
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id="publish-button">Publish post</button>
+        </div>
+    </div>
+    <div class="mdl-cell mdl-cell--3-col">
+        <span class="mdl-layout__title">
+            <h3>Category:</h3>
+        </span>
+        @foreach($categories as $category)
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect">
+                <input type="radio" class="mdl-radio__button" name="catRadio" value="{{ $category->name }}">
+                <span class="mdl-radio__label">{{ $category->name }}</span>
+            </label>
+        @endforeach
     </div>
 @stop()
 
 @section('javascript')
+    <!-- Control save and publish button -->
+    <script>
+        let $saveButton = $("#save-button");
+        let $publishButton = $("#publish-button");
+        let $editor = $("#markdown-data");
+
+        let $categories = $(".mdl-radio__button");
+
+        if ($categories.length === 0) {
+            $publishButton.disable();
+        } else {
+            let $selected = null;
+            $.each($categories, function(index, element) {
+                $element = $(element);
+                if ($element.is(':checked')) {
+                    $selected = $element;
+                }
+            });
+
+            if ($selected === null) {
+                $selected = $($categories.get(0));
+                $selected.prop('checked', true);
+            }
+
+            $publishButton.click(function () {
+
+            });
+        }
+    </script>
+
+    <!-- Markdown editor script -->
     <script>
         function setObjectHighlightedText(object, replacement){
-            if(typeof object.selectionStart == 'number' && typeof object.selectionEnd == 'number') {
+            if(typeof object.selectionStart === 'number' && typeof object.selectionEnd === 'number') {
                 // All browsers except IE
                 let start = object.selectionStart;
                 let end = object.selectionEnd;
@@ -100,7 +135,7 @@
         }
 
         function getObjectHighlightedText(object){
-            if(typeof object.selectionStart == 'number' && typeof object.selectionEnd == 'number') {
+            if(typeof object.selectionStart === 'number' && typeof object.selectionEnd === 'number') {
                 // All browsers except IE
                 let start = object.selectionStart;
                 let end = object.selectionEnd;
@@ -269,120 +304,6 @@
         });
         // End of code that controls the popup code formatter
 
-        // Start of code that controls the popup image gallery.
-        let startImage = 0;
-        let endImage = 6;
-        let incrementSize = 6;
-        let totalImages = 38;
-        //  When registered is false, the click-events have already been defined
-        let registered = false;
-
-        let $searchBar = $("#search");
-
-
-        let findImages = function(){
-            // Reset image counters, because searchterm changed
-            startImage = 0;
-            endImage = incrementSize;
-            renderer($searchBar.val());
-        };
-
-        let renderer = function(searchTerm){
-            let $imgStartDisplay = $("#image-start");
-            let $imgEndDisplay = $("#image-end");
-            let $imgNextButton = $("#image-next-btn");
-            let $imgPreviousButton = $("#image-previous-btn");
-            let $images = $("#images");
-            let $totalImages = $("#image-total");
-            // Render all images from image gallery
-
-            // This function converts a certain number to a string with a specified number of digits
-            let lpad = function(s, width, char) {
-                return (s.length >= width) ? s : (new Array(width).join(char) + s).slice(-width);
-            };
-
-            // This function rounds a certain number to a certain multiple
-            let roundUpTo = function(value, num) {
-                let resto = value % num;
-                if (resto <= (value/2)) {
-                    return value-resto;
-                } else {
-                    return value+num-resto;
-                }
-            };
-
-            let getThumbHTML = function(url, id, name){
-                let out =
-                    "<div class='thumb-wrapper'>" +
-                    "   <img class='img-thumb' src='" + url + "' title='" + name + "' />" +
-                    "</div>";
-                return out;
-            };
-
-
-            let onUpdate = function(incrementValue){
-                if (startImage + incrementValue < 0){
-                    startImage = 0;
-                    endImage = Math.abs(incrementValue);
-                } else if (startImage + incrementValue > totalImages){
-                    startImage = roundUpTo(startImage, Math.abs(incrementValue));
-                    endImage = roundUpTo(endImage, Math.abs(incrementValue));
-                } else {
-                    startImage += incrementValue;
-                    endImage += incrementValue;
-                }
-
-                $.post("ajax/image/get-images.php", {search: searchTerm, from: startImage, to: endImage})
-                    .done(function(data){
-                        let html = "";
-                        $.each(data, function(key, value){
-                            html += getThumbHTML(value["url"], value["id"], value["name"])
-                        });
-
-                        $images.html(html);
-
-                        $imgStartDisplay.text(lpad(startImage, 3, 0));
-                        $imgEndDisplay.text(lpad(endImage, 3, 0));
-
-                        if ($searchBar.val() === ""){
-                            $totalImages.text(lpad(totalImages, 3, 0));
-                        } else {
-                            $totalImages.text(lpad(data.length, 3, 0));
-                        }
-
-                        $(".img-thumb").click(function(){
-                            let src = $(this).attr("src");
-                            setHighlightedText("![](" + src + ")");
-                            // Close image browser
-                            let popup = document.getElementById("popup1");
-                            popup.style.display = "none";
-                        });
-                    });
-            };
-
-            if (!registered){
-                // Load next images
-                $imgNextButton.click(function(){
-                    onUpdate(incrementSize);
-                });
-
-                // Load previous images
-                $imgPreviousButton.click(function(){
-                    onUpdate(incrementSize * -1);
-                });
-                registered = true;
-            }
-
-            onUpdate(0);
-        };
-
-        $("#image-button").click(function(){
-            let popup = document.getElementById("popup1");
-            popup.style.display = "block";
-            renderer("");
-        });
-        // End of code that controls the popup image gallery
-
         // Start of code that controls the insert link popup
         let $linkInput = $("#link-input");
 
@@ -419,12 +340,13 @@
             $popup.css("display", "none");
         });
 
+        // Start of code that controls the tags
         let updateTags = function(value) {
             let tags = $("#tags").val();
             let allTags = tags.split(",");
             let chips = "";
             for (let i = 0; i < allTags.length; i++) {
-                if (allTags[i].trim() != ""){
+                if (allTags[i].trim() !== ""){
                     chips +=
                         "<span class='mdl-chip mdl-chip--deletable' style='margin-left: 5px;'>" +
                         "   <span class='mdl-chip__text'>" + allTags[i] + "</span>" +
@@ -434,6 +356,7 @@
             }
             $("#chips").html(chips);
         };
+        // End of code that controls tags
     </script>
 @stop()
 

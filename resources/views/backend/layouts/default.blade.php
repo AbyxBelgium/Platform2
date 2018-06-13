@@ -4,6 +4,7 @@
 <html lang="{{ app()->getLocale() }}">
     <head>
         @include('backend.includes.head')
+        <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>
     <body>
         <div class="mdl-layout content mdl-js-layout mdl-layout--fixed-header">
@@ -18,5 +19,13 @@
         </div>
     </body>
     @yield('custom-style')
+    <!-- Automatically insert CSRF-token when performing async calls with jQuery -->
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
     @yield('javascript')
 </html>

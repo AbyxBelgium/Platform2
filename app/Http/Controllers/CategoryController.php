@@ -97,7 +97,8 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Category::destroy($id);
+        return redirect()->route('backend/category/index');
     }
 
     private function storeOrUpdate(Category $category, IconManager $iconManager) {
