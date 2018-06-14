@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Post;
+use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -35,7 +36,14 @@ class PostController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
+        // TODO sort by alphabet -- but uncategorized always first!
+        $categories = Category::all()->sortBy(function($category) {
+            if ($category->name == "Uncategorized") {
+                return "A";
+            } else {
+                return $category->name;
+            }
+        });
         return view('backend.pages.post.create', ['categories' => $categories]);
     }
 
@@ -47,11 +55,11 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        // TODO: Fix categories! Fix tags!
         $rules = [
             'title' => 'required',
             'content' => 'required',
-            'tags' => 'required'
+            'tags' => 'required',
+            'category' => 'required'
         ];
 
         $validator = Validator::make(Input::all(), $rules);
@@ -60,10 +68,31 @@ class PostController extends Controller
             return redirect()->route('backend/post/create')->withErrors($validator->errors())->withInput();
         } else {
             $post = new Post();
+
+            $splittedTags = array_unique(explode(', ', Input::get('tags')));
+            $tags = [];
+
+            foreach ($splittedTags as $tag) {
+                $currentTag = Tag::where('name', $tag)->first();
+                if (!$currentTag) {
+                    $currentTag = new Tag();
+                    $currentTag->name = $tag;
+                    $currentTag->save();
+                }
+                array_push($tags, $currentTag->id);
+            }
+
+
             $post->title = Input::get('title');
             $post->content = Input::get('content');
             $post->user(Auth::user());
+
+            $category = Category::find(Input::get('category'));
+            $post->category($category);
+
             $post->save();
+
+            $post->tags()->sync($tags);
 
             return redirect()->route('backend/post/index');
         }

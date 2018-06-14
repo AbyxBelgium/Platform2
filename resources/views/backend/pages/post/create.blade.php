@@ -75,7 +75,7 @@
         </span>
         @foreach($categories as $category)
             <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect">
-                <input type="radio" class="mdl-radio__button" name="catRadio" value="{{ $category->name }}">
+                <input type="radio" class="mdl-radio__button" name="catRadio" data-id="{{ $category->id }}" value="{{ $category->name }}">
                 <span class="mdl-radio__label">{{ $category->name }}</span>
             </label>
         @endforeach
@@ -87,30 +87,38 @@
     <script>
         let $saveButton = $("#save-button");
         let $publishButton = $("#publish-button");
+
         let $editor = $("#markdown-data");
+        let $titleInput = $("#title");
+        let $tagsInput = $("#tags");
 
         let $categories = $(".mdl-radio__button");
 
-        if ($categories.length === 0) {
-            $publishButton.prop("disabled", true);
-        } else {
-            let $selected = null;
-            $.each($categories, function(index, element) {
-                $element = $(element);
-                if ($element.is(':checked')) {
-                    $selected = $element;
-                }
-            });
-
-            if ($selected === null) {
-                $selected = $($categories.get(0));
-                $selected.prop('checked', true);
+        let $selected = null;
+        $.each($categories, function(index, element) {
+            $element = $(element);
+            if ($element.is(':checked')) {
+                $selected = $element;
             }
+        });
 
-            $publishButton.click(function () {
-
-            });
+        if ($selected === null) {
+            $selected = $($categories.get(0));
+            $selected.prop('checked', true);
         }
+
+        $publishButton.click(function () {
+            console.log();
+            $.post("{{ route('backend/post/store') }}", {
+                title: $titleInput.val(),
+                content: $editor.val(),
+                tags: $tagsInput.val(),
+                category: $selected.data('id')
+            })
+                .done(function(data) {
+                    window.location.href = "{{ route('backend/post/index', ["page" => 1]) }}"
+                });
+        });
     </script>
 
     <!-- Markdown editor script -->
@@ -343,7 +351,7 @@
         // Start of code that controls the tags
         let updateTags = function(value) {
             let tags = $("#tags").val();
-            let allTags = tags.split(",");
+            let allTags = tags.split(", ");
             let chips = "";
             for (let i = 0; i < allTags.length; i++) {
                 if (allTags[i].trim() !== ""){
