@@ -224,7 +224,15 @@ footer {
   color: #ff5252;
 }
 
+.delete-form > button:disabled {
+  color: #E0E0E0;
+}
+
 .delete-form > button:hover {
   cursor: pointer;
+}
+
+.delete-form > button:hover:disabled {
+  cursor: default;
 }
 

@@ -10,6 +10,8 @@
             <h3>Categories:</h3>
         </span>
 
+        @include('common.error')
+
         <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" id="post-list">
             <thead>
             <tr>
@@ -31,7 +33,7 @@
                         <form method="POST" class="delete-form" action="{{ route('backend/category/destroy', ['id' => $category->id]) }}">
                             @csrf
                             {{ method_field('DELETE') }}
-                            <button type="submit"><span class="icon icon-delete icon-colored" title="Delete category"></span></button>
+                            <button type="submit" @if(!$category->deletable) disabled @endif><span class="icon icon-delete icon-colored" title="Delete category"></span></button>
                         </form>
                         <a class="action" href="{{ route('backend/category/edit', ['id' => $category->id]) }}">
                             <span class="icon icon-mode_edit icon-colored" title="Edit category"></span>

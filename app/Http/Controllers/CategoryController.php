@@ -97,8 +97,13 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        Category::destroy($id);
-        return redirect()->route('backend/category/index');
+        $category = Category::find($id);
+        if ($category->deletable) {
+            Category::destroy($id);
+            return redirect()->route('backend/category/index');
+        } else {
+            return redirect()->route('backend/category/index')->withErrors(['not_removable_error' => 'This category cannot be deleted!']);
+        }
     }
 
     private function storeOrUpdate(Category $category, IconManager $iconManager) {
@@ -111,6 +116,7 @@ class CategoryController extends Controller
         } else {
             $category->name = Input::get('name');
             $category->icon = Input::get('icon');
+            $category->deletable = true;
             $category->save();
 
             return redirect()->route('backend/category/index');
