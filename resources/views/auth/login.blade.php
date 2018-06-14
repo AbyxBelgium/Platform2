@@ -22,6 +22,9 @@
                 </ul>
             </div>
         @endif
+
+        <p>Please <a href="/register">register here</a> if you haven't already.</p>
+
         <div class="input-form-group login">
             <form method="POST" action="{{ route('login') }}">
                 @csrf
@@ -38,7 +41,6 @@
                     <span class="mdl-textfield__error">Please provide a valid password!</span>
                 </div>
 
-                <a class="account-helper" id="register-link" href="/register"><span class="icon icon-vpn_key"></span> Register</a>
                 <a class="account-helper" id="reset-password-link" href="/password/reset"><span class="icon icon-help_outline"></span> Forgot password?</a>
 
                 <div class="mdl-layout-spacer"></div>
@@ -66,5 +68,25 @@
         #reset-password-link {
             float: right;
         }
+
+        .mdl-layout-spacer {
+            margin-top: 10px;
+        }
     </style>
+@stop()
+
+@section('javascript')
+    <!--
+        Fix textfields broken when autofilled by browser. This fix only works on WebKit and Blink-browsers and is not
+        completely waterproof!
+    -->
+    <script>
+        setTimeout(function(){
+            if ($("input:-webkit-autofill").length > 0) {
+                $textField = $(".mdl-textfield");
+                $textField.addClass("is-dirty");
+                $textField.removeClass("is-invalid");
+            }
+        }, 500);
+    </script>
 @stop()
