@@ -28,7 +28,6 @@ Route::get($BACKEND_ROOT, 'Backend\DesktopController@show')->name('backend/index
 Route::resource('image', 'ImageController');
 
 // Posts
-Route::get('/post/{id}', 'PostController@show')->name('post/show');
 Route::get($BACKEND_ROOT . '/post/create', 'PostController@create')->name('backend/post/create');
 Route::post($BACKEND_ROOT . '/post', 'PostController@store')->name('backend/post/store');
 Route::get($BACKEND_ROOT . '/posts', 'PostController@index')->name('backend/post/index');
@@ -37,7 +36,6 @@ Route::put($BACKEND_ROOT . '/post/{id}', 'PostController@update')->name('backend
 Route::delete($BACKEND_ROOT . '/post/{id}', 'PostController@destroy')->name('backend/post/destroy');
 
 // Categories
-Route::get('/category/{id}', 'CategoryController@show')->name('category/show');
 Route::get($BACKEND_ROOT . '/category/create', 'CategoryController@create')->name('backend/category/create');
 Route::post($BACKEND_ROOT . '/category', 'CategoryController@store')->name('backend/category/store');
 Route::get($BACKEND_ROOT . '/categories', 'CategoryController@index')->name('backend/category/index');
@@ -49,6 +47,9 @@ Route::delete($BACKEND_ROOT . '/category/{id}', 'CategoryController@destroy')->n
 
 // --- START OF FRONTEND ROUTES ---
 
-Route::get($FRONTEND_ROOT, 'Frontend\HomeController@show');
+Route::get($FRONTEND_ROOT, 'Frontend\HomeController@show')->name('frontend/index');
+Route::get($FRONTEND_ROOT . '/post/{id}', 'PostController@show')->name('post/show');
+Route::get($FRONTEND_ROOT . '/category/{id}', 'CategoryController@show')->name('category/show');
+
 
 // --- END OF FRONTEND ROUTES ---

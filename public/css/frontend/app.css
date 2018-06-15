@@ -92,3 +92,8 @@ footer {
   padding: 0 !important;
 }
 
+.post-content {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+

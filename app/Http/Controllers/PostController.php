@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Post;
+use App\System\MarkdownConverter;
 use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -63,9 +64,16 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, MarkdownConverter $markdownConverter)
     {
-        //
+        $post = Post::find($id);
+        $user = $post->user;
+
+        return view('frontend.pages.post', [
+            "post" => $post,
+            "user" => $user,
+            "markdownConverter" => $markdownConverter
+        ]);
     }
 
     /**
