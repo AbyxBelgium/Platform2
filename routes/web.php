@@ -30,6 +30,7 @@ Route::get($BACKEND_ROOT . '/post/create', 'PostController@create')->name('backe
 Route::post($BACKEND_ROOT . '/post', 'PostController@store')->name('backend/post/store');
 Route::get($BACKEND_ROOT . '/posts', 'PostController@index')->name('backend/post/index');
 Route::get($BACKEND_ROOT . '/post/edit/{id}', 'PostController@edit')->name('backend/post/edit');
+Route::put($BACKEND_ROOT . '/post/{id}', 'PostController@update')->name('backend/post/update');
 Route::delete($BACKEND_ROOT . '/post/{id}', 'PostController@destroy')->name('backend/post/destroy');
 
 // Categories

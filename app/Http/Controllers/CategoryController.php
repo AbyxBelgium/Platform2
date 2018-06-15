@@ -97,6 +97,14 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
+        // First we should change the category of all posts with the current category to the default category
+        $postsWithCategory = Post::where('category', $id)->get();
+        $defaultCategory = Category::where('name', 'Uncategorized')->first();
+        foreach ($postsWithCategory as $post) {
+            $post->category = $defaultCategory;
+            $post->save();
+        }
+
         $category = Category::find($id);
         if ($category->deletable) {
             Category::destroy($id);

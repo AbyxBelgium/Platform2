@@ -2,6 +2,7 @@
     <thead>
     <tr>
         <th class="mdl-data-table__cell--non-numeric">Title</th>
+        <th class="mdl-data-table__cell--non-numeric">Category</th>
         <th class="mdl-data-table__cell--non-numeric action-col">Actions</th>
     </tr>
     </thead>
@@ -9,6 +10,7 @@
     @foreach($posts as $post)
         <tr>
             <td class="resizable-col">{{ $post->title }}</td>
+            <td class="resizable-col">{{ \App\Category::find($post->category_id)->name }}</td>
             <td class="action-col">
                 <form method="POST" class="delete-form" action="{{ route('backend/post/destroy', ['id' => $post->id]) }}">
                     @csrf

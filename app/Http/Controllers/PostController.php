@@ -55,48 +55,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = [
-            'title' => 'required',
-            'content' => 'required',
-            'tags' => 'required',
-            'category' => 'required'
-        ];
-
-        $validator = Validator::make(Input::all(), $rules);
-
-        if ($validator->fails()) {
-            return redirect()->route('backend/post/create')->withErrors($validator->errors())->withInput();
-        } else {
-            $post = new Post();
-
-            $splittedTags = array_unique(explode(', ', Input::get('tags')));
-            $tags = [];
-
-            foreach ($splittedTags as $tag) {
-                $currentTag = Tag::where('name', $tag)->first();
-                if (!$currentTag) {
-                    $currentTag = new Tag();
-                    $currentTag->name = $tag;
-                    $currentTag->save();
-                }
-                array_push($tags, $currentTag->id);
-            }
-
-
-            $post->title = Input::get('title');
-            $post->content = Input::get('content');
-            $post->user(Auth::user());
-
-            $category = Category::find(Input::get('category'));
-            $post->category($category);
-
-            $post->save();
-
-            $post->tags()->sync($tags);
-
-            return redirect()->route('backend/post/index');
-        }
-
+        return $this->storeOrUpdate($request, new Post());
     }
 
     /**
@@ -118,7 +77,20 @@ class PostController extends Controller
      */
     public function edit($id)
     {
+        $post = Post::find($id);
+        $categories = Category::all();
 
+        $tags = $post->tags;
+        $tagData = [];
+        foreach($tags as $tag) {
+            array_push($tagData, $tag->name);
+        }
+
+        return view('backend.pages.post.edit', [
+            'post' => $post,
+            'categories' => $categories,
+            'tags' => implode(', ', $tagData)
+        ]);
     }
 
     /**
@@ -130,7 +102,8 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = Post::find($id);
+        return $this->storeOrUpdate($request, $post);
     }
 
     /**
@@ -145,5 +118,51 @@ class PostController extends Controller
         $post->tags()->detach();
         Post::destroy($id);
         return redirect()->route('backend/post/index');
+    }
+
+    private function storeOrUpdate(Request $request, Post $post) {
+        $rules = [
+            'title' => 'required',
+            'content' => 'required',
+            'category' => 'required'
+        ];
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return redirect()->route('backend/post/create')->withErrors($validator->errors())->withInput();
+        } else {
+            $category = Category::find(Input::get('category'));
+
+            if (!$category) {
+                return redirect()->route('backend/post/create')->withErrors(['invalid_category' => 'Please choose a valid category!'])->withInput();
+            }
+
+            $splittedTags = array_unique(explode(', ', $request->has('tags') ? Input::get('tags'): ""));
+            $tags = [];
+
+            foreach ($splittedTags as $tag) {
+                $currentTag = Tag::where('name', $tag)->first();
+                if (!$currentTag) {
+                    $currentTag = new Tag();
+                    $currentTag->name = $tag;
+                    $currentTag->save();
+                }
+                array_push($tags, $currentTag->id);
+            }
+
+
+            $post->title = Input::get('title');
+            $post->content = Input::get('content');
+            $post->user(Auth::user());
+
+            $post->category($category);
+
+            $post->save();
+
+            $post->tags()->sync($tags);
+
+            return url()->route('backend/post/index');
+        }
     }
 }
