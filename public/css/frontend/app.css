@@ -97,3 +97,27 @@ footer {
   padding-right: 20px;
 }
 
+.mdl-card__actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.mdl-card__actions > .mdl-button--icon {
+  margin-right: 3px;
+  margin-left: 3px;
+}
+
+.mdl-card__media > img {
+  max-width: 100%;
+}
+
+.mdl-card {
+  min-height: 0 !important;
+}
+
