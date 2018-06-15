@@ -12,13 +12,16 @@
 */
 
 $BACKEND_ROOT = "/backend";
+$FRONTEND_ROOT = "";
 
 // Authentication
 Auth::routes();
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
+// --- START OF BACKEND ROUTES ---
+
 // Custom backend pages
-Route::get($BACKEND_ROOT, 'DesktopController@show')->name('backend/index');
+Route::get($BACKEND_ROOT, 'Backend\DesktopController@show')->name('backend/index');
 
 // Images
 // TODO modify to use correct backend and frontend path
@@ -41,3 +44,11 @@ Route::get($BACKEND_ROOT . '/categories', 'CategoryController@index')->name('bac
 Route::get($BACKEND_ROOT . '/category/edit/{id}', 'CategoryController@edit')->name('backend/category/edit');
 Route::put($BACKEND_ROOT . '/category/{id}', 'CategoryController@update')->name('backend/category/update');
 Route::delete($BACKEND_ROOT . '/category/{id}', 'CategoryController@destroy')->name('backend/category/destroy');
+
+// --- END OF BACKEND ROUTES ---
+
+// --- START OF FRONTEND ROUTES ---
+
+Route::get($FRONTEND_ROOT, 'Frontend\HomeController@show');
+
+// --- END OF FRONTEND ROUTES ---

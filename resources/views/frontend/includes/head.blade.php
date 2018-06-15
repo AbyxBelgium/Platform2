@@ -8,7 +8,7 @@
 
 <!-- Material Design Lite stylesheets -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue-red.min.css" />
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.red-blue.min.css" />
 
 <!-- Material Design Lite script -->
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
@@ -17,7 +17,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <!-- Own style -->
-<link rel="stylesheet" href="{{ URL::asset('css/backend/app.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('css/frontend/app.css') }}">
 <!-- All supported icons -->
 <link rel="stylesheet" href="{{ URL::asset('css/icons.css') }}">
 <link rel="stylesheet" href="{{ URL::asset('css/icon-font.css') }}">

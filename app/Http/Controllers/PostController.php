@@ -36,7 +36,6 @@ class PostController extends Controller
      */
     public function create()
     {
-        // TODO sort by alphabet -- but uncategorized always first!
         $categories = Category::all()->sortBy(function($category) {
             if ($category->name == "Uncategorized") {
                 return "A";
