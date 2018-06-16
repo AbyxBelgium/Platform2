@@ -1,5 +1,6 @@
 <?php
 
+use App\Category;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
@@ -35,5 +36,7 @@ class MakeCategoriesUndeletable extends Migration
         Schema::table('categories', function(Blueprint $table) {
             $table->dropColumn('deletable');
         });
+
+        Category::where('name', 'Uncategorized')->first()->delete();
     }
 }

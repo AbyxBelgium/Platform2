@@ -7,7 +7,6 @@
         <div title="Registered users" class="material-icons mdl-badge mdl-badge--overlap statistic-badge" data-badge="{{ $userCount }}">account_box</div>
         <div title="Total posts" class="material-icons mdl-badge mdl-badge--overlap statistic-badge" data-badge="{{ $postCount }}">mode_comment</div>
         <div title="Categories" class="material-icons mdl-badge mdl-badge--overlap statistic-badge" data-badge="{{ $categoryCount }}">toc</div>
-        <div title="Total pageviews" class="material-icons mdl-badge mdl-badge--overlap statistic-badge" data-badge="312">remove_red_eye</div>
         <div title="Platform version" class="material-icons mdl-badge mdl-badge--overlap statistic-badge" data-badge="1.3">update</div>
         <div title="Memory usage" class="material-icons mdl-badge mdl-badge--overlap statistic-badge" id="mem-badge" data-badge="{{ $resourceManager->getMemoryLoad() }}%">memory</div>
         <div title="Storage usage" class="material-icons mdl-badge mdl-badge--overlap statistic-badge" id="storage-badge" data-badge="{{ $resourceManager->getStorageUsage() }}%">storage</div>

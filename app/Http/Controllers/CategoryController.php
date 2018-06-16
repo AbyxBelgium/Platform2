@@ -102,7 +102,7 @@ class CategoryController extends Controller
         $postsWithCategory = Post::where('category_id', $id)->get();
         $defaultCategory = Category::where('name', 'Uncategorized')->first();
         foreach ($postsWithCategory as $post) {
-            $post->category = $defaultCategory;
+            $post->category_id = $defaultCategory->id;
             $post->save();
         }
 
