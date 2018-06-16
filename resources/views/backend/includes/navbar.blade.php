@@ -7,18 +7,25 @@
         <div class="mdl-layout-spacer"></div>
         <!-- Navigation. We hide it in small screens. -->
         @if(Auth::check())
-            <nav class="mdl-navigation mdl-layout--large-screen-only">
-                @foreach($backendNavbar as $title => $menuItem)
-                    @if (count($menuItem) == 2)
-                        <a class="mdl-navigation__link" href="{{ $menuItem[1] }}"><span class="icon icon-{{ $menuItem[0] }}"></span> {{ $title }}</a>
-                    @else
-                        <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="submenu-{{ $title }}">
-                            @foreach($menuItem[2] as $subTitle => $subMenu)
-                                <li class="mdl-menu__item mdl-js-ripple-effect" tabindex="-1"><a class="no-link" href="{{ $subMenu[1] }}">{{ $subTitle }}</a></li>
-                            @endforeach
-                        </ul>
-                    @endif
-                @endforeach
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" href="{{ route('backend/index')  }}"><span class="icon icon-home"></span> Desktop</a>
+                <a class="mdl-navigation__link" href="#" id="submenu-new">
+                    <span class="icon icon-add"></span> New
+                </a>
+                <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="submenu-new">
+                    <li class="mdl-menu__item mdl-js-ripple-effect" tabindex="-1"><a class="no-link" href="{{ route('backend/post/create') }}">Post</a></li>
+                    <li class="mdl-menu__item mdl-js-ripple-effect" tabindex="-1"><a class="no-link" href="{{ route('backend/category/create') }}">Category</a></li>
+                </ul>
+                <a class="mdl-navigation__link" href="#" id="submenu-all">
+                    <span class="icon icon-list"></span> All
+                </a>
+                <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="submenu-all">
+                    <li class="mdl-menu__item mdl-js-ripple-effect" tabindex="-1"><a class="no-link" href="{{ route('backend/post/index', ['page' => 1]) }}">Posts</a></li>
+                    <li class="mdl-menu__item mdl-js-ripple-effect" tabindex="-1"><a class="no-link" href="{{ route('backend/category/index', ['page' => 1]) }}">Categories</a></li>
+                </ul>
+                <a class="mdl-navigation__link" href="{{ route('frontend/index') }}"><span class="icon icon-screen_share"></span> Live website</a>
+                <a class="mdl-navigation__link" href="{{ route('logout') }}"><span class="icon icon-play_for_work"></span> Logout</a>
+
             </nav>
         @endif()
     </div>

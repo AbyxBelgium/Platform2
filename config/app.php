@@ -159,9 +159,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\SystemResourceProvider::class,
-        App\Providers\NavbarProvider::class
-
+        App\Providers\SystemResourceProvider::class
     ],
 
     /*
