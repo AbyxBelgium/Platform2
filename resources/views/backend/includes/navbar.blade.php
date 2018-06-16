@@ -23,6 +23,12 @@
                     <li class="mdl-menu__item mdl-js-ripple-effect" tabindex="-1"><a class="no-link" href="{{ route('backend/post/index', ['page' => 1]) }}">Posts</a></li>
                     <li class="mdl-menu__item mdl-js-ripple-effect" tabindex="-1"><a class="no-link" href="{{ route('backend/category/index', ['page' => 1]) }}">Categories</a></li>
                 </ul>
+                <a class="mdl-navigation__link" href="#" id="submenu-settings">
+                    <span class="icon icon-settings"></span> Settings
+                </a>
+                <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="submenu-settings">
+                    <li class="mdl-menu__item mdl-js-ripple-effect" tabindex="-1"><a class="no-link" href="{{ route('backend/settings/composition') }}">Composition</a></li>
+                </ul>
                 <a class="mdl-navigation__link" href="{{ route('frontend/index') }}"><span class="icon icon-screen_share"></span> Live website</a>
                 <a class="mdl-navigation__link" href="{{ route('logout') }}"><span class="icon icon-play_for_work"></span> Logout</a>
 

@@ -23,6 +23,9 @@ Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 // Custom backend pages
 Route::get($BACKEND_ROOT, 'Backend\DesktopController@show')->name('backend/index');
 
+// Settings
+Route::get($BACKEND_ROOT . '/settings/composition', 'Backend\HomeCompositionController@show')->name('backend/settings/composition');
+
 // Images
 // TODO modify to use correct backend and frontend path
 Route::resource('image', 'ImageController');
@@ -50,6 +53,5 @@ Route::delete($BACKEND_ROOT . '/category/{id}', 'CategoryController@destroy')->n
 Route::get($FRONTEND_ROOT, 'Frontend\HomeController@show')->name('frontend/index');
 Route::get($FRONTEND_ROOT . '/post/{id}', 'PostController@show')->name('post/show');
 Route::get($FRONTEND_ROOT . '/category/{id}', 'CategoryController@show')->name('category/show');
-
 
 // --- END OF FRONTEND ROUTES ---
