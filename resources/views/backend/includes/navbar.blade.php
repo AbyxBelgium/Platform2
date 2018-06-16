@@ -8,7 +8,17 @@
         <!-- Navigation. We hide it in small screens. -->
         @if(Auth::check())
             <nav class="mdl-navigation mdl-layout--large-screen-only">
-                @include('backend.includes.nav')
+                @foreach($backendNavbar as $title => $menuItem)
+                    @if (count($menuItem) == 2)
+                        <a class="mdl-navigation__link" href="{{ $menuItem[1] }}"><span class="icon icon-{{ $menuItem[0] }}"></span> {{ $title }}</a>
+                    @else
+                        <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="submenu-{{ $title }}">
+                            @foreach($menuItem[2] as $subTitle => $subMenu)
+                                <li class="mdl-menu__item mdl-js-ripple-effect" tabindex="-1"><a class="no-link" href="{{ $subMenu[1] }}">{{ $subTitle }}</a></li>
+                            @endforeach
+                        </ul>
+                    @endif
+                @endforeach
             </nav>
         @endif()
     </div>
