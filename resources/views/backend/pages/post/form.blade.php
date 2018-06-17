@@ -53,6 +53,40 @@
             <textarea rows="14" class="form-control" id="markdown-data" name="content">@yield('form-content')</textarea>
         </div>
 
+        <!-- Dialogs that are part of the markdown editor -->
+        <dialog class="mdl-dialog" id="link-dialog">
+            <h4 class="mdl-dialog__title">Insert link</h4>
+            <div class="mdl-dialog__content">
+                <p>Paste a link:</p>
+                <input type="text" id="link-input" title="link" value=""/>
+            </div>
+            <div class="mdl-dialog__actions">
+                <button type="button" id='link-done-button' class="mdl-button dialog-done-button">Done</button>
+                <button type="button" id='link-cancel-button' class="mdl-button close dialog-close-button">Cancel</button>
+            </div>
+        </dialog>
+
+        <dialog class="mdl-dialog" id="code-dialog">
+            <h4 class="mdl-dialog__title">Insert code</h4>
+            <div class="mdl-dialog__content">
+                <p>Paste some code:</p>
+                <textarea rows="8" id="code-input" title="code"></textarea>
+                <p>Select language:</p>
+                <select id="language-selector" title="Language">
+                    <option value="cpp">C++</option>
+                    <option value="css">CSS</option>
+                    <option value="java">Java</option>
+                    <option value="javascript">JavaScript</option>
+                    <option value="php">PHP</option>
+                    <option value="xml">HTML/XML</option>
+                </select>
+            </div>
+            <div class="mdl-dialog__actions">
+                <button type="button" id='code-done-button' class="mdl-button dialog-done-button">Done</button>
+                <button type="button" id='code-cancel-button' class="mdl-button close dialog-close-button">Cancel</button>
+            </div>
+        </dialog>
+
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <label for="tags" class="mdl-textfield__label">Tags (Separated by comma):</label>
             <input type="text" class="mdl-textfield__input" id="tags" name="tags" onkeyup="updateTags(this)" value="@yield('form-tags')">
@@ -245,7 +279,7 @@
             // Get all selected lines and let each one start with the quote identifier (>)
             let lines = selected.split("\n");
             let replace = "";
-            // When the selected lines allready start with a ">", then remove them (thus disabling the quote)
+            // When the selected lines already start with a ">", then remove them (thus disabling the quote)
             if (selected.startsWith(">")){
                 for (let i = 0; i < lines.length; i++){
                     if (lines[i].startsWith(">")){
@@ -263,13 +297,14 @@
         });
 
         // Start of code that controls the popup code formatter
-        let $codeField = $("#code");
+        let $codeField = $("#code-input");
         let $languageSelector = $("#language-selector");
+
+        let codeDialog = document.getElementById("code-dialog");
 
         $("#code-button").click(function(){
             // Find code popup object and open the popup
-            let popup = document.getElementById("popup2");
-            popup.style.display = "block";
+            codeDialog.showModal();
 
             let selected = getHighlightedText().trim();
             if (selected !== "" && selected.startsWith("<pre") && selected.endsWith("</pre>")){
@@ -285,7 +320,7 @@
             }
         });
 
-        $("#insert-code-button").click(function(){
+        $("#code-done-button").click(function(){
             // Selected language (is value of dropdown menu)
             let language = $languageSelector.val();
 
@@ -294,9 +329,6 @@
 
             let replacement = "<pre class='brush: " + language + ";'>\n" + code + "\n</pre>";
             setHighlightedText(replacement);
-
-            let popup = document.getElementById("popup2");
-            popup.style.display = "none";
 
             // Clear code textarea
             $codeField.val("");
@@ -327,9 +359,10 @@
         // Start of code that controls the insert link popup
         let $linkInput = $("#link-input");
 
+        let linkDialog = document.getElementById('link-dialog');
+
         $("#link-button").click(function(){
-            let popup = document.getElementById("popup3");
-            popup.style.display = "block";
+            linkDialog.showModal();
 
             let selected = getHighlightedText();
             if (selected.startsWith("[") && selected.endsWith(")")){
@@ -339,7 +372,7 @@
             }
         });
 
-        $("#insert-link-button").click(function(){
+        $("#link-done-button").click(function(){
             let selected = getHighlightedText();
             let url = $linkInput.val();
             if (selected.startsWith("[") && selected.endsWith(")")){
@@ -349,15 +382,16 @@
                 setHighlightedText("[" + selected + "](" + url + ")");
             }
 
-            document.getElementById("popup3").style.display = "none";
             $linkInput.val("");
         });
         // End of code that controls the insert link popup
 
-        // Hide popup when done or cancel button is pressed
-        $(".done, .cancel").click(function(){
-            let $popup = $(".popup");
-            $popup.css("display", "none");
+        // Hide all popups when done or cancel button is pressed
+        $(".dialog-done-button, .dialog-close-button").click(function(){
+            let dialogs = document.getElementsByClassName("mdl-dialog");
+            for (dialog of dialogs) {
+                dialog.close();
+            }
         });
 
         // Start of code that controls the tags
