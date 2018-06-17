@@ -10,11 +10,19 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.red-blue.min.css" />
 
+<!-- SyntaxHighlighter stylesheets -->
+<link href="{{ URL::asset('syntaxhighlighter/styles/shThemeDefault.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ URL::asset('syntaxhighlighter/styles/shCore.css') }}" rel="stylesheet" type="text/css" />
+
 <!-- Material Design Lite script -->
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- SyntaxHighlighter scripts -->
+<script src="{{ URL::asset('syntaxhighlighter/scripts/shCore.js') }}" type="text/javascript"></script>
+<script type="text/javascript" src="{{ URL::asset('syntaxhighlighter/scripts/shAutoloader.js') }}"></script>
 
 <!-- Own style -->
 <link rel="stylesheet" href="{{ URL::asset('css/frontend/app.css') }}">

@@ -127,3 +127,7 @@ footer {
   padding-bottom: 5px !important;
 }
 
+.syntaxhighlighter {
+  overflow: hidden !important;
+}
+

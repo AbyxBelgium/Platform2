@@ -27,5 +27,16 @@
             }
         });
     </script>
+
+    <script>
+        SyntaxHighlighter.autoloader(
+            "js jscript javascript {{ URL::asset('syntaxhighlighter/scripts/shBrushJScript.js') }}",
+            "php  {{ URL::asset('syntaxhighlighter/scripts/shBrushPhp.js') }}",
+            "cpp  {{ URL::asset('syntaxhighlighter/scripts/shBrushCpp.js') }}",
+            "java  {{ URL::asset('syntaxhighlighter/scripts/shBrushJava.js') }}",
+            "xml  {{ URL::asset('syntaxhighlighter/scripts/shBrushXml.js') }}",
+            "css {{ URL::asset('syntaxhighlighter/scripts/shBrushCss.js') }}");
+        SyntaxHighlighter.all()
+    </script>
     @yield('javascript')
 </html>
