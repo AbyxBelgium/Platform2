@@ -21,7 +21,7 @@ class DesktopController extends Controller
      * @return Response
      */
     public function show(SystemResourceManager $resourceManager) {
-        $posts = DB::table('posts')->take(10)->get();
+        $posts = DB::table('posts')->orderByDesc('created_at')->take(10)->get();
 
         $categoryCount = DB::table('categories')->count();
         $postCount = DB::table('posts')->count();

@@ -26,7 +26,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = DB::table('posts')->simplePaginate(15);
+        $posts = DB::table('posts')->orderByDesc('created_at')->simplePaginate(15);
         return view('backend.pages.post.index', ["posts" => $posts]);
     }
 
