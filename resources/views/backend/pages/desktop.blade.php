@@ -14,7 +14,7 @@
     </div>
 
     <div class="mdl-cell mdl-cell--12-col">
-        <span class="mdl-layout__title">
+        <span class="mdl-layout__title mdl-layout--large-screen-only">
             <h3>Recent posts:</h3>
         </span>
         <div>
