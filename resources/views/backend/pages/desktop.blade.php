@@ -23,6 +23,15 @@
     </div>
 @stop()
 
+@section('custom-style')
+    <style>
+     #post-list {
+         position: inherit;
+         top: 0;
+     }
+    </style>
+@stop()
+
 @section('javascript')
     <script>
         let $cpuBadge = $("#cpu-badge");
