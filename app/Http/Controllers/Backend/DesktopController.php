@@ -17,7 +17,7 @@ class DesktopController extends Controller
     /**
      * Initialize the desktop page.
      *
-     * @param SystemResourceManager Current ResourceManager that can be used to monitor system usage.
+     * @param SystemResourceManager $resourceManager ResourceManager that can be used to monitor system usage.
      * @return Response
      */
     public function show(SystemResourceManager $resourceManager) {

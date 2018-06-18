@@ -12,7 +12,11 @@
 
         @include('common.error')
 
-        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" id="post-list">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect create-button" href="{{ route('backend/category/create') }}">
+            <span class="icon icon-add icon-fix-position"></span> Add category
+        </a>
+
+        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" id="category-list">
             <thead>
             <tr>
                 <th class="mdl-data-table__cell--non-numeric">Icon</th>

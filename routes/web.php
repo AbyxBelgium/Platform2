@@ -27,8 +27,12 @@ Route::get($BACKEND_ROOT, 'Backend\DesktopController@show')->name('backend/index
 Route::get($BACKEND_ROOT . '/settings/composition', 'Backend\HomeCompositionController@show')->name('backend/settings/composition');
 
 // Images
-// TODO modify to use correct backend and frontend path
-Route::resource('image', 'ImageController');
+Route::get($BACKEND_ROOT . '/image/create', 'ImageController@create')->name('backend/image/create');
+Route::post($BACKEND_ROOT . '/image', 'ImageController@show')->name('backend/image/store');
+Route::get($BACKEND_ROOT . '/images', 'ImageController@index')->name('backend/image/index');
+Route::get($BACKEND_ROOT . '/image/edit/{id}', 'ImageController@edit')->name('backend/image/edit');
+Route::put($BACKEND_ROOT . '/image/{id}', 'ImageController@update')->name('backend/image/update');
+Route::delete($BACKEND_ROOT . '/image/{id}', 'ImageController@destroy')->name('backend/image/destroy');
 
 // Posts
 Route::get($BACKEND_ROOT . '/post/create', 'PostController@create')->name('backend/post/create');

@@ -7,7 +7,7 @@
         <div class="mdl-layout-spacer"></div>
         <!-- Navigation. We hide it in small screens. -->
         @if(Auth::check())
-            <nav class="mdl-navigation">
+            <nav class="mdl-navigation mdl-layout--large-screen-only">
                 <a class="mdl-navigation__link" href="{{ route('backend/index')  }}"><span class="icon icon-home"></span> Desktop</a>
                 <a class="mdl-navigation__link" href="#" id="submenu-new">
                     <span class="icon icon-add"></span> New

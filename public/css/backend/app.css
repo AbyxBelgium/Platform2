@@ -264,3 +264,20 @@ footer {
   display: block;
 }
 
+.icon-fix-position {
+  position: relative;
+  top: 4px;
+}
+
+.create-button {
+  float: right;
+  position: relative;
+  top: -50px;
+}
+
+#post-list,
+#category-list {
+  position: relative;
+  top: -45px;
+}
+
