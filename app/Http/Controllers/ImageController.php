@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Image;
+use Illuminate\Support\Facades\DB;
 
 class ImageController extends Controller
 {
@@ -14,7 +15,8 @@ class ImageController extends Controller
      */
     public function index()
     {
-        return view('backend.pages.image.index');
+        $images = DB::table('images')->orderByDesc('created_at')->simplePaginate(60);
+        return view('backend.pages.image.index', ['images' => $images]);
     }
 
     /**
