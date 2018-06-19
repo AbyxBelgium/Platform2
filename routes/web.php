@@ -28,7 +28,7 @@ Route::get($BACKEND_ROOT . '/settings/composition', 'Backend\HomeCompositionCont
 
 // Images
 Route::get($BACKEND_ROOT . '/image/create', 'ImageController@create')->name('backend/image/create');
-Route::post($BACKEND_ROOT . '/image', 'ImageController@show')->name('backend/image/store');
+Route::post($BACKEND_ROOT . '/image', 'ImageController@store')->name('backend/image/store');
 Route::get($BACKEND_ROOT . '/images', 'ImageController@index')->name('backend/image/index');
 Route::get($BACKEND_ROOT . '/image/edit/{id}', 'ImageController@edit')->name('backend/image/edit');
 Route::put($BACKEND_ROOT . '/image/{id}', 'ImageController@update')->name('backend/image/update');

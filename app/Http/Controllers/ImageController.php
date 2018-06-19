@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Image;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\Console\Output\ConsoleOutput;
 
 class ImageController extends Controller
 {
@@ -27,6 +28,15 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
+        // TODO: Implement checks for all required input parameters
+        foreach($request->file('files') as $file) {
+            $filename = $file->store('uploads/images');
+            $image = new Image();
+            $image->name = $filename;
+            $image->save();
+        }
+
+        return url()->route('backend/image/index');
     }
 
     /**
@@ -37,6 +47,8 @@ class ImageController extends Controller
      */
     public function show($id)
     {
+        // TODO implement correct!
+        return view('backend.pages.image.index');
     }
 
 
