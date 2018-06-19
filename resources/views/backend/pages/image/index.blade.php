@@ -206,6 +206,9 @@
                 success: function(data) {
                     $form.addClass(data.success === true ? 'is-success' : 'is-error' );
                     if (!data.success) $errorMsg.text(data.error);
+                },
+                error: function(data) {
+                    $form.addClass('is-error');
                 }
             });
         });
