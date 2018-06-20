@@ -39,7 +39,7 @@ class ImageController extends Controller
         $rules = [];
 
         for ($i = 0; $i < count($request->file('files')); $i++) {
-            array_push($rules, 'files' . $i);
+            $rules['files.' . $i] = "image|mimes:jpeg,bmp,png|max:10000";
         }
 
         $validator = Validator::make(Input::all(), $rules);
