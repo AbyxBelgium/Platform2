@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Image;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Validator;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
 class ImageController extends Controller
@@ -34,6 +36,18 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
+        $rules = [];
+
+        for ($i = 0; $i < count($request->file('files')); $i++) {
+            array_push($rules, 'files' . $i);
+        }
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return url()->route('backend/image/index');
+        }
+
         // TODO: Implement checks for all required input parameters
         foreach($request->file('files') as $file) {
             $filename = $file->store('uploads/images', 'public');

@@ -78,6 +78,7 @@
             width: 100%;
             text-align: center;
             height: 100px;
+            margin: 8px;
 
             -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
             transition: outline-offset .15s ease-in-out, background-color .15s linear;
