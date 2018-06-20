@@ -33,8 +33,11 @@
                 <div class="mdl-card mdl-cell mdl-cell--2-col mdl-shadow--2dp">
                     <figure class="mdl-card__media thumb-wrapper">
                         <span class="helper"></span>
-                        <img class="thumb" title="{{ $img->name }}" src="{{ asset($img->name) }}">
+                        <img class="thumb" title="{{ $img->name }}" src="{{ asset('storage/' . $img->filename) }}">
                     </figure>
+                    <div class="mdl-card__title">
+                        <h3 class="mdl-card__title-text thumb-title">{{ $img->name }}</h3>
+                    </div>
                     <div class="mdl-card__actions mdl-card--border image-actions">
                         <a href="{{ route('image/show', ['id' => $img->id]) }}" title="permalink">
                             <button class="mdl-button mdl-button--icon mdl-button--accent">

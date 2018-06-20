@@ -30,9 +30,10 @@ class ImageController extends Controller
     {
         // TODO: Implement checks for all required input parameters
         foreach($request->file('files') as $file) {
-            $filename = $file->store('uploads/images');
+            $filename = $file->store('uploads/images', 'public');
             $image = new Image();
-            $image->name = $filename;
+            $image->filename = $filename;
+            $image->name = $file->getClientOriginalName();
             $image->save();
         }
 
