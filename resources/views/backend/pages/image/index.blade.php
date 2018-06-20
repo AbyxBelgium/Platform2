@@ -12,6 +12,8 @@
             <span class="icon icon-add icon-fix-position"></span> Upload new
         </a>
 
+        @include('common.error')
+
         <!-- Advanced file upload form. Based on https://css-tricks.com/drag-and-drop-file-uploading/ -->
         <form method="post" enctype="multipart/form-data" action="{{ route('backend/image/store') }}" novalidate="" class="box box__invisible">
             <div class="box__input">
@@ -44,11 +46,11 @@
                                 <span class="icon icon-link"></span>
                             </button>
                         </a>
-                        <a href="{{ route('backend/image/destroy', ['id' => $img->id]) }}">
-                            <button class="mdl-button mdl-button--icon mdl-button--accent">
-                                <span class="icon icon-delete"></span>
-                            </button>
-                        </a>
+                        <form method="POST" class="delete-form" action="{{ route('backend/image/destroy', ['id' => $img->id]) }}">
+                            @csrf
+                            {{ method_field('DELETE') }}
+                            <button type="submit"><span class="icon icon-delete icon-colored" title="Delete image"></span></button>
+                        </form>
                     </div>
                 </div>
             @endforeach
@@ -203,11 +205,9 @@
                 cache: false,
                 contentType: false,
                 processData: false,
-                complete: function() {
+                complete: function(data) {
                     $form.removeClass('is-uploading');
-                },
-                success: function(data) {
-                    $form.addClass(data.success === true ? 'is-success' : 'is-error' );
+                    location.reload();
                 },
                 error: function(data) {
                     $form.addClass('is-error');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Image;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
 class ImageController extends Controller
@@ -74,7 +75,15 @@ class ImageController extends Controller
      */
     public function destroy($id)
     {
-
+        $img = Image::find($id);
+        // TODO this 'storage/' prepend should not be necessary
+        $imgPath = public_path('storage/' . $img->filename);
+        File::delete($imgPath);
+        if (File::exists($imgPath)) {
+            return redirect()->route('backend/image/index')->withErrors(['not_deleted_error' => 'File ' . $img->name . ' could not be deleted! Please try again...']);
+        }
+        Image::destroy($id);
+        return redirect()->route('backend/image/index');
     }
 
     /**
