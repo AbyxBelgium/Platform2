@@ -54,8 +54,8 @@ class ImageController extends Controller
      */
     public function show($id)
     {
-        // TODO implement correct!
-        return view('backend.pages.image.index');
+        $img = Image::find($id);
+        return redirect(asset('storage/' . $img->filename));
     }
 
 

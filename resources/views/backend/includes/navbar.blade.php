@@ -14,7 +14,7 @@
                 </a>
                 <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="submenu-new">
                     <li class="mdl-menu__item mdl-js-ripple-effect" tabindex="-1"><a class="no-link" href="{{ route('backend/post/create') }}">Post</a></li>
-                    <li class="mdl-menu__item mdl-js-ripple-effect" tabindex="-1"><a class="no-link" href="{{ route('backend/category/create') }}">Cateory</a></li>
+                    <li class="mdl-menu__item mdl-js-ripple-effect" tabindex="-1"><a class="no-link" href="{{ route('backend/category/create') }}">Category</a></li>
                 </ul>
                 <a class="mdl-navigation__link" href="#" id="submenu-all">
                     <span class="icon icon-list"></span> All

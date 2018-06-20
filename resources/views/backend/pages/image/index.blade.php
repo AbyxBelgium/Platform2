@@ -64,6 +64,10 @@
 
 @section('custom-style')
     <style>
+        #images {
+            width: 100%;
+        }
+
         .box {
             font-size: 1.25rem; /* 20 */
             background-color: #c8dadf;
