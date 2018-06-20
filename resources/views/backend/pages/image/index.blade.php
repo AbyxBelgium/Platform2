@@ -24,7 +24,10 @@
                 <label for="file"><strong>Choose an image</strong><span class="box__dragndrop"> or drag it here</span>.</label>
                 <button type="submit" class="box__button">Upload</button>
             </div>
-            <div class="box__uploading">Uploading…</div>
+            <div class="box__uploading">
+                <p>Uploading...</p>
+                <div class="mdl-spinner mdl-js-spinner is-active"></div>
+            </div>
             <div class="box__success">Done! <a href="{{ route('backend/image/index') }}" class="box__restart" role="button">Upload more?</a></div>
             <div class="box__error">Error! <span></span>. <a href="{{ route('backend/image/index') }}" class="box__restart" role="button">Try again!</a></div>
             <input type="hidden" name="ajax" value="1">
@@ -99,7 +102,7 @@
         .box__error {
             display: none;
             position: relative;
-            top: -75px;
+            top: -90px;
         }
 
         .box.is-uploading .box__input {

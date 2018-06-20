@@ -10,6 +10,11 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 
 class ImageController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +22,7 @@ class ImageController extends Controller
      */
     public function index()
     {
-        $images = DB::table('images')->orderByDesc('created_at')->simplePaginate(60);
+        $images = DB::table('images')->orderByDesc('created_at')->simplePaginate(30);
         return view('backend.pages.image.index', ['images' => $images]);
     }
 
