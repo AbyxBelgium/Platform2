@@ -58,5 +58,6 @@ Route::get($FRONTEND_ROOT, 'Frontend\HomeController@show')->name('frontend/index
 Route::get($FRONTEND_ROOT . '/post/{id}', 'PostController@show')->name('post/show');
 Route::get($FRONTEND_ROOT . '/category/{id}', 'CategoryController@show')->name('category/show');
 Route::get($FRONTEND_ROOT . '/image/{id}', 'ImageController@show')->name('image/show');
+Route::get($FRONTEND_ROOT . '/page/{id}', 'Frontend\PageController@show')->name('page/show');
 
 // --- END OF FRONTEND ROUTES ---

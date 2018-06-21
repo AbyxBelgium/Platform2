@@ -50,7 +50,7 @@
                     <span class="icon icon-help"></span>
                 </button>
             </div>
-            <textarea rows="14" class="form-control" id="markdown-data" name="content">@yield('form-content')</textarea>
+            <div contenteditable="true" class="form-control" id="markdown-data">@yield('form-content')</div>
         </div>
 
         <!-- Dialogs that are part of the markdown editor -->
@@ -169,6 +169,9 @@
 
     <!-- Markdown editor script -->
     <script>
+        // The underlying markdown data that represents the current WYSIWYG content.
+        let markdownData = '';
+
         function setObjectHighlightedText(object, replacement){
             if(typeof object.selectionStart === 'number' && typeof object.selectionEnd === 'number') {
                 // All browsers except IE
@@ -422,7 +425,7 @@
     <style>
         #markdown-editor {
             background-color: #F0F0F0;
-            padding: 7px 7px 0 7px;
+            padding: 7px;
         }
 
         #markdown-editor button {
@@ -463,10 +466,10 @@
             color: rgb(45, 45, 45);
         }
 
-        #markdown-editor textarea {
+        #markdown-editor #markdown-data {
             width: 100%;
-            position: relative;
-            left: -3px;
+            height: 300px;
+            background-color: white;
         }
 
         .popup {
