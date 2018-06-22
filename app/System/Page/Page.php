@@ -6,6 +6,7 @@
 namespace App\System\Page;
 
 
+use App\Catalogue\Sample\Main;
 use Illuminate\Support\Facades\View;
 
 class Page
@@ -21,6 +22,8 @@ class Page
 
     public function createView(): string
     {
-        return View::make('frontend.pages.page', ['title' => $this->title]);
+        $temp = new Main();
+        return $temp->getElements()[0]->getContent();
+        //return View::make('frontend.pages.page', ['title' => $this->title]);
     }
 }
