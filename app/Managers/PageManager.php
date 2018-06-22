@@ -37,7 +37,14 @@ class PageManager
                 $el = $main->getElementByIdentifier($id);
                 array_push($elements, $el);
             }
-            $col = new Column($elements);
+
+            $title = "";
+
+            if ($column["title"]) {
+                $title = $column["title"];
+            }
+
+            $col = new Column($elements, $title, $column["width"]);
             array_push($columns, $col);
         }
         return new PageRepresentation($page->name, $columns);
