@@ -6,12 +6,40 @@
 namespace App\Managers;
 
 
-use App\System\Page\Page;
+use App\Page;
+use App\System\Page\Column;
+use App\System\Page\Element;
+use App\System\Page\PageRepresentation;
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\Console\Output\ConsoleOutput;
 
 class PageManager
 {
-    public function parsePageConfiguration(string $filelocation): Page
+    public function parsePageConfiguration(Page $page): PageRepresentation
     {
-        // TODO implement parser
+        // Every page has a corresponding filename (if it exists!)
+        $filename = 'pages/' . $page->name . '.json';
+        $contents = Storage::get($filename);
+        $parsed = json_decode($contents, true);
+        $columns = [];
+        foreach ($parsed["columns"] as $column) {
+            $elements = [];
+            foreach ($column["elements"] as $element) {
+                $id = $element["identifier"];
+                $app = $element["app"];
+
+                // Lookup the correct identifier by name belonging to the indicated application.
+                // This means that we first have to instantiate the main class of this app. We'll use reflection for
+                // this purpose.
+                $mainClass = 'App\\Catalogue\\' .$app . '\\Main';
+                $main = new $mainClass();
+
+                $el = $main->getElementByIdentifier($id);
+                array_push($elements, $el);
+            }
+            $col = new Column($elements);
+            array_push($columns, $col);
+        }
+        return new PageRepresentation($page->name, $columns);
     }
 }

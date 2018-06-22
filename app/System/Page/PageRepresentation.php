@@ -9,7 +9,7 @@ namespace App\System\Page;
 use App\Catalogue\Sample\Main;
 use Illuminate\Support\Facades\View;
 
-class Page
+class PageRepresentation
 {
     private $title;
     private $containers = [];
@@ -22,8 +22,9 @@ class Page
 
     public function createView(): string
     {
-        $temp = new Main();
-        return $temp->getElements()[0]->getContent();
-        //return View::make('frontend.pages.page', ['title' => $this->title]);
+        return View::make('frontend.pages.page', [
+            'title' => $this->title,
+            'columns' => $this->containers
+        ]);
     }
 }

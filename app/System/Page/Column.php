@@ -6,12 +6,18 @@
 namespace App\System\Page;
 
 
-class Container
+class Column
 {
     private $elements;
+    private $width;
 
     public function __construct($elements)
     {
         $this->elements = $elements;
+    }
+
+    public function getElements()
+    {
+        return $this->elements;
     }
 }

@@ -6,8 +6,20 @@
 namespace App\Catalogue;
 
 
-interface App
+use App\System\Page\Element;
+
+abstract class App
 {
-    public function getName(): string;
-    public function getElements(): array;
+    public abstract function getName(): string;
+    public abstract function getElements(): array;
+
+    public function getElementByIdentifier(string $identifier): Element
+    {
+        foreach ($this->getElements() as $element) {
+            if ($element->getIdentifier() == $identifier) {
+                return $element;
+            }
+        }
+        return null;
+    }
 }

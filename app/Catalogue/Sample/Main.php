@@ -12,7 +12,7 @@ use App\Catalogue\App;
 use App\System\Page\Element;
 use Illuminate\Support\Facades\View;
 
-class Main implements App
+class Main extends App
 {
     public function getName(): string
     {

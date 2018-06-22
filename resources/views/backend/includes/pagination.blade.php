@@ -1,6 +1,6 @@
 @if ($paginator->hasPages())
     <div class="center nav-buttons">
-        {{-- Previous Page Link --}}
+        {{-- Previous PageRepresentation Link --}}
         @if ($paginator->onFirstPage())
             <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect small-button" id="post-previous-btn" disabled>
                 <span class="icon icon-keyboard_arrow_left"></span>
@@ -15,7 +15,7 @@
             Page {{ $paginator->currentPage() }}
         </a>
 
-        {{-- Next Page Link --}}
+        {{-- Next PageRepresentation Link --}}
         @if ($paginator->hasMorePages())
             <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect small-button" id="post-next-btn" disabled>
                 <span class="icon icon-keyboard_arrow_right"></span>
