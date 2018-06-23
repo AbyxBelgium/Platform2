@@ -33,7 +33,8 @@
 @section('custom-style')
     <style>
         .drop-column {
-            border: 1px dashed darkblue;
+            outline: 2px dashed #92b0b3;
+            outline-offset: -10px;
             min-height: 150px;
         }
     </style>
