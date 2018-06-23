@@ -23,9 +23,6 @@ Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 // Custom backend pages
 Route::get($BACKEND_ROOT, 'Backend\DesktopController@show')->name('backend/index');
 
-// Settings
-Route::get($BACKEND_ROOT . '/settings/composition', 'Backend\HomeCompositionController@show')->name('backend/settings/composition');
-
 // Images
 Route::get($BACKEND_ROOT . '/image/create', 'ImageController@create')->name('backend/image/create');
 Route::post($BACKEND_ROOT . '/image', 'ImageController@store')->name('backend/image/store');
@@ -50,6 +47,10 @@ Route::get($BACKEND_ROOT . '/category/edit/{id}', 'CategoryController@edit')->na
 Route::put($BACKEND_ROOT . '/category/{id}', 'CategoryController@update')->name('backend/category/update');
 Route::delete($BACKEND_ROOT . '/category/{id}', 'CategoryController@destroy')->name('backend/category/destroy');
 
+// Pages
+Route::get($BACKEND_ROOT . '/page/create', 'PageController@create')->name('backend/page/create');
+Route::get($BACKEND_ROOT . '/pages', 'PageController@show')->name('backend/page/index');
+
 // --- END OF BACKEND ROUTES ---
 
 // --- START OF FRONTEND ROUTES ---
@@ -58,6 +59,6 @@ Route::get($FRONTEND_ROOT, 'Frontend\HomeController@show')->name('frontend/index
 Route::get($FRONTEND_ROOT . '/post/{id}', 'PostController@show')->name('post/show');
 Route::get($FRONTEND_ROOT . '/category/{id}', 'CategoryController@show')->name('category/show');
 Route::get($FRONTEND_ROOT . '/image/{id}', 'ImageController@show')->name('image/show');
-Route::get($FRONTEND_ROOT . '/page/{id}', 'Frontend\PageController@show')->name('page/show');
+Route::get($FRONTEND_ROOT . '/page/{id}', 'PageController@show')->name('page/show');
 
 // --- END OF FRONTEND ROUTES ---

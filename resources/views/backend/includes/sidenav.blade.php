@@ -14,6 +14,9 @@
             <a class="mdl-navigation__link sidenav-submenu" href="{{ route('backend/category/create') }}">
                 <span class="icon icon-subdirectory_arrow_right"></span>Category
             </a>
+            <a class="mdl-navigation__link sidenav-submenu" href="{{ route('backend/page/create') }}">
+                <span class="icon icon-subdirectory_arrow_right"></span>Page
+            </a>
             <a class="mdl-navigation__link" href="#">
                 <span class="icon icon-list"></span> All
             </a>
@@ -23,11 +26,11 @@
             <a class="mdl-navigation__link sidenav-submenu" href="{{ route('backend/category/index') }}">
                 <span class="icon icon-subdirectory_arrow_right"></span>Categories
             </a>
+            <a class="mdl-navigation__link sidenav-submenu" href="{{ route('backend/page/index') }}">
+                <span class="icon icon-subdirectory_arrow_right"></span>Pages
+            </a>
             <a class="mdl-navigation__link" href="#" id="submenu-all">
                 <span class="icon icon-settings"></span> Settings
-            </a>
-            <a class="mdl-navigation__link sidenav-submenu" href="{{ route('backend/settings/composition') }}">
-                <span class="icon icon-subdirectory_arrow_right"></span>Composition
             </a>
             <a class="mdl-navigation__link" href="{{ route('frontend/index') }}">
                 <span class="icon icon-screen_share"></span> Live website
