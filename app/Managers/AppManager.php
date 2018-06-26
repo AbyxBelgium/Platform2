@@ -8,14 +8,14 @@ namespace App\Managers;
 
 class AppManager
 {
-    public function getAllExtensions(): array
+    public function getAllElements(): array
     {
-        $subdirs = array_filter(glob('*'), 'is_dir');
+        $subdirs = array_filter(glob('/app/Catalogue/*'), 'is_dir');
         $elements = [];
         foreach($subdirs as $dir) {
             $mainClass = 'App\\Catalogue\\' .$dir . '\\Main';
             $instance = new $mainClass();
-            $elements = array_merge($elements, $instance->getElements());
+            $elements[$dir] = $instance->getElements();
         }
         return $elements;
     }

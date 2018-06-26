@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Managers\AppManager;
 use App\Managers\PageManager;
 use App\Page;
 use http\Env\Response;
@@ -29,7 +30,8 @@ class PageController extends Controller
      */
     public function create()
     {
-        return view('backend.pages.page.create');
+        $appManager = new AppManager();
+        return view('backend.pages.page.create', ['elements' => $appManager->getAllElements()]);
     }
 
     /**
