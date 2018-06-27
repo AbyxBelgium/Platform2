@@ -22,7 +22,7 @@ class Main extends App
     public function getElements(): array
     {
         $output = [];
-        array_push($output, new Element('main-content', View::make('Sample.main-content')));
+        array_push($output, new Element('main-content', View::make('Sample.main-content'), $this));
         return $output;
     }
 }

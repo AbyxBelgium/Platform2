@@ -49,6 +49,7 @@ Route::delete($BACKEND_ROOT . '/category/{id}', 'CategoryController@destroy')->n
 
 // Pages
 Route::get($BACKEND_ROOT . '/page/create', 'PageController@create')->name('backend/page/create');
+Route::post($BACKEND_ROOT . '/page/store', 'PageController@store')->name('backend/page/store');
 Route::get($BACKEND_ROOT . '/pages', 'PageController@show')->name('backend/page/index');
 
 // --- END OF BACKEND ROUTES ---
