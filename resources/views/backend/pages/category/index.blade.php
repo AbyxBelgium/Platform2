@@ -16,7 +16,7 @@
             <span class="icon icon-add icon-fix-position"></span> Add category
         </a>
 
-        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" id="category-list">
+        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp addable-table-list" id="category-list">
             <thead>
             <tr>
                 <th class="mdl-data-table__cell--non-numeric">Icon</th>

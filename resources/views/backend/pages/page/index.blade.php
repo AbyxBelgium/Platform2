@@ -8,7 +8,11 @@
             <h3>Pages:</h3>
         </span>
 
-        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" id="category-list">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect create-button" href="{{ route('backend/page/create') }}">
+            <span class="icon icon-add icon-fix-position"></span> Add page
+        </a>
+
+        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp addable-table-list" id="page-list">
             <thead>
             <tr>
                 <th class="mdl-data-table__cell--non-numeric">Name</th>

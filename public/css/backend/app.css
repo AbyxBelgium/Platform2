@@ -275,8 +275,7 @@ footer {
   top: -50px;
 }
 
-#post-list,
-#category-list {
+.addable-table-list {
   position: relative;
   top: -45px;
 }

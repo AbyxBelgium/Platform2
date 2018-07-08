@@ -8,6 +8,7 @@ use App\Managers\PageManager;
 use App\Page;
 use http\Env\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
 
@@ -25,7 +26,8 @@ class PageController extends Controller
      */
     public function index()
     {
-        return view('backend.pages.page.index');
+        $pages = DB::table('pages')->simplePaginate(15);
+        return view('backend.pages.page.index', ["pages" => $pages]);
     }
 
     /**
@@ -77,6 +79,8 @@ class PageController extends Controller
      */
     public function destroy($id)
     {
+        $page = Page::find($id);
+        Storage::disk('local')->delete('pages/' . $page->name . '.json');
         Page::destroy($id);
         return redirect()->route('backend/page/index');
     }

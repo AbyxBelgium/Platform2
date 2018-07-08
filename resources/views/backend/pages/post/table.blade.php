@@ -1,4 +1,4 @@
-<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" id="post-list">
+<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp addable-table-list" id="post-list">
     <thead>
     <tr>
         <th class="mdl-data-table__cell--non-numeric">Title</th>
