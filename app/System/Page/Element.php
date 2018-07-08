@@ -13,12 +13,14 @@ class Element
     private $content;
     private $identifier;
     private $app;
+    private $backendContent;
 
-    public function __construct($identifier, $content, $app)
+    public function __construct($identifier, $content, $app, $backendContent = "")
     {
         $this->identifier = $identifier;
         $this->content = $content;
         $this->app = $app;
+        $this->backendContent = $backendContent;
     }
 
     public function getIdentifier()
@@ -34,5 +36,10 @@ class Element
     public function getApp(): App
     {
         return $this->app;
+    }
+
+    public function getBackendContent()
+    {
+        return $this->backendContent;
     }
 }
