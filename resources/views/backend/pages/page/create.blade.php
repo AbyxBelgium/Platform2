@@ -84,7 +84,7 @@
         </span>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <label class="mdl-textfield__label" for="right-column-title">Column title:</label>
-            <input class="mdl-textfield__input" type="text" id="left-column-title" name="right-column-title" value="" required />
+            <input class="mdl-textfield__input" type="text" id="right-column-title" name="right-column-title" value="" required />
             <span class="mdl-textfield__error">Column title cannot be empty!</span>
         </div>
 
