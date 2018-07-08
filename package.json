@@ -14,5 +14,8 @@
         "cross-env": "^5.1.6",
         "laravel-mix": "^2.0",
         "lodash": "^4.17.4"
+    },
+    "dependencies": {
+        "html5sortable": "^0.9.3"
     }
 }

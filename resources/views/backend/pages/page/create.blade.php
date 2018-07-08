@@ -144,8 +144,10 @@
                 };
 
                 if ($element.is(':checked')) {
+                    let uuid = guid();
+
                     let data =
-                        '<div class="mdl-card element-card mdl-shadow--2dp">' +
+                        '<div class="mdl-card element-card mdl-shadow--2dp" id="' + uuid + '">' +
                         '    <div class="mdl-card__title mdl-card--expand">' +
                         '        <h4>' +
                         '            ' + $element.data('app') + ': ' + $element.val() +
@@ -154,6 +156,18 @@
                         '    <div class="mdl-card__actions mdl-card--border">' +
                         '        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">' +
                         '            Delete' +
+                        '            <span class="mdl-button__ripple-container">' +
+                        '                <span class="mdl-ripple"></span>' +
+                        '            </span>' +
+                        '        </a>' +
+                        '        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" id="up-' + uuid + '">' +
+                        '            Move up' +
+                        '            <span class="mdl-button__ripple-container">' +
+                        '                <span class="mdl-ripple"></span>' +
+                        '            </span>' +
+                        '        </a>' +
+                        '        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" id="down-' + uuid + '">' +
+                        '            Move down' +
                         '            <span class="mdl-button__ripple-container">' +
                         '                <span class="mdl-ripple"></span>' +
                         '            </span>' +
@@ -169,6 +183,19 @@
                         $rightColumn.prepend(data);
                         rightExtensions.push(elementData);
                     }
+
+                    // Move element up one position in the list
+                    $("#up-" + uuid).click(function() {
+                        let $element = $("#" + uuid);
+                        $element.prev().insertAfter($element);
+                    });
+
+                    // Move element down one position in the list
+                    $("#down-" + uuid).click(function() {
+                        let $element = $("#" + uuid);
+                        $element.next().insertBefore($element);
+                    });
+
                     break;
                 }
             }
@@ -220,6 +247,15 @@
                 }
             });
         });
+
+        function guid() {
+            function s4() {
+                return Math.floor((1 + Math.random()) * 0x10000)
+                    .toString(16)
+                    .substring(1);
+            }
+            return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+        }
     </script>
 @stop()
 
