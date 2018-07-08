@@ -130,51 +130,54 @@
         let $rightColumn = $("#right-drop-destination");
 
         let $modalDoneButton = $("#insert-done-button");
-        let initializeDialog = function(col) {
+
+        let col = "left";
+        $modalDoneButton.click(function() {
+            // Get currently selected extension and add it to the corresponding column
+            let $radioButtons = $('.mdl-radio__button');
+            for (let i = 0; i < $radioButtons.length; i++) {
+                let $element = $($radioButtons.get(i));
+
+                let elementData = {
+                    "app": $element.data('app'),
+                    "identifier": $element.val()
+                };
+
+                if ($element.is(':checked')) {
+                    let data =
+                        '<div class="mdl-card element-card mdl-shadow--2dp">' +
+                        '    <div class="mdl-card__title mdl-card--expand">' +
+                        '        <h4>' +
+                        '            ' + $element.data('app') + ': ' + $element.val() +
+                        '        </h4>' +
+                        '    </div>' +
+                        '    <div class="mdl-card__actions mdl-card--border">' +
+                        '        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">' +
+                        '            Delete' +
+                        '            <span class="mdl-button__ripple-container">' +
+                        '                <span class="mdl-ripple"></span>' +
+                        '            </span>' +
+                        '        </a>' +
+                        '        <div class="mdl-layout-spacer"></div>' +
+                        '    </div>' +
+                        '</div>';
+
+                    if (col === 'left') {
+                        $leftColumn.prepend(data);
+                        leftExtensions.push(elementData)
+                    } else {
+                        $rightColumn.prepend(data);
+                        rightExtensions.push(elementData);
+                    }
+                    break;
+                }
+            }
+            dialog.close();
+        });
+
+        let initializeDialog = function(column) {
+            col = column;
              dialog.show();
-
-             $modalDoneButton.click(function() {
-                 // Get currently selected extension and add it to the corresponding column
-                 let $radioButtons = $('.mdl-radio__button');
-                 for (let i = 0; i < $radioButtons.length; i++) {
-                     let $element = $($radioButtons.get(i));
-
-                     let elementData = {
-                         "app": $element.data('app'),
-                         "identifier": $element.val()
-                     };
-
-                     if ($element.is(':checked')) {
-                         let data =
-                             '<div class="mdl-card element-card mdl-shadow--2dp">' +
-                             '    <div class="mdl-card__title mdl-card--expand">' +
-                             '        <h4>' +
-                             '            ' + $element.data('app') + ': ' + $element.val() +
-                             '        </h4>' +
-                             '    </div>' +
-                             '    <div class="mdl-card__actions mdl-card--border">' +
-                             '        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">' +
-                             '            Delete' +
-                             '            <span class="mdl-button__ripple-container">' +
-                             '                <span class="mdl-ripple"></span>' +
-                             '            </span>' +
-                             '        </a>' +
-                             '        <div class="mdl-layout-spacer"></div>' +
-                             '    </div>' +
-                             '</div>';
-
-                         if (col === 'left') {
-                             $leftColumn.prepend(data);
-                             leftExtensions.push(elementData)
-                         } else {
-                             $rightColumn.prepend(data);
-                             rightExtensions.push(elementData);
-                         }
-                         break;
-                     }
-                 }
-                 dialog.close();
-             });
         };
 
         $leftColButton.click(function() {
@@ -189,6 +192,8 @@
         let $rightColumnTitle = $("#right-column-title");
         let $leftColumnWidth = $("#left-column-width");
         let $rightColumnWidth = $("#right-column-width");
+
+        let $pageTitleInput = $("#page-title");
 
         $publishButton.click(function() {
             let publishData = {
@@ -206,8 +211,10 @@
             $.post({
                 url: "{{ route('backend/page/store') }}",
                 type: "POST",
-                data: publishData,
-                dataType: "json",
+                data: {
+                    "title": $pageTitleInput.val(),
+                    "content": JSON.stringify(publishData)
+                },
                 complete: function() {
                     location.href = "{{ route('backend/page/index') }}"
                 }
