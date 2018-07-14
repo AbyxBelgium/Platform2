@@ -15,7 +15,7 @@ return [
 
     'paths' => [
         resource_path('views'),
-        realpath(base_path('app/Catalogue')),
+        realpath(base_path('app/Catalogue/Apps')),
     ],
 
     /*

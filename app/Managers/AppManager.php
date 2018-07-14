@@ -13,19 +13,19 @@ class AppManager
 {
     public function getApp(string $name): App
     {
-        $mainClass = 'App\\Catalogue\\' . $name . '\\Main';
+        $mainClass = 'App\\Catalogue\\Apps\\' . $name . '\\Main';
         return new $mainClass();
     }
 
     public function getController(App $app, string $controllerName): AppController
     {
-        $controller = 'App\\Catalogue\\' . $app . '\\' . $controllerName;
+        $controller = 'App\\Catalogue\\Apps\\' . $app . '\\' . $controllerName;
         return new $controller();
     }
 
     public function getAllElements(): array
     {
-        $subdirs = array_filter(glob('../app/Catalogue/*'), 'is_dir');
+        $subdirs = array_filter(glob('../app/Catalogue/Apps/*'), 'is_dir');
         $elements = [];
         foreach($subdirs as $dir) {
             $dir = basename($dir);

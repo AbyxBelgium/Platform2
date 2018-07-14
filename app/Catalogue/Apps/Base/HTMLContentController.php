@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Catalogue\Base;
+namespace App\Catalogue\Apps\Base;
 
 
 use App\Catalogue\AppController;

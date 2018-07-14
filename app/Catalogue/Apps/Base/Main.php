@@ -5,7 +5,7 @@
  * @author Pieter Verschaffelt
  */
 
-namespace App\Catalogue\Base;
+namespace App\Catalogue\Apps\Base;
 
 
 use App\Catalogue\App;
