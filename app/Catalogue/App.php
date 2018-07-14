@@ -17,14 +17,25 @@ abstract class App
     public abstract function getElements(): array;
 
     /**
-     * This method is called when the App is installed into the system and
+     * This method should return all routes that are defined by the app.
+     * These routes are then accessible from the blade-views defined by this app.
+     *
+     * @return array
+     */
+    public function getRoutes(): array
+    {
+        return [];
+    }
+
+    /**
+     * This method is called when the app is installed into the system and
      * should be used for registering and installing persistent features, such
      * as database tables.
      */
     public function onInstall(): void {}
 
     /**
-     * This method is called when the App is uninstalled from the system and
+     * This method is called when the app is uninstalled from the system and
      * should be used for deregistering and removing persistent features such
      * as database tables.
      */

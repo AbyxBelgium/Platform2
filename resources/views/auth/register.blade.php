@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="mdl-cell mdl-cell--3-col" style="margin: auto; text-align: center;">
-        <img class="platform-logo" src="{{  URL::asset('graphics/platform-logo.svg') }}" />
+        <img class="platform-logo" src="{{ URL::asset('graphics/platform-logo.svg') }}" />
     </div>
     <div class="mdl-cell mdl-cell--9-col">
         <span class="mdl-layout__title">

@@ -13,6 +13,7 @@
 
 $BACKEND_ROOT = "/backend";
 $FRONTEND_ROOT = "";
+$APP_ROOT = "";
 
 // Authentication
 Auth::routes();
@@ -52,7 +53,7 @@ Route::get($BACKEND_ROOT . '/page/create', 'PageController@create')->name('backe
 Route::post($BACKEND_ROOT . '/page/store', 'PageController@store')->name('backend/page/store');
 Route::get($BACKEND_ROOT . '/pages', 'PageController@index')->name('backend/page/index');
 Route::delete($BACKEND_ROOT . '/page/{id}', 'PageController@destroy')->name('backend/page/destroy');
-ROute::get($BACKEND_ROOT . '/page/edit/{id}', 'PageController@edit')->name('backend/page/edit');
+Route::get($BACKEND_ROOT . '/page/edit/{id}', 'PageController@edit')->name('backend/page/edit');
 
 // --- END OF BACKEND ROUTES ---
 
@@ -65,3 +66,12 @@ Route::get($FRONTEND_ROOT . '/image/{id}', 'ImageController@show')->name('image/
 Route::get($FRONTEND_ROOT . '/page/{id}', 'PageController@show')->name('page/show');
 
 // --- END OF FRONTEND ROUTES ---
+
+// --- START OF APP/EXTENSION ROUTING ---
+
+Route::get($APP_ROOT . '/app/{app}/{route}', 'AppController@resolveRoute')->name('app/get');
+Route::post($APP_ROOT . '/app/{app}/{route}', 'AppController@resolveRoute')->name('app/post');
+Route::put($APP_ROOT . '/app/{app}/{route}', 'AppController@resolveRoute')->name('app/put');
+Route::delete($APP_ROOT . '/app/{app}/{route}', 'AppController@resolveRoute')->name('app/delete');
+
+// --- ENF OF APP ROUTING ---
