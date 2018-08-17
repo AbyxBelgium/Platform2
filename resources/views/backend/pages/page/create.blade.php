@@ -35,7 +35,7 @@
                                 </span>
                                 <span class="mdl-list__item-secondary-action">
                                     <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="list-option-1">
-                                        <input type="radio" id="list-option-1" class="mdl-radio__button" name="options" data-app="{{ $element->getApp()->getName() }}" value="{{ $element->getIdentifier() }}" checked />
+                                        <input type="radio" id="list-option-1" class="mdl-radio__button" name="options" data-app="{{ $element->getApp()->getName() }}" data-backend="{{ $element->getBackendContent() }}" value="{{ $element->getIdentifier() }}" checked />
                                     </label>
                                 </span>
                             </li>
@@ -152,6 +152,9 @@
                         '        <h4>' +
                         '            ' + $element.data('app') + ': ' + $element.val() +
                         '        </h4>' +
+                        '    </div>' +
+                        '    <div class="mdl-card__supporting-text">' +
+                        '           ' + $element.data('backend') +
                         '    </div>' +
                         '    <div class="mdl-card__actions mdl-card--border">' +
                         '        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">' +
