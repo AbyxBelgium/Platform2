@@ -7,7 +7,11 @@
 namespace App\System\UI\Theme;
 
 
+use App\System\UI\Form;
+use App\System\UI\Input\Input;
+
 interface Theme
 {
-    public function render(string $elementType): string;
+    public function renderInput(string $elementType, Input $element): string;
+    public function renderForm(Form $form): string;
 }

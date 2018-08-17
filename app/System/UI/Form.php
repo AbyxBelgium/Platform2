@@ -6,10 +6,9 @@
 namespace App\System\UI;
 
 
-use App\Catalogue\AppRoute;
 use App\System\UI\Input\Input;
 
-class Form
+class Form extends UIElement
 {
     private $submitText;
     private $inputs = [];
@@ -17,10 +16,11 @@ class Form
 
     /**
      * @param string $submitText Text that's displayed for the submit-button of this form.
-     * @param AppRoute $route The route to which all data is submitted.
+     * @param string $route The route to which all data is submitted.
      */
-    public function __construct(string $submitText, AppRoute $route)
+    public function __construct(string $submitText, string $route)
     {
+        parent::__construct();
         $this->submitText = $submitText;
         $this->route = $route;
     }
@@ -32,7 +32,28 @@ class Form
     /**
      * @return Input[]
      */
-    public function getAllInputs() {
+    public function getInputs() {
         return $this->inputs;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRoute(): string
+    {
+        return $this->route;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSubmitText(): string
+    {
+        return $this->submitText;
+    }
+
+    public function render(): string
+    {
+        return $this->theme->renderForm($this);
     }
 }

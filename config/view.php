@@ -16,6 +16,7 @@ return [
     'paths' => [
         resource_path('views'),
         realpath(base_path('app/Catalogue/Apps')),
+        realpath(base_path('app/Catalogue/Themes'))
     ],
 
     /*

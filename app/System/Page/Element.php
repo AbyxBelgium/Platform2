@@ -7,6 +7,7 @@ namespace App\System\Page;
 
 
 use App\Catalogue\App;
+use App\System\UI\Form;
 
 class Element
 {
@@ -15,7 +16,7 @@ class Element
     private $app;
     private $backendContent;
 
-    public function __construct($identifier, $content, $app, $backendContent = "")
+    public function __construct($identifier, $content, $app, ?Form $backendContent = null)
     {
         $this->identifier = $identifier;
         $this->content = $content;
@@ -40,6 +41,10 @@ class Element
 
     public function getBackendContent()
     {
-        return $this->backendContent;
+        if (!$this->backendContent) {
+            return '';
+        }
+
+        return $this->backendContent->render();
     }
 }

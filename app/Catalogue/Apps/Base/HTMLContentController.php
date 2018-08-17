@@ -12,6 +12,5 @@ class HTMLContentController extends AppController
 {
     public function create(Request $request) {
         $content = Input::get('content');
-        dd($content);
     }
 }

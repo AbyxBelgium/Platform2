@@ -11,6 +11,8 @@ namespace App\Catalogue\Apps\Base;
 use App\Catalogue\App;
 use App\Catalogue\Route\PostRoute;
 use App\System\Page\Element;
+use App\System\UI\Form;
+use App\System\UI\Input\TextInput;
 use Illuminate\Support\Facades\View;
 
 class Main extends App
@@ -23,7 +25,9 @@ class Main extends App
     public function getElements(): array
     {
         $output = [];
-        array_push($output, new Element('Any HTML content', View::make('Base.any-html-content'), $this, View::make('Base.any-html-content-backend')));
+        $htmlContentForm = new Form('Save', appRoute("Base", "backend/html-content/create"));
+        $htmlContentForm->addInput(new TextInput('Content'));
+        array_push($output, new Element('Any HTML content', View::make('Base.any-html-content'), $this, $htmlContentForm));
         return $output;
     }
 

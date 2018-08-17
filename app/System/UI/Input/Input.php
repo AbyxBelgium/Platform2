@@ -7,16 +7,17 @@ namespace App\System\UI\Input;
 
 
 use App\System\UI\Theme\Theme;
+use App\System\UI\UIElement;
+use ReflectionClass;
 
-abstract class Input
+abstract class Input extends UIElement
 {
     private $name;
-    private $theme;
 
-    public function __construct($name, Theme $theme)
+    public function __construct($name)
     {
+        parent::__construct();
         $this->name = $name;
-        $this->theme = $theme;
     }
 
     /**
@@ -29,6 +30,7 @@ abstract class Input
 
     public function render(): string
     {
-        return $this->theme->render(get_class($this));
+        $reflected = new ReflectionClass($this);
+        return $this->theme->renderInput($reflected->getShortName(), $this);
     }
 }
