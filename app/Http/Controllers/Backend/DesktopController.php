@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Managers\SystemResourceManager;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 
@@ -26,12 +27,15 @@ class DesktopController extends Controller
         $postCount = DB::table('posts')->count();
         $userCount = DB::table('users')->count();
 
+        $user = Auth::user();
+        $token = $user->createToken('Platform2')->accessToken;
+
         return view('backend.pages.desktop', [
-            'resourceManager' => $resourceManager,
             'categoryCount' => $categoryCount,
             'postCount' => $postCount,
             'userCount' => $userCount,
-            'posts' => $posts
+            'posts' => $posts,
+            'token' => $token
         ]);
     }
 }
