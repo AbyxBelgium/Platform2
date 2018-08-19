@@ -23,3 +23,5 @@
 <!-- All supported icons -->
 <link rel="stylesheet" href="{{ URL::asset('css/icons.css') }}">
 <link rel="stylesheet" href="{{ URL::asset('css/icon-font.css') }}">
+
+@yield('custom-header')

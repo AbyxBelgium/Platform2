@@ -17,10 +17,9 @@ class DesktopController extends Controller
     /**
      * Initialize the desktop page.
      *
-     * @param SystemResourceManager $resourceManager ResourceManager that can be used to monitor system usage.
      * @return Response
      */
-    public function show(SystemResourceManager $resourceManager) {
+    public function show() {
         $posts = DB::table('posts')->orderByDesc('created_at')->take(10)->get();
 
         $categoryCount = DB::table('categories')->count();
