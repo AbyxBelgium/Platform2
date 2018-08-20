@@ -51,7 +51,20 @@
         let $storageBadge = $("#storage-badge");
 
         let token = "{{ $token }}";
-        let refreshRate = 200;
+        let refreshRate = 1000;
+
+        let steps = 20;
+        let cpuData = [];
+        let memData = [];
+        let storageData = [];
+
+        let currentTime = (new Date()).getTime();
+
+        for (let i = 0; i < steps; i++) {
+            cpuData.push([currentTime - (steps - i) * refreshRate, 0]);
+            memData.push([currentTime - (steps - i) * refreshRate, 0]);
+            storageData.push([currentTime - (steps - i) * refreshRate, 0]);
+        }
 
         Highcharts.chart('chart-container', {
 
@@ -115,16 +128,16 @@
             },
             series: [{
                 name: "CPU",
-                data: new Array(20).fill([(new Date()).getTime(), 0]),
+                data: cpuData,
                 pointInterval: refreshRate
 
             }, {
                 name: "Memory",
-                data: new Array(20).fill([(new Date()).getTime(), 0]),
+                data: memData,
                 pointInterval: refreshRate
             }, {
                 name: "Storage",
-                data: new Array(20).fill([(new Date()).getTime(), 0]),
+                data: storageData,
                 pointInterval: refreshRate
             }]
         });
