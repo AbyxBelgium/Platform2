@@ -35,7 +35,7 @@
                                 </span>
                                 <span class="mdl-list__item-secondary-action">
                                     <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="list-option-1">
-                                        <input type="radio" id="list-option-1" class="mdl-radio__button" name="options" data-app="{{ $element->getApp()->getName() }}" data-backend="{{ $element->getBackendContent() }}" value="{{ $element->getIdentifier() }}" checked />
+                                        <input type="radio" id="list-option-1" class="mdl-radio__button" name="options" data-app="{{ $element->getApp()->getName() }}" value="{{ $element->getIdentifier() }}" checked />
                                     </label>
                                 </span>
                             </li>
@@ -112,7 +112,7 @@
 @stop()
 
 @section('javascript')
-    <script src="{{ URL::asset('js/backend/page/edit.js') }}"></script>
+    @include('backend.pages.page.edit-js')
 @stop()
 
 @section('custom-style')

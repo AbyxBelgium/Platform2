@@ -27,4 +27,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function generateApiToken()
+    {
+        $token = $this->createToken('Platform2')->accessToken;
+        return $token;
+    }
 }

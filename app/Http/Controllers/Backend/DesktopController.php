@@ -27,7 +27,7 @@ class DesktopController extends Controller
         $userCount = DB::table('users')->count();
 
         $user = Auth::user();
-        $token = $user->createToken('Platform2')->accessToken;
+        $token = $user->generateApiToken();
 
         return view('backend.pages.desktop', [
             'categoryCount' => $categoryCount,
