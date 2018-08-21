@@ -41,9 +41,20 @@ class ExtensionController extends Controller
     public function extensionSettings(string $appName, string $extensionName)
     {
         $extension = $this->getExtensionByApp($appName, $extensionName);
+
+        if ($extension->getBackendContent()) {
+            $backendContent = $extension->getBackendContent()->render();
+            $uuid = $extension->getBackendContent()->getUuid();
+        } else {
+            $backendContent = '';
+            $uuid = 0;
+        }
+
         return response()->json(
             [
-                "content" => $extension->getBackendContent()
+                "valid" => $uuid != 0,
+                "content" => $backendContent,
+                "uuid" => $uuid
             ]
         );
     }

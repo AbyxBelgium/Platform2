@@ -30,8 +30,6 @@
             };
 
             if ($element.is(':checked')) {
-                let uuid = guid();
-
                 $.ajax({
                     "url": "/api/extension/" + $element.data("app") + "/" + $element.val() + '/settings',
                     "headers": {
@@ -39,15 +37,17 @@
                     }
                 })
                     .done(function(received) {
+                        let uuid = received.uuid;
+
                         let data =
                             '<div class="mdl-card element-card mdl-shadow--2dp" id="' + uuid + '">' +
                             '    <div class="mdl-card__title mdl-card--expand">' +
                             '        <h4>' +
-                            '            ' + $element.data('app') + ': ' + received.content +
+                            '            ' + $element.data('app') + ': ' + $element.val() +
                             '        </h4>' +
                             '    </div>' +
                             '    <div class="mdl-card__supporting-text">' +
-                            '           ' + $element.data('backend') +
+                            '           ' +  received.content +
                             '    </div>' +
                             '    <div class="mdl-card__actions mdl-card--border">' +
                             '        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">' +
@@ -91,6 +91,33 @@
                             let $element = $("#" + uuid);
                             $element.next().insertBefore($element);
                         });
+
+                        let $extensionButton = $("#button-" + uuid);
+                        let $extensionForm = $("#form-" + uuid);
+
+                        $extensionButton.click(function() {
+                            let route = $extensionButton.data("action");
+
+                            // Loop over form inputs and retrieve key-value pairs.
+                            let keyValues = [];
+                            // First check all default inputs
+                            let $inputs = $extensionForm.children("input");
+                            $inputs.each(function(index) {
+                                keyValues[$(this).name()] = $(this).val();
+                            });
+                            // Then check all textarea's
+                            let $texts = $extensionForm.children("textarea");
+                            $texts.each(function(index) {
+                                keyValues[$(this).name()] = $(this).val();
+                            });
+
+                            $.post({
+                                "url": route,
+                                "data": {
+                                    "data-pairs": keyValues
+                                }
+                            })
+                        })
                     });
                 break;
             }

@@ -7,6 +7,7 @@ namespace App\System\UI;
 
 
 use App\System\UI\Input\Input;
+use ReflectionClass;
 
 class Form extends UIElement
 {
@@ -54,6 +55,7 @@ class Form extends UIElement
 
     public function render(): string
     {
-        return $this->theme->renderForm($this);
+        $reflected = new ReflectionClass($this);
+        return $this->theme->renderForm($reflected->getShortName(), $this);
     }
 }

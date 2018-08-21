@@ -13,5 +13,5 @@ use App\System\UI\Input\Input;
 interface Theme
 {
     public function renderInput(string $elementType, Input $element): string;
-    public function renderForm(Form $form): string;
+    public function renderForm(string $type, Form $form): string;
 }

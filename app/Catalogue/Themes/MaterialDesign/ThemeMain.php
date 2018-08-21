@@ -19,8 +19,8 @@ class ThemeMain implements Theme
         return View::make("MaterialDesign.$elementType", ['element' => $element]);
     }
 
-    public function renderForm(Form $form): string
+    public function renderForm(string $type, Form $form): string
     {
-        return View::make("MaterialDesign.Form", ['element' => $form]);
+        return View::make("MaterialDesign.$type", ['element' => $form]);
     }
 }
