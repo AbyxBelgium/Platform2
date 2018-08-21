@@ -28,14 +28,13 @@ class AppController
 
         foreach ($routes as $currentRoute) {
             if ($currentRoute->getName() === $route) {
-                $appRoute = $route;
+                $appRoute = $currentRoute;
                 break;
             }
         }
 
         if ($appRoute == null) {
-            //abort(404);
-            throw new RouteNotFoundException();
+            abort(404);
         }
 
         $executors = explode("@", $appRoute->getExecutor());

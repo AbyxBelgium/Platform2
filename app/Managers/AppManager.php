@@ -7,7 +7,7 @@ namespace App\Managers;
 
 
 use App\Catalogue\App;
-use App\Http\Controllers\App\AppController;
+use App\Catalogue\AppController;
 
 class AppManager
 {
@@ -19,7 +19,7 @@ class AppManager
 
     public function getController(App $app, string $controllerName): AppController
     {
-        $controller = 'App\\Catalogue\\Apps\\' . $app . '\\' . $controllerName;
+        $controller = 'App\\Catalogue\\Apps\\' . $app->getName() . '\\' . $controllerName;
         return new $controller();
     }
 

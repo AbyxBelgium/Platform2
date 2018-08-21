@@ -99,22 +99,25 @@
                             let route = $extensionButton.data("action");
 
                             // Loop over form inputs and retrieve key-value pairs.
-                            let keyValues = [];
+                            let keyValues = {};
                             // First check all default inputs
-                            let $inputs = $extensionForm.children("input");
+                            let $inputs = $extensionForm.find("input");
                             $inputs.each(function(index) {
-                                keyValues[$(this).name()] = $(this).val();
+                                keyValues[$(this).attr("name")] = $(this).val();
                             });
                             // Then check all textarea's
-                            let $texts = $extensionForm.children("textarea");
+                            let $texts = $extensionForm.find("textarea");
                             $texts.each(function(index) {
-                                keyValues[$(this).name()] = $(this).val();
+                                keyValues[$(this).attr("name")] = $(this).val();
                             });
+
+                            console.log(keyValues);
 
                             $.post({
                                 "url": route,
                                 "data": {
-                                    "data-pairs": keyValues
+                                    "data-pairs": JSON.stringify(keyValues),
+                                    "test-data": "this is a string!"
                                 }
                             })
                         })
