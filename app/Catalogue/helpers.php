@@ -8,6 +8,8 @@ function appRoute(string $app, string $routeName) {
     $appInstance = $appManager->getApp($app);
     $routes = $appInstance->getRoutes();
 
+    $routeName = str_replace('/', '_', $routeName);
+
     /**
      * @var AppRoute $route
      */
@@ -29,6 +31,7 @@ function appRoute(string $app, string $routeName) {
     }
 
     $type = $route->getType();
+    $routeName = urlencode($routeName);
 
     switch($type) {
         case "GET": {

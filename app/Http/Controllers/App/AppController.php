@@ -7,6 +7,7 @@ namespace App\Http\Controllers\App;
 use App\Catalogue\AppRoute;
 use App\Managers\AppManager;
 use Illuminate\Support\Facades\Request;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
 class AppController
 {
@@ -23,6 +24,7 @@ class AppController
          * @var AppRoute $appRoute
          */
         $appRoute = null;
+        $route = urldecode($route);
 
         foreach ($routes as $currentRoute) {
             if ($currentRoute->getName() === $route) {
@@ -32,7 +34,8 @@ class AppController
         }
 
         if ($appRoute == null) {
-            return;
+            //abort(404);
+            throw new RouteNotFoundException();
         }
 
         $executors = explode("@", $appRoute->getExecutor());

@@ -4,6 +4,8 @@
 namespace App\Catalogue;
 
 
+use Debugbar;
+
 abstract class AppRoute
 {
     private $path;
@@ -19,7 +21,8 @@ abstract class AppRoute
     {
         $this->path = $path;
         $this->executor = $executor;
-        $this->name = $name;
+        $this->name = str_replace("/", "_", $name);
+        DebugBar::addMessage($this->name);
     }
 
     /**

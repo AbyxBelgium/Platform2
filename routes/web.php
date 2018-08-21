@@ -69,9 +69,9 @@ Route::get($FRONTEND_ROOT . '/page/{id}', 'PageController@show')->name('page/sho
 
 // --- START OF APP/EXTENSION ROUTING ---
 
-Route::get($APP_ROOT . '/app/{app}/{route}', 'AppController@resolveRoute')->name('app/get');
-Route::post($APP_ROOT . '/app/{app}/{route}', 'AppController@resolveRoute')->name('app/post');
-Route::put($APP_ROOT . '/app/{app}/{route}', 'AppController@resolveRoute')->name('app/put');
-Route::delete($APP_ROOT . '/app/{app}/{route}', 'AppController@resolveRoute')->name('app/delete');
+Route::get($APP_ROOT . '/app/{app}/{route}', 'App\AppController@resolveRoute')->name('app/get');
+Route::post($APP_ROOT . '/app/{app}/{route}', 'App\AppController@resolveRoute')->name('app/post');
+Route::put($APP_ROOT . '/app/{app}/{route}', 'App\AppController@resolveRoute')->name('app/put');
+Route::delete($APP_ROOT . '/app/{app}/{route}', 'App\AppController@resolveRoute')->name('app/delete');
 
 // --- ENF OF APP ROUTING ---
