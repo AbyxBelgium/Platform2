@@ -3,7 +3,6 @@
 
 namespace App\Catalogue\Apps\Base;
 
-use Debugbar;
 use App\Catalogue\AppController;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Request;

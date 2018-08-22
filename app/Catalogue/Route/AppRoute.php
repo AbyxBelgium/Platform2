@@ -4,8 +4,6 @@
 namespace App\Catalogue;
 
 
-use Debugbar;
-
 abstract class AppRoute
 {
     private $path;
