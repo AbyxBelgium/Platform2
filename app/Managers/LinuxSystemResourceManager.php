@@ -7,7 +7,7 @@ class LinuxSystemResourceManager extends CommonSystemResourceManager
     public function getCPULoad(): int
     {
         if (shell_exec('which sar') != "") {
-            return intval(floatval(shell_exec('sar -u 1 1 | tail -n 1 | tr -s \' \' | cut -d \' \' -f 4')));
+            return intval(floatval(shell_exec('sar -u 1 1 | tail -n 1 | tr -s \' \' | cut -d \' \' -f 3')));
         }
         return sys_getloadavg()[0] * 100;
     }
