@@ -20,7 +20,6 @@ abstract class AppRoute
         $this->path = $path;
         $this->executor = $executor;
         $this->name = str_replace("/", "_", $name);
-        DebugBar::addMessage($this->name);
     }
 
     /**
