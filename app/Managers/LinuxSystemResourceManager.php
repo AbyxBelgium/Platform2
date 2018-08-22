@@ -6,6 +6,9 @@ class LinuxSystemResourceManager extends CommonSystemResourceManager
 {
     public function getCPULoad(): int
     {
+        if (shell_exec('which sar') != "") {
+            return intval(floatval(shell_exec('sar 0 | tail -n 1 | tr -s \' \' | cut -d \' \' -f 4')));
+        }
         return sys_getloadavg()[0] * 100;
     }
 
