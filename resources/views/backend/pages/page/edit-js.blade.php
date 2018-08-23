@@ -47,7 +47,14 @@
                             '        </h4>' +
                             '    </div>' +
                             '    <div class="mdl-card__supporting-text">' +
+                            '    <div class="error" id="error-' + uuid + '" style="display: none;">' +
+                            '    </div>' +
+                            '    <div class="center" id="form-loading-' + uuid + '" style="display: none;">' +
+                            '        <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>' +
+                            '    </div>' +
+                            '        <fieldset id="form-data-' + uuid + '">' +
                             '           ' +  received.content +
+                            '        </fieldset>' +
                             '    </div>' +
                             '    <div class="mdl-card__actions mdl-card--border">' +
                             '        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">' +
@@ -94,8 +101,16 @@
 
                         let $extensionButton = $("#button-" + uuid);
                         let $extensionForm = $("#form-" + uuid);
+                        let $formFieldSet = $("#form-data-" + uuid);
+                        let $loadIndicator = $("#form-loading-" + uuid);
+                        let $errorField = $("#error-" + uuid);
 
                         $extensionButton.click(function() {
+                            $formFieldSet.attr("disabled", "disabled");
+                            $loadIndicator.css("display", "block");
+                            $extensionButton.prop("disabled", true);
+                            $errorField.css("display", "none");
+
                             let route = $extensionButton.data("action");
 
                             // Loop over form inputs and retrieve key-value pairs.
@@ -111,16 +126,32 @@
                                 keyValues[$(this).attr("name")] = $(this).val();
                             });
 
-                            console.log(keyValues);
-
                             $.post({
                                 "url": route,
                                 "data": {
                                     "data-pairs": JSON.stringify(keyValues),
                                     "test-data": "this is a string!"
                                 }
+                            }).done(function(result) {
+                                $formFieldSet.attr("disabled", false);
+                                $loadIndicator.css("display", "none");
+                                $extensionButton.prop("disabled", false);
+
+                                if (!result["status"]) {
+                                    $errorField.text("An error occurred: " + result["error"]);
+                                    $errorField.css("display", "block");
+                                }
                             })
-                        })
+                        });
+
+                        // Activate loader itself from Material Design Lite library
+                        // This call is required when the spinner was added using JavaScript instead of plain HTML
+                        $('.mdl-js-spinner').each(function() {
+                            componentHandler.upgradeElement(this);
+                        });
+                        $('.mdl-textfield').each(function() {
+                            componentHandler.upgradeElement(this);
+                        });
                     });
                 break;
             }
