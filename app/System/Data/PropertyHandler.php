@@ -18,9 +18,22 @@ class PropertyHandler
         $this->appName = $appName;
     }
 
+    private function getPropertyObject(string $key): ?Property
+    {
+        return Property::where([
+            'app' => $this->appName,
+            'key' => $key
+        ])->first();
+    }
+
     public function setProperty(string $key, string $value): void
     {
-        $property = new Property();
+        $property = $this->getPropertyObject($key);
+
+        if (!$property) {
+            $property = new Property();
+        }
+
         $property->app = $this->appName;
         $property->key = $key;
         $property->value = $value;
@@ -29,10 +42,7 @@ class PropertyHandler
 
     public function getProperty(string $key, string $default): string
     {
-        $output = Property::where([
-            'app' => $this->appName,
-            'key' => $key
-        ])->first();
+        $output = $this->getPropertyObject($key);
 
         if ($output) {
             return $output->value;
