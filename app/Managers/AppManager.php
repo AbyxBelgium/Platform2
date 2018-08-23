@@ -20,7 +20,7 @@ class AppManager
     public function getController(App $app, string $controllerName): AppController
     {
         $controller = 'App\\Catalogue\\Apps\\' . $app->getName() . '\\' . $controllerName;
-        return new $controller();
+        return new $controller($app);
     }
 
     public function getAllElements(): array
