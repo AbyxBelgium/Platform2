@@ -9,6 +9,7 @@
 namespace App\Catalogue;
 
 
+use App\Property;
 use App\System\Page\Element;
 
 abstract class App
@@ -49,5 +50,29 @@ abstract class App
             }
         }
         return null;
+    }
+
+    public function setProperty(string $key, string $value): void
+    {
+        $property = new Property();
+        $property->app = $this->getName();
+        $property->key = $key;
+        $property->value = $value;
+        $property->save();
+    }
+
+    public function getProperty(string $key, string $default): string
+    {
+        // TODO Fix error handling when property cannot be found!
+        $output = Property::where([
+            'app' => $this->getName(),
+            'key' => $key
+        ])->first();
+
+        if ($output) {
+            return $output->value;
+        } else {
+            return $default;
+        }
     }
 }
