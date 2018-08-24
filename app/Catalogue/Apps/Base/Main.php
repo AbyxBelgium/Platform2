@@ -12,7 +12,6 @@ use App\Catalogue\App;
 use App\Catalogue\Route\PostRoute;
 use App\System\Page\Element;
 use App\System\UI\ExtensionForm;
-use App\System\UI\Form;
 use App\System\UI\Input\TextInput;
 use Illuminate\Support\Facades\View;
 
@@ -28,7 +27,8 @@ class Main extends App
         $output = [];
         $htmlContentForm = new ExtensionForm('Save', appRoute("Base", "backend/html-content/create"));
         $htmlContentForm->addInput(new TextInput('Content'));
-        array_push($output, new Element('Any HTML content', View::make('Base.any-html-content'), $this, $htmlContentForm));
+        $propertyHandler = $this->getPropertyHandler();
+        array_push($output, new Element('Any HTML content', View::make('Base.any-html-content', ["content" => $propertyHandler->getProperty("content", "")]), $this, $htmlContentForm));
         return $output;
     }
 

@@ -31,7 +31,7 @@ class PageManager
                 // Lookup the correct identifier by name belonging to the indicated application.
                 // This means that we first have to instantiate the main class of this app. We'll use reflection for
                 // this purpose.
-                $mainClass = 'App\\Catalogue\\' .$app . '\\Main';
+                $mainClass = 'App\\Catalogue\\Apps\\' .$app . '\\Main';
                 $main = new $mainClass();
 
                 $el = $main->getElementByIdentifier($id);

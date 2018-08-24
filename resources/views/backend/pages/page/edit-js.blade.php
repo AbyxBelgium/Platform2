@@ -91,12 +91,22 @@
                         $("#up-" + uuid).click(function() {
                             let $element = $("#" + uuid);
                             $element.prev().insertAfter($element);
+                            if (col === 'left') {
+                                moveElementUp(leftExtensions, leftExtensions.find(elementData));
+                            } else {
+                                moveElementUp(rightExtensions, rightExtensions.find(elementData));
+                            }
                         });
 
                         // Move element down one position in the list
                         $("#down-" + uuid).click(function() {
                             let $element = $("#" + uuid);
                             $element.next().insertBefore($element);
+                            if (col === 'left') {
+                                moveElementDown(leftExtensions, leftExtensions.find(elementData));
+                            } else {
+                                moveElementDown(rightExtensions, rightExtensions.find(elementData));
+                            }
                         });
 
                         let $extensionButton = $("#button-" + uuid);
@@ -119,7 +129,15 @@
                             let $inputs = $extensionForm.find("input");
                             $inputs.each(function(index) {
                                 keyValues[$(this).attr("name")] = $(this).val();
+                                if (col === 'left') {
+                                    let prevIdx = index - 1;
+                                    if (prevIdx < 0) {
+                                        return;
+                                    }
+                                    let temp = lef
+                                }
                             });
+
                             // Then check all textarea's
                             let $texts = $extensionForm.find("textarea");
                             $texts.each(function(index) {
@@ -205,12 +223,27 @@
         });
     });
 
-    function guid() {
-        function s4() {
-            return Math.floor((1 + Math.random()) * 0x10000)
-                .toString(16)
-                .substring(1);
+    function moveElementUp(arr, idx) {
+        let prevIdx = idx - 1;
+        if (prevIdx < 0) {
+            return arr;
         }
-        return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+
+        let temp = arr[prevIdx];
+        arr[prevIdx] = arr[idx];
+        arr[idx] = temp;
+        return arr;
+    }
+
+    function moveElementDown(arr, idx) {
+        let nextIdx = idx + 1;
+        if (nextIdx >= arr.length) {
+            return arr;
+        }
+
+        let temp = arr[nextIdx];
+        arr[nextIdx] = arr[idx];
+        arr[idx] = temp;
+        return arr;
     }
 </script>
