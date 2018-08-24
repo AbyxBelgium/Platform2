@@ -14,7 +14,7 @@ class HTMLContentController extends AppController
         $dataResults = json_decode($keyValuePairs, true);
 
         $propertyHandler = $this->app->getPropertyHandler();
-        $propertyHandler->setProperty("content", "blub! Dit is data!");
+        $propertyHandler->setProperty("content", $dataResults["Content"]);
 
         return response()->json([
             "status" => 1
