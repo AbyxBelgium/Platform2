@@ -38,6 +38,7 @@
                 })
                     .done(function(received) {
                         let uuid = received.uuid;
+                        elementData["uuid"] = uuid;
 
                         let data =
                             '<div class="mdl-card element-card mdl-shadow--2dp" id="' + uuid + '">' +
@@ -148,7 +149,7 @@
                                 "url": route,
                                 "data": {
                                     "data-pairs": JSON.stringify(keyValues),
-                                    "test-data": "this is a string!"
+                                    "uuid": uuid
                                 }
                             }).done(function(result) {
                                 $formFieldSet.attr("disabled", false);
@@ -159,6 +160,13 @@
                                     $errorField.text("An error occurred: " + result["error"]);
                                     $errorField.css("display", "block");
                                 }
+                            }).fail(function() {
+                                $formFieldSet.attr("disabled", false);
+                                $loadIndicator.css("display", "none");
+                                $extensionButton.prop("disabled", false);
+
+                                $errorField.text("Server error while processing request!");
+                                $errorField.css("display", "block");
                             })
                         });
 
