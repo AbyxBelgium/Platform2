@@ -7,7 +7,7 @@ use App\Catalogue\App;
 use App\Catalogue\AppController;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\View;
 
 class HTMLContentController extends AppController
 {
@@ -24,8 +24,9 @@ class HTMLContentController extends AppController
         ]);
     }
 
-    public function show(Request $request, App $app, int $uuid): Response
+    public function show($request, App $app, string $uuid)
     {
-
+        $propertyHandler = $app->getPropertyHandler();
+        return View::make('Base.any-html-content', ["content" => $propertyHandler->getProperty("content-" . $uuid, "")]);
     }
 }

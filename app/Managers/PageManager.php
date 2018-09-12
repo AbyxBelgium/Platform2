@@ -27,14 +27,16 @@ class PageManager
             foreach ($column["elements"] as $element) {
                 $id = $element["identifier"];
                 $app = $element["app"];
+                $uuid = $element["uuid"];
 
                 // Lookup the correct identifier by name belonging to the indicated application.
                 // This means that we first have to instantiate the main class of this app. We'll use reflection for
                 // this purpose.
-                $mainClass = 'App\\Catalogue\\Apps\\' .$app . '\\Main';
+                $mainClass = 'App\\Catalogue\\Apps\\' . $app . '\\Main';
                 $main = new $mainClass();
 
                 $el = $main->getElementByIdentifier($id);
+                $el->setUuid($uuid);
                 array_push($elements, $el);
             }
 

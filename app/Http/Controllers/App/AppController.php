@@ -37,11 +37,6 @@ class AppController
             abort(404);
         }
 
-        $executors = explode("@", $appRoute->getExecutor());
-        $controller = $executors[0];
-        $method = $executors[1];
-
-        $controllerInstance = $appManager->getController($appMainClass, $controller);
-        return $controllerInstance->$method($request);
+        return $appManager->invokeControllerFunction($appMainClass, $appRoute->getExecutor(), $request);
     }
 }

@@ -27,8 +27,7 @@ class Main extends App
         $output = [];
         $htmlContentForm = new ExtensionForm('Save', appRoute("Base", "backend/html-content/create"));
         $htmlContentForm->addInput(new TextInput('Content'));
-        $propertyHandler = $this->getPropertyHandler();
-        array_push($output, new Element('Any HTML content', View::make('Base.any-html-content', ["content" => $propertyHandler->getProperty("content", "")]), $this, $htmlContentForm));
+        array_push($output, new Element('Any HTML content', 'HTMLContentController@show', $this, $htmlContentForm));
         return $output;
     }
 

@@ -23,6 +23,16 @@ class AppManager
         return new $controller($app);
     }
 
+    public function invokeControllerFunction(App $app, string $controllerExecutor, ...$params)
+    {
+        $executors = explode("@", $controllerExecutor);
+        $controller = $executors[0];
+        $method = $executors[1];
+
+        $controller = $this->getController($app, $controller);
+        return call_user_func_array(array($controller, $method), $params);
+    }
+
     public function getAllElements(): array
     {
         $subdirs = array_filter(glob('../app/Catalogue/Apps/*'), 'is_dir');

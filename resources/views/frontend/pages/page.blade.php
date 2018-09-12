@@ -11,7 +11,7 @@
                 </span>
             @endif
             @foreach($column->getElements() as $element)
-                {!! $element->getContent() !!}
+                {!! $element->render(request(), $element->getUuid()) !!}
             @endforeach
         </div>
     @endforeach
