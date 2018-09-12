@@ -77,8 +77,6 @@ class ImageController extends Controller
         return redirect(asset('storage/' . $img->filename));
     }
 
-
-
     /**
      * Update the specified resource in storage.
      *

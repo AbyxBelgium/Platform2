@@ -16,8 +16,21 @@ $FRONTEND_ROOT = "";
 $APP_ROOT = "";
 
 // Authentication
-Auth::routes();
-Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
+// Authentication Routes...
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::get('logout', 'Auth\LoginController@logout')->name('logout');
+
+// Registration Routes...
+// TODO: These routes are now protected, but should be changed to routes accessible to the administrator only
+Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register')->middleware('auth');
+Route::post('register', 'Auth\RegisterController@register')->middleware('auth');
+
+// Password Reset Routes...
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 // --- START OF BACKEND ROUTES ---
 
