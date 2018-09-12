@@ -48,7 +48,8 @@
         arr[nextIdx] = arr[idx];
         arr[idx] = temp;
         return arr;
-    }
+    };
+
     let renderCard = function(app, identifier, uuid, content) {
         return '' +
             '<div class="mdl-card element-card mdl-shadow--2dp" id="' + uuid + '">' +
