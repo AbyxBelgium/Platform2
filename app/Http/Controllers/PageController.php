@@ -51,7 +51,29 @@ class PageController extends Controller
     public function show($id) {
         $pageManager = new PageManager();
         $pageRepresentation = $pageManager->parsePageConfiguration(Page::find($id));
-        return response($pageRepresentation->createView());
+
+        if (request()->wantsJson()) {
+            $output = array();
+            foreach ($pageRepresentation->getContainers() as $container) {
+                $containerData = [];
+                foreach ($container->getElements() as $element) {
+                    array_push($containerData, [
+                        "app" => $element->getApp()->getName(),
+                        "identifier" => $element->getIdentifier(),
+                        "uuid" => $element->getUuid()
+                    ]);
+                }
+                array_push($output, [
+                    "elements" => $containerData
+                ]);
+            }
+
+            return response([
+                "containers" => $output
+            ]);
+        } else {
+            return response($pageRepresentation->createView());
+        }
     }
 
     /**

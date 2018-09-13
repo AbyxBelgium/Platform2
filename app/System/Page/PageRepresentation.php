@@ -27,4 +27,12 @@ class PageRepresentation
             'columns' => $this->containers
         ]);
     }
+
+    /**
+     * @return Column[]
+     */
+    public function getContainers(): array
+    {
+        return $this->containers;
+    }
 }

@@ -19,6 +19,9 @@ class Column
         $this->width = $width;
     }
 
+    /**
+     * @return Element[]
+     */
     public function getElements(): array
     {
         return $this->elements;

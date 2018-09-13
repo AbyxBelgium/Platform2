@@ -92,12 +92,117 @@
             '</div>';
     };
 
-    let receiveCardData = function(app, identifier) {
+    let initializeCard = function(app, identifier, received) {
+        let uuid = received.uuid;
+
         let elementData = {
             "app": app,
-            "identifier": identifier
+            "identifier": identifier,
+            "uuid": uuid
         };
 
+        let data = renderCard(app, identifier, uuid, received.content);
+
+        if (col === 'left') {
+            $leftColumn.prepend(data);
+            leftExtensions.push(elementData)
+        } else {
+            $rightColumn.prepend(data);
+            rightExtensions.push(elementData);
+        }
+
+        // Move element up one position in the list
+        $("#up-" + uuid).click(function() {
+            let $element = $("#" + uuid);
+            $element.prev().insertAfter($element);
+            if (col === 'left') {
+                moveElementUp(leftExtensions, leftExtensions.find(elementData));
+            } else {
+                moveElementUp(rightExtensions, rightExtensions.find(elementData));
+            }
+        });
+
+        // Move element down one position in the list
+        $("#down-" + uuid).click(function() {
+            let $element = $("#" + uuid);
+            $element.next().insertBefore($element);
+            if (col === 'left') {
+                moveElementDown(leftExtensions, leftExtensions.find(elementData));
+            } else {
+                moveElementDown(rightExtensions, rightExtensions.find(elementData));
+            }
+        });
+
+        let $extensionButton = $("#button-" + uuid);
+        let $extensionForm = $("#form-" + uuid);
+        let $formFieldSet = $("#form-data-" + uuid);
+        let $loadIndicator = $("#form-loading-" + uuid);
+        let $errorField = $("#error-" + uuid);
+
+        $extensionButton.click(function() {
+            $formFieldSet.attr("disabled", "disabled");
+            $loadIndicator.css("display", "block");
+            $extensionButton.prop("disabled", true);
+            $errorField.css("display", "none");
+
+            let route = $extensionButton.data("action");
+
+            // Loop over form inputs and retrieve key-value pairs.
+            let keyValues = {};
+            // First check all default inputs
+            let $inputs = $extensionForm.find("input");
+            $inputs.each(function(index) {
+                keyValues[$(this).attr("name")] = $(this).val();
+                if (col === 'left') {
+                    let prevIdx = index - 1;
+                    if (prevIdx < 0) {
+                        return;
+                    }
+                }
+            });
+
+            // Then check all textarea's
+            let $texts = $extensionForm.find("textarea");
+            $texts.each(function(index) {
+                keyValues[$(this).attr("name")] = $(this).val();
+            });
+
+            $.post({
+                "url": route,
+                "data": {
+                    "data-pairs": JSON.stringify(keyValues),
+                    "uuid": uuid
+                }
+            }).done(function(result) {
+                $formFieldSet.attr("disabled", false);
+                $loadIndicator.css("display", "none");
+                $extensionButton.prop("disabled", false);
+
+                if (!result["status"]) {
+                    $errorField.text("An error occurred: " + result["error"]);
+                    $errorField.css("display", "block");
+                }
+            }).fail(function() {
+                $formFieldSet.attr("disabled", false);
+                $loadIndicator.css("display", "none");
+                $extensionButton.prop("disabled", false);
+
+                $errorField.text("Server error while processing request!");
+                $errorField.css("display", "block");
+            })
+        });
+
+        // Activate loader itself from Material Design Lite library
+        // This call is required when the spinner was added using JavaScript instead of plain HTML
+        $('.mdl-js-spinner').each(function() {
+            componentHandler.upgradeElement(this);
+        });
+        $('.mdl-textfield').each(function() {
+            componentHandler.upgradeElement(this);
+        });
+    };
+
+    let receiveCardData = function(app, identifier) {
         $.ajax({
             "url": "/api/extension/" + app + "/" + identifier + '/settings',
             "headers": {
@@ -105,108 +210,7 @@
             }
         })
             .done(function(received) {
-                let uuid = received.uuid;
-                elementData["uuid"] = uuid;
-
-                let data = renderCard(app, identifier, uuid, received.content);
-
-                if (col === 'left') {
-                    $leftColumn.prepend(data);
-                    leftExtensions.push(elementData)
-                } else {
-                    $rightColumn.prepend(data);
-                    rightExtensions.push(elementData);
-                }
-
-                // Move element up one position in the list
-                $("#up-" + uuid).click(function() {
-                    let $element = $("#" + uuid);
-                    $element.prev().insertAfter($element);
-                    if (col === 'left') {
-                        moveElementUp(leftExtensions, leftExtensions.find(elementData));
-                    } else {
-                        moveElementUp(rightExtensions, rightExtensions.find(elementData));
-                    }
-                });
-
-                // Move element down one position in the list
-                $("#down-" + uuid).click(function() {
-                    let $element = $("#" + uuid);
-                    $element.next().insertBefore($element);
-                    if (col === 'left') {
-                        moveElementDown(leftExtensions, leftExtensions.find(elementData));
-                    } else {
-                        moveElementDown(rightExtensions, rightExtensions.find(elementData));
-                    }
-                });
-
-                let $extensionButton = $("#button-" + uuid);
-                let $extensionForm = $("#form-" + uuid);
-                let $formFieldSet = $("#form-data-" + uuid);
-                let $loadIndicator = $("#form-loading-" + uuid);
-                let $errorField = $("#error-" + uuid);
-
-                $extensionButton.click(function() {
-                    $formFieldSet.attr("disabled", "disabled");
-                    $loadIndicator.css("display", "block");
-                    $extensionButton.prop("disabled", true);
-                    $errorField.css("display", "none");
-
-                    let route = $extensionButton.data("action");
-
-                    // Loop over form inputs and retrieve key-value pairs.
-                    let keyValues = {};
-                    // First check all default inputs
-                    let $inputs = $extensionForm.find("input");
-                    $inputs.each(function(index) {
-                        keyValues[$(this).attr("name")] = $(this).val();
-                        if (col === 'left') {
-                            let prevIdx = index - 1;
-                            if (prevIdx < 0) {
-                                return;
-                            }
-                        }
-                    });
-
-                    // Then check all textarea's
-                    let $texts = $extensionForm.find("textarea");
-                    $texts.each(function(index) {
-                        keyValues[$(this).attr("name")] = $(this).val();
-                    });
-
-                    $.post({
-                        "url": route,
-                        "data": {
-                            "data-pairs": JSON.stringify(keyValues),
-                            "uuid": uuid
-                        }
-                    }).done(function(result) {
-                        $formFieldSet.attr("disabled", false);
-                        $loadIndicator.css("display", "none");
-                        $extensionButton.prop("disabled", false);
-
-                        if (!result["status"]) {
-                            $errorField.text("An error occurred: " + result["error"]);
-                            $errorField.css("display", "block");
-                        }
-                    }).fail(function() {
-                        $formFieldSet.attr("disabled", false);
-                        $loadIndicator.css("display", "none");
-                        $extensionButton.prop("disabled", false);
-
-                        $errorField.text("Server error while processing request!");
-                        $errorField.css("display", "block");
-                    })
-                });
-
-                // Activate loader itself from Material Design Lite library
-                // This call is required when the spinner was added using JavaScript instead of plain HTML
-                $('.mdl-js-spinner').each(function() {
-                    componentHandler.upgradeElement(this);
-                });
-                $('.mdl-textfield').each(function() {
-                    componentHandler.upgradeElement(this);
-                });
+                initializeCard(app, identifier, received);
             });
     };
 
