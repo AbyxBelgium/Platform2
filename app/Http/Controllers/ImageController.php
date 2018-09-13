@@ -8,8 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
-use Intervention\Image\ImageManager;
-use Symfony\Component\Console\Output\ConsoleOutput;
+use Intervention\Image\Facades\Image as InterventionImage;
 
 class ImageController extends Controller
 {
@@ -50,12 +49,10 @@ class ImageController extends Controller
         }
 
         // TODO: Implement checks for all required input parameters
-        $manager = new ImageManager(array('driver' => 'gd'));
         foreach($request->file('files') as $file) {
             $filename = $file->store('uploads/images', 'public');
 
-            // TODO use proper Laravel autoloaders for Intervention Image
-            $thumbnail = $manager->make(public_path('storage/' . $filename))->resize(300, null, function($constraint) {
+            $thumbnail = InterventionImage::make(public_path('storage/' . $filename))->resize(300, null, function($constraint) {
                 $constraint->aspectRatio();
             });
             $fileExtension = pathinfo(public_path('storage/' . $filename), PATHINFO_EXTENSION);
