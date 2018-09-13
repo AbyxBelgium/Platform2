@@ -53,12 +53,17 @@ class ImageController extends Controller
         $manager = new ImageManager(array('driver' => 'gd'));
         foreach($request->file('files') as $file) {
             $filename = $file->store('uploads/images', 'public');
+
             // TODO use proper Laravel autoloaders for Intervention Image
-            //$thumbnail = $manager->make(asset('storage/' . $filename))->resize(200, 300);
-            //$thumbnail->save(public_path('storage/' . $filename . '-resized'));
+            $thumbnail = $manager->make(public_path('storage/' . $filename))->resize(300, null, function($constraint) {
+                $constraint->aspectRatio();
+            });
+            $fileExtension = pathinfo(public_path('storage/' . $filename), PATHINFO_EXTENSION);
+            $thumbnail->save(public_path('storage/' . $filename . '-thumb' . '.' . $fileExtension));
             $image = new Image();
             $image->filename = $filename;
             $image->name = $file->getClientOriginalName();
+            $image->filename_thumbnail = $filename . '-thumb' . '.' . $fileExtension;
             $image->save();
         }
 

@@ -38,7 +38,7 @@
                 <div class="mdl-card mdl-cell mdl-cell--2-col mdl-shadow--2dp">
                     <figure class="mdl-card__media thumb-wrapper">
                         <span class="helper"></span>
-                        <img class="thumb" title="{{ $img->name }}" src="{{ asset('storage/' . $img->filename) }}">
+                        <img class="thumb" title="{{ $img->name }}" src="{{ asset('storage/' . $img->filename_thumbnail) }}">
                     </figure>
                     <div class="mdl-card__title">
                         <h3 class="mdl-card__title-text thumb-title">{{ $img->name }}</h3>
