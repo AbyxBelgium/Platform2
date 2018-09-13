@@ -149,13 +149,12 @@
         });
 
         $publishButton.click(function () {
-            console.log();
             $.ajax({
                 url: "@yield('form-action')",
                 method: "@yield('form-method')",
                 data: {
                     title: $titleInput.val(),
-                    content: $editor.val(),
+                    content: $editor.text(),
                     tags: $tagsInput.val(),
                     category: $selected.data('id')
                 }
@@ -407,11 +406,20 @@
                     chips +=
                         "<span class='mdl-chip mdl-chip--deletable' style='margin-left: 5px;'>" +
                         "   <span class='mdl-chip__text'>" + allTags[i] + "</span>" +
-                        "   <button type='button' class='mdl-chip__action'><i class='material-icons'>cancel</i></button>" +
+                        "   <button type='button' class='mdl-chip__action' data-tag-index='" + i + "'><i class='material-icons'>cancel</i></button>" +
                         "</span>";
                 }
             }
             $("#chips").html(chips);
+
+            // Tags should also be deletable
+            $(".mdl-chip__action").click(function() {
+                allTags.splice($(this).data('tag-index'), 1);
+                let tags = allTags.join(', ');
+                $("#tags").val(tags);
+                $("#chips").html("");
+                updateTags();
+            })
         };
 
         $(document).ready(function() {
