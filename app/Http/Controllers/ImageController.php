@@ -104,11 +104,19 @@ class ImageController extends Controller
     {
         $img = Image::find($id);
         // TODO this 'storage/' prepend should not be necessary
+        // TODO display errors in view
         $imgPath = public_path('storage/' . $img->filename);
         File::delete($imgPath);
         if (File::exists($imgPath)) {
             return redirect()->route('backend/image/index')->withErrors(['not_deleted_error' => 'File ' . $img->name . ' could not be deleted! Please try again...']);
         }
+
+        $thumbnailPath = public_path('storage/' . $img->filename_thumbnail);
+        File::delete($thumbnailPath);
+        if (File::exists($thumbnailPath)) {
+            return redirect()->route('backend/image/index')->withErrors(['not_deleted_error' => 'File ' . $img->name . ' could not be deleted! Please try again...']);
+        }
+
         Image::destroy($id);
         return redirect()->route('backend/image/index');
     }
