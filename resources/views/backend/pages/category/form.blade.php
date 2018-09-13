@@ -60,8 +60,13 @@
         function updateIcon() {
             $iconField.removeClass("is-invalid");
             let iconVal = $iconInput.val();
-            console.log(iconVal);
             $iconField.addClass("is-dirty");
+
+            if (iconVal === "") {
+                iconVal = allIcons[0];
+                $iconInput.val(iconVal);
+            }
+
             if (allIcons.includes(iconVal)) {
                 $currentIcon = $(".icon-" + iconVal);
                 $icons.removeClass("selected-icon");
