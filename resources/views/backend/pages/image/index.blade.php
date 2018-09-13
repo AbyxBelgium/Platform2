@@ -215,7 +215,7 @@
                 processData: false,
                 complete: function(data) {
                     $form.removeClass('is-uploading');
-                    //location.reload();
+                    location.reload();
                 },
                 error: function(data) {
                     $form.addClass('is-error');
