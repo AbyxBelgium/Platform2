@@ -77,6 +77,23 @@ class PageController extends Controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $appManager = new AppManager();
+        $user = Auth::user();
+        return view('backend.pages.page.edit', [
+            'elements' => $appManager->getAllElements(),
+            'token' => $user->generateApiToken(),
+            'pageId' => $id
+        ]);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request

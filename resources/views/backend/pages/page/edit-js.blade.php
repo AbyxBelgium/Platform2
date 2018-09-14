@@ -1,4 +1,6 @@
 <script>
+    let mode = "@yield('mode')";
+
     let leftExtensions = [];
     let rightExtensions = [];
 
@@ -265,4 +267,33 @@
             }
         });
     });
+
+    if (mode === 'edit') {
+        $.get({
+            url: "{{ route('page/show', ['id' => $pageId]) }}",
+            headers: {
+                Accept: "application/json"
+            }
+        }).done(function(received) {
+            console.log(received);
+
+            // For now we assume that 2 containers are always present
+            // First we fill the left column
+            col = 'left';
+            let container = received.containers[0];
+            for (let j = 0; j < container.elements.length; j++) {
+                console.log("call left!");
+                let element = container.elements[j];
+                receiveCardData(element.app, element.identifier);
+            }
+
+            col = 'right';
+            container = received.containers[1];
+            for (let j = 0; j < container.elements.length; j++) {
+                console.log("call right!");
+                let element = container.elements[j];
+                receiveCardData(element.app, element.identifier);
+            }
+        })
+    }
 </script>
