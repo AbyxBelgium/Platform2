@@ -14,12 +14,12 @@
         dialog.close();
     });
 
+    let col = 'left';
+
     let $leftColumn = $("#left-drop-destination");
     let $rightColumn = $("#right-drop-destination");
 
     let $modalDoneButton = $("#insert-done-button");
-
-    let col = "left";
 
     let $leftColumnTitle = $("#left-column-title");
     let $rightColumnTitle = $("#right-column-title");
@@ -94,7 +94,7 @@
             '</div>';
     };
 
-    let initializeCard = function(app, identifier, received) {
+    let initializeCard = function(app, identifier, received, col) {
         let uuid = received.uuid;
 
         let elementData = {
@@ -204,7 +204,7 @@
         });
     };
 
-    let receiveCardData = function(app, identifier) {
+    let receiveCardData = function(app, identifier, col) {
         $.ajax({
             "url": "/api/extension/" + app + "/" + identifier + '/settings',
             "headers": {
@@ -212,7 +212,7 @@
             }
         })
             .done(function(received) {
-                initializeCard(app, identifier, received);
+                initializeCard(app, identifier, received, col);
             });
     };
 
@@ -236,7 +236,7 @@
             let $element = $($radioButtons.get(i));
 
             if ($element.is(':checked')) {
-                receiveCardData($element.data('app'), $element.val())
+                receiveCardData($element.data('app'), $element.val(), col)
             }
         }
         dialog.close();
@@ -279,20 +279,18 @@
 
             // For now we assume that 2 containers are always present
             // First we fill the left column
-            col = 'left';
             let container = received.containers[0];
             for (let j = 0; j < container.elements.length; j++) {
                 console.log("call left!");
                 let element = container.elements[j];
-                receiveCardData(element.app, element.identifier);
+                receiveCardData(element.app, element.identifier, 'left');
             }
 
-            col = 'right';
             container = received.containers[1];
             for (let j = 0; j < container.elements.length; j++) {
                 console.log("call right!");
                 let element = container.elements[j];
-                receiveCardData(element.app, element.identifier);
+                receiveCardData(element.app, element.identifier, 'right');
             }
         })
     }
