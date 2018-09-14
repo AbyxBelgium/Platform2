@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Debugbar;
 use Illuminate\Http\Request;
 use App\Image;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Input;
@@ -24,7 +26,20 @@ class ImageController extends Controller
      */
     public function index()
     {
+        // Check that PHP.ini-settings are set to recommended values
+        $uploadMaxSize = $this->convertIniToMegaBytes(ini_get('upload_max_filesize'));
+        $postMaxSize = $this->convertIniToMegaBytes(ini_get('post_max_size'));
+        $recommendedValue = Config::get('constants.constants.constant_recommended_post_size');
+
         $images = DB::table('images')->orderByDesc('created_at')->simplePaginate(30);
+
+        if ($uploadMaxSize < $recommendedValue || $postMaxSize < $recommendedValue) {
+            DebugBar::addMessage("There are errors!");
+            return view('backend.pages.image.index', ['images' => $images])->withErrors(
+                ['ini_settings_error' => 'Your PHP.ini settings are below the recommended value. Please consider increasing both "upload_max_filesize" and "post_max_size" to at least ' . $recommendedValue . 'M.']
+            );
+        }
+
         return view('backend.pages.image.index', ['images' => $images]);
     }
 
@@ -125,7 +140,26 @@ class ImageController extends Controller
      * @param Image $img
      * @return \Illuminate\Http\Response
      */
-    private function convertImageToRequest(Image $img) {
+    private function convertImageToRequest(Image $img)
+    {
 
+    }
+
+    private function convertIniToMegaBytes(string $val)
+    {
+        $val = trim($val);
+        $last = strtolower($val[strlen($val)-1]);
+        $val = substr($val, 0, strlen($val) - 1);
+        switch($last) {
+            // The 'G' modifier is available since PHP 5.1.0
+            case 'g':
+                $val *= 1024;
+                break;
+            case 'k':
+                $val /= 1024;
+                break;
+        }
+
+        return $val;
     }
 }
