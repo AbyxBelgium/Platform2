@@ -210,10 +210,9 @@
             "headers": {
                 "Authorization": "Bearer {{ $token }}"
             }
-        })
-            .done(function(received) {
-                initializeCard(app, identifier, received, col);
-            });
+        }).done(function(received) {
+            initializeCard(app, identifier, received, col);
+        });
     };
 
     let initializeDialog = function(column) {

@@ -111,6 +111,7 @@
 
 @section('javascript')
     @include('backend.pages.page.edit-js')
+    @yield('javascript-extra')
 @stop()
 
 @section('custom-style')
