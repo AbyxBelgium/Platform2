@@ -14,7 +14,7 @@
 
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <label class="mdl-textfield__label" for="page-title">Page title:</label>
-            <input class="mdl-textfield__input" type="text" id="page-title" name="page-title" value="" required />
+            <input class="mdl-textfield__input" type="text" id="page-title" name="page-title" value="@yield('page-title')" required />
             <span class="mdl-textfield__error">Page title cannot be empty!</span>
         </div>
 
@@ -54,7 +54,7 @@
         </span>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <label class="mdl-textfield__label" for="left-column-title">Column title:</label>
-            <input class="mdl-textfield__input" type="text" id="left-column-title" name="left-column-title" value="" required />
+            <input class="mdl-textfield__input" type="text" id="left-column-title" name="left-column-title" value="@yield('left-column-title')" required />
             <span class="mdl-textfield__error">Column title cannot be empty!</span>
         </div>
 
@@ -82,7 +82,7 @@
         </span>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <label class="mdl-textfield__label" for="right-column-title">Column title:</label>
-            <input class="mdl-textfield__input" type="text" id="right-column-title" name="right-column-title" value="" required />
+            <input class="mdl-textfield__input" type="text" id="right-column-title" name="right-column-title" value="@yield('right-column-title')" required />
             <span class="mdl-textfield__error">Column title cannot be empty!</span>
         </div>
 

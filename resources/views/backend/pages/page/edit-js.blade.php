@@ -270,7 +270,7 @@
 
     if (mode === 'edit') {
         $.get({
-            url: "{{ route('page/show', ['id' => $pageId]) }}",
+            url: "{{ route('page/show', ['id' => $page->id]) }}",
             headers: {
                 Accept: "application/json"
             }

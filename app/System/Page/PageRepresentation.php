@@ -5,8 +5,6 @@
 
 namespace App\System\Page;
 
-
-use App\Catalogue\Sample\Main;
 use Illuminate\Support\Facades\View;
 
 class PageRepresentation

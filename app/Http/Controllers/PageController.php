@@ -86,10 +86,14 @@ class PageController extends Controller
     {
         $appManager = new AppManager();
         $user = Auth::user();
+        $page = Page::find($id);
+        $pageManager = new PageManager();
+        $pageRepresentation = $pageManager->parsePageConfiguration($page);
         return view('backend.pages.page.edit', [
             'elements' => $appManager->getAllElements(),
             'token' => $user->generateApiToken(),
-            'pageId' => $id
+            'page' => $page,
+            'pageRepresentation' => $pageRepresentation
         ]);
     }
 
