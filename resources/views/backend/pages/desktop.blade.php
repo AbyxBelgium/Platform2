@@ -9,15 +9,17 @@
 @stop()
 
 @section('content')
-    <div class="mdl-cell mdl-cell--12-col statistics">
-        <div title="Registered users" class="material-icons mdl-badge mdl-badge--overlap statistic-badge" data-badge="{{ $userCount }}">account_box</div>
-        <div title="Total posts" class="material-icons mdl-badge mdl-badge--overlap statistic-badge" data-badge="{{ $postCount }}">mode_comment</div>
-        <div title="Categories" class="material-icons mdl-badge mdl-badge--overlap statistic-badge" data-badge="{{ $categoryCount }}">toc</div>
-        <div title="Platform version" class="material-icons mdl-badge mdl-badge--overlap statistic-badge" data-badge="1.3">update</div>
-        <div title="Memory usage" class="material-icons mdl-badge mdl-badge--overlap statistic-badge inactive-badge" id="mem-badge" data-badge="0%">memory</div>
-        <div title="Storage usage" class="material-icons mdl-badge mdl-badge--overlap statistic-badge inactive-badge" id="storage-badge" data-badge="0%">storage</div>
-        <div title="Current CPU load" class="material-icons mdl-badge mdl-badge--overlap statistic-badge inactive-badge" id="cpu-badge" data-badge="0%">settings_applications</div>
-    </div>
+    {{--<div class="mdl-cell mdl-cell--12-col statistics">--}}
+        {{--<div title="Registered users" class="material-icons mdl-badge mdl-badge--overlap statistic-badge" data-badge="{{ $userCount }}">account_box</div>--}}
+        {{--<div title="Total posts" class="material-icons mdl-badge mdl-badge--overlap statistic-badge" data-badge="{{ $postCount }}">mode_comment</div>--}}
+        {{--<div title="Categories" class="material-icons mdl-badge mdl-badge--overlap statistic-badge" data-badge="{{ $categoryCount }}">toc</div>--}}
+        {{--<div title="Platform version" class="material-icons mdl-badge mdl-badge--overlap statistic-badge" data-badge="1.3">update</div>--}}
+        {{--<div title="Memory usage" class="material-icons mdl-badge mdl-badge--overlap statistic-badge inactive-badge" id="mem-badge" data-badge="0%">memory</div>--}}
+        {{--<div title="Storage usage" class="material-icons mdl-badge mdl-badge--overlap statistic-badge inactive-badge" id="storage-badge" data-badge="0%">storage</div>--}}
+        {{--<div title="Current CPU load" class="material-icons mdl-badge mdl-badge--overlap statistic-badge inactive-badge" id="cpu-badge" data-badge="0%">settings_applications</div>--}}
+    {{--</div>--}}
+
+    <resource-monitor users="{{ $userCount }}" posts="{{ $postCount }}" categories="{{ $categoryCount }}" token="{{ $token }}" refresh-rate="1000"></resource-monitor>
 
     <div id="chart-container" style="width: 100%; height: 200px; position: relative; top: 50px;"></div>
 
