@@ -4,9 +4,9 @@
         <div title="Total posts" class="material-icons mdl-badge mdl-badge--overlap statistic-badge" :data-badge="posts">mode_comment</div>
         <div title="Categories" class="material-icons mdl-badge mdl-badge--overlap statistic-badge" :data-badge="categories">toc</div>
         <div title="Platform version" class="material-icons mdl-badge mdl-badge--overlap statistic-badge" data-badge="1.4">update</div>
-        <div title="Memory usage" class="material-icons mdl-badge mdl-badge--overlap statistic-badge inactive-badge" id="mem-badge" :data-badge="memory">memory</div>
-        <div title="Storage usage" class="material-icons mdl-badge mdl-badge--overlap statistic-badge inactive-badge" id="storage-badge" :data-badge="storage">storage</div>
-        <div title="Current CPU load" class="material-icons mdl-badge mdl-badge--overlap statistic-badge inactive-badge" id="cpu-badge" :data-badge="cpu">settings_applications</div>
+        <div title="Memory usage" class="material-icons mdl-badge mdl-badge--overlap statistic-badge" v-bind:class="{'inactive-badge': !loaded}" id="mem-badge" :data-badge="memory">memory</div>
+        <div title="Storage usage" class="material-icons mdl-badge mdl-badge--overlap statistic-badge" v-bind:class="{'inactive-badge': !loaded}" id="storage-badge" :data-badge="storage">storage</div>
+        <div title="Current CPU load" class="material-icons mdl-badge mdl-badge--overlap statistic-badge" v-bind:class="{'inactive-badge': !loaded}" id="cpu-badge" :data-badge="cpu">settings_applications</div>
     </div>
 </template>
 
@@ -19,7 +19,8 @@
             return {
                 memory: "0%",
                 storage: "0%",
-                cpu: "0%"
+                cpu: "0%",
+                loaded: false
             }
         },
         created: function() {
@@ -36,6 +37,7 @@
 
                 axios.get("/api/system-resources", config)
                     .then(response => {
+                        this.loaded = true;
                         this.memory = response.data.memory + "%";
                         this.storage = response.data.storage + "%";
                         this.cpu = response.data.cpu + "%";
@@ -46,5 +48,7 @@
 </script>
 
 <style scoped>
-
+    .inactive-badge::after {
+        background: gray !important;
+    }
 </style>

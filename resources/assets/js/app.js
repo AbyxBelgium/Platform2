@@ -14,6 +14,8 @@ window.Vue = require('vue');
  */
 
 Vue.component('resource-monitor', require('./components/ResourceMonitorComponent.vue'));
+Vue.component('resource-graph', require('./components/ResourceGraphComponent.vue'));
+
 
 const app = new Vue({
     el: '#app'
