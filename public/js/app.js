@@ -13932,20 +13932,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['token'],
+    props: ['token', 'steps', 'refreshRate'],
     components: {
         highcharts: __WEBPACK_IMPORTED_MODULE_0_highcharts_vue__["Chart"]
     },
     created: function created() {
         var currentTime = new Date().getTime();
 
-        for (var i = 0; i < steps; i++) {
-            this.chartOptions.series[0].data.push([currentTime - (steps - i) * refreshRate, 0]);
-            this.chartOptions.series[1].data.push([currentTime - (steps - i) * refreshRate, 0]);
-            this.chartOptions.series[2].data.push([currentTime - (steps - i) * refreshRate, 0]);
+        for (var i = 0; i < this.steps; i++) {
+            this.chartOptions.series[0].data.push([currentTime - (this.steps - i) * this.refreshRate, 0]);
+            this.chartOptions.series[1].data.push([currentTime - (this.steps - i) * this.refreshRate, 0]);
+            this.chartOptions.series[2].data.push([currentTime - (this.steps - i) * this.refreshRate, 0]);
         }
 
-        setInterval(this.updateGraph, 1000);
+        setInterval(this.updateGraph, this.refreshRate);
     },
     methods: {
         updateGraph: function updateGraph() {
@@ -14003,16 +14003,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 series: [{
                     name: "CPU",
                     data: [],
-                    pointInterval: 1000
+                    pointInterval: this.refreshRate
 
                 }, {
                     name: "Memory",
                     data: [],
-                    pointInterval: 1000
+                    pointInterval: this.refreshRate
                 }, {
                     name: "Storage",
                     data: [],
-                    pointInterval: 1000
+                    pointInterval: this.refreshRate
                 }]
             }
         };

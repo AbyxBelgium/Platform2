@@ -9,20 +9,20 @@
     import * as axios from "axios"
 
     export default {
-        props: ['token'],
+        props: ['token', 'steps', 'refreshRate'],
         components: {
             highcharts: Chart
         },
         created: function() {
             let currentTime = (new Date()).getTime();
 
-            for (let i = 0; i < steps; i++) {
-                this.chartOptions.series[0].data.push([currentTime - (steps - i) * refreshRate, 0]);
-                this.chartOptions.series[1].data.push([currentTime - (steps - i) * refreshRate, 0]);
-                this.chartOptions.series[2].data.push([currentTime - (steps - i) * refreshRate, 0]);
+            for (let i = 0; i < this.steps; i++) {
+                this.chartOptions.series[0].data.push([currentTime - (this.steps - i) * this.refreshRate, 0]);
+                this.chartOptions.series[1].data.push([currentTime - (this.steps - i) * this.refreshRate, 0]);
+                this.chartOptions.series[2].data.push([currentTime - (this.steps - i) * this.refreshRate, 0]);
             }
 
-            setInterval(this.updateGraph, 1000);
+            setInterval(this.updateGraph, this.refreshRate);
         },
         methods: {
             updateGraph() {
@@ -81,16 +81,16 @@
                     series: [{
                         name: "CPU",
                         data: [],
-                        pointInterval: 1000
+                        pointInterval: this.refreshRate
 
                     }, {
                         name: "Memory",
                         data: [],
-                        pointInterval: 1000
+                        pointInterval: this.refreshRate
                     }, {
                         name: "Storage",
                         data: [],
-                        pointInterval: 1000
+                        pointInterval: this.refreshRate
                     }]
                 }
             }

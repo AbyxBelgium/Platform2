@@ -6,7 +6,7 @@
 
 @section('content')
     <resource-monitor users="{{ $userCount }}" posts="{{ $postCount }}" categories="{{ $categoryCount }}" token="{{ $token }}" refresh-rate="1000"></resource-monitor>
-    <resource-graph token="{{ $token }}" id="resource-graph"></resource-graph>
+    <resource-graph token="{{ $token }}" steps="20" refresh-rate="1000" id="resource-graph"></resource-graph>
 
     <div class="mdl-cell mdl-cell--12-col">
         <span class="mdl-layout__title">
@@ -30,28 +30,4 @@
             top: 20px;
         }
     </style>
-@stop()
-
-@section('javascript')
-    <script>
-        let $cpuBadge = $("#cpu-badge");
-        let $memBadge = $("#mem-badge");
-        let $storageBadge = $("#storage-badge");
-
-        let token = "{{ $token }}";
-        let refreshRate = 1000;
-
-        let steps = 20;
-        let cpuData = [];
-        let memData = [];
-        let storageData = [];
-
-        let currentTime = (new Date()).getTime();
-
-        for (let i = 0; i < steps; i++) {
-            cpuData.push([currentTime - (steps - i) * refreshRate, 0]);
-            memData.push([currentTime - (steps - i) * refreshRate, 0]);
-            storageData.push([currentTime - (steps - i) * refreshRate, 0]);
-        }
-    </script>
 @stop()
