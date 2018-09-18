@@ -53,10 +53,12 @@
         },
         data() {
             return {
-                steps: 20,
                 chartOptions: {
-                    animation: false,
-                    type: 'spline',
+                    chart: {
+                        height: 200,
+                        animation: false,
+                        type: 'spline',
+                    },
                     title: {
                         text: ''
                     },

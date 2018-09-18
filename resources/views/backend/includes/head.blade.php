@@ -8,6 +8,7 @@
 
 <!-- Material Design Lite stylesheets -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Material+Icons">
 <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue-red.min.css" />
 
 <!-- Material Design Lite script -->

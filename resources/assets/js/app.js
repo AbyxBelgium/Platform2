@@ -7,6 +7,13 @@
 
 window.Vue = require('vue');
 
+import 'vue-material/dist/vue-material.min.css'
+
+import { MdDialog, MdButton } from 'vue-material/dist/components'
+
+Vue.use(MdDialog);
+Vue.use(MdButton);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -15,7 +22,7 @@ window.Vue = require('vue');
 
 Vue.component('resource-monitor', require('./components/ResourceMonitorComponent.vue'));
 Vue.component('resource-graph', require('./components/ResourceGraphComponent.vue'));
-
+Vue.component('page-edit', require('./components/page/PageEditComponent'));
 
 const app = new Vue({
     el: '#app'
