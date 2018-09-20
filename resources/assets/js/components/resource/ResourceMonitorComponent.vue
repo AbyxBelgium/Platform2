@@ -14,6 +14,7 @@
     import * as axios from "axios";
 
     export default {
+        name: 'ResourceMonitorComponent',
         props: ['users', 'posts', 'categories', 'token', 'refreshRate'],
         data() {
             return {

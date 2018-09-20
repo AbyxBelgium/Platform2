@@ -9,6 +9,7 @@
     import * as axios from "axios"
 
     export default {
+        name: 'ResourceGraphComponent',
         props: ['token', 'steps', 'refreshRate'],
         components: {
             highcharts: Chart
@@ -58,6 +59,7 @@
                         height: 200,
                         animation: false,
                         type: 'spline',
+                        backgroundColor: '#FAFAFA'
                     },
                     title: {
                         text: ''

@@ -8,22 +8,30 @@
 window.Vue = require('vue');
 
 import 'vue-material/dist/vue-material.min.css'
+import 'vue-material/dist/theme/default.css'
+import VueMaterial from 'vue-material'
+import VueRouter from 'vue-router'
 
-import { MdDialog, MdButton } from 'vue-material/dist/components'
+Vue.use(VueMaterial);
+Vue.use(VueRouter);
 
-Vue.use(MdDialog);
-Vue.use(MdButton);
+import AppComponent from './components/AppComponent.vue';
+import HomeComponent from './components/home/HomeComponent.vue';
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-Vue.component('resource-monitor', require('./components/ResourceMonitorComponent.vue'));
-Vue.component('resource-graph', require('./components/ResourceGraphComponent.vue'));
-Vue.component('page-edit', require('./components/page/PageEditComponent'));
+const router = new VueRouter({
+    mode: 'history',
+    base: 'backend',
+    routes: [
+        {
+            path: '/',
+            name: 'home',
+            component: HomeComponent
+        },
+    ],
+});
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    components: { AppComponent },
+    router
 });

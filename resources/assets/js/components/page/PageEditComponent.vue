@@ -16,8 +16,19 @@
                 <span class="mdl-textfield__error">Page title cannot be empty!</span>
             </div>
 
-            <md-dialog :md-active.sync="showDialog">
+            <md-dialog :md-active.sync="showDialog" style="background-color: white;">
                 <md-dialog-title>Add element</md-dialog-title>
+                <md-dialog-content>
+                    <div v-for="app in apps" :key="app.name">
+                        <md-list>
+                            <md-subheader class="md-primary">{{ app.name }}</md-subheader>
+                            <md-list-item v-for="element in app.elements" :key="app.name + element.identifier" @click="addElementToPage(0, element.identifier)">{{ element.identifier }}</md-list-item>
+                        </md-list>
+                    </div>
+                </md-dialog-content>
+                <md-dialog-actions>
+                    <md-button class="md-primary" @click="showDialog = false">Close</md-button>
+                </md-dialog-actions>
             </md-dialog>
 
         </div>
@@ -88,14 +99,21 @@
 
 <script>
     export default {
+        name: 'PageEditComponent',
         data() {
             return {
                 apps: [{
                     name: 'Main',
-                    elements: ['test', 'blub']
+                    elements: [{
+                        identifier: 'Test'
+                    }, {
+                        identifier: 'Blub'
+                    }]
                 }, {
                     name: 'Base',
-                    elements: ['HTMLContent']
+                    elements: [{
+                        identifier: 'HTMLContent'
+                    }]
                 }],
                 columns: [[], []],
                 showDialog: false
@@ -110,5 +128,7 @@
 </script>
 
 <style scoped>
-
+    .md-dialog {
+        width: 700px;
+    }
 </style>
