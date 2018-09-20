@@ -15,9 +15,10 @@ import VueRouter from 'vue-router'
 Vue.use(VueMaterial);
 Vue.use(VueRouter);
 
-import AppComponent from './components/AppComponent.vue';
-import HomeComponent from './components/home/HomeComponent.vue';
+import AppComponent from './components/AppComponent';
+import HomeComponent from './components/home/HomeComponent';
 import LoginComponent from './components/authentication/LoginComponent';
+import RegisterComponent from './components/authentication/RegisterComponent'
 
 const router = new VueRouter({
     mode: 'history',
@@ -32,6 +33,11 @@ const router = new VueRouter({
             path: '/login',
             name: 'login',
             component: LoginComponent
+        },
+        {
+            path: '/register',
+            name: 'register',
+            component: RegisterComponent
         }
     ],
 });
