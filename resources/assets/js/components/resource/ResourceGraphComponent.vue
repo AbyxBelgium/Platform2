@@ -64,8 +64,7 @@
                     chart: {
                         height: 200,
                         animation: false,
-                        type: 'spline',
-                        backgroundColor: '#FAFAFA'
+                        type: 'spline'
                     },
                     title: {
                         text: ''

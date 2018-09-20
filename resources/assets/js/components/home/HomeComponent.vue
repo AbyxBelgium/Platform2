@@ -1,8 +1,10 @@
 <template>
-    <div>
-        <resource-monitor-component users="1" posts="1" categories="1" refresh-rate="2000"></resource-monitor-component>
-        <resource-graph-component refresh-rate="2000" steps="20"></resource-graph-component>
-    </div>
+    <md-card>
+        <md-card-content>
+            <resource-monitor-component class="resource-monitor" users="1" posts="1" categories="1" refresh-rate="2000"></resource-monitor-component>
+            <resource-graph-component refresh-rate="2000" steps="20"></resource-graph-component>
+        </md-card-content>
+    </md-card>
 </template>
 
 <script>
@@ -16,5 +18,7 @@
 </script>
 
 <style scoped>
-
+    .resource-monitor {
+        text-align: center;
+    }
 </style>

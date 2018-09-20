@@ -45827,7 +45827,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.resource-monitor[data-v-4a1ee4e5] {\n    text-align: center;\n}\n", ""]);
 
 // exports
 
@@ -45842,6 +45842,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__resource_ResourceMonitorComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__resource_ResourceMonitorComponent__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__resource_ResourceGraphComponent__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__resource_ResourceGraphComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__resource_ResourceGraphComponent__);
+//
+//
 //
 //
 //
@@ -45867,20 +45869,27 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
+    "md-card",
     [
-      _c("resource-monitor-component", {
-        attrs: {
-          users: "1",
-          posts: "1",
-          categories: "1",
-          "refresh-rate": "2000"
-        }
-      }),
-      _vm._v(" "),
-      _c("resource-graph-component", {
-        attrs: { "refresh-rate": "2000", steps: "20" }
-      })
+      _c(
+        "md-card-content",
+        [
+          _c("resource-monitor-component", {
+            staticClass: "resource-monitor",
+            attrs: {
+              users: "1",
+              posts: "1",
+              categories: "1",
+              "refresh-rate": "2000"
+            }
+          }),
+          _vm._v(" "),
+          _c("resource-graph-component", {
+            attrs: { "refresh-rate": "2000", steps: "20" }
+          })
+        ],
+        1
+      )
     ],
     1
   )
@@ -46683,7 +46692,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.inactive-badge[data-v-ece7d82a]::after {\n    background: gray !important;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -46696,6 +46705,20 @@ exports.push([module.i, "\n.inactive-badge[data-v-ece7d82a]::after {\n    backgr
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -47643,92 +47666,102 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "mdl-cell mdl-cell--12-col statistics" }, [
-    _c(
-      "div",
-      {
-        staticClass:
-          "material-icons mdl-badge mdl-badge--overlap statistic-badge",
-        attrs: { title: "Registered users", "data-badge": _vm.users }
-      },
-      [_vm._v("account_box")]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass:
-          "material-icons mdl-badge mdl-badge--overlap statistic-badge",
-        attrs: { title: "Total posts", "data-badge": _vm.posts }
-      },
-      [_vm._v("mode_comment")]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass:
-          "material-icons mdl-badge mdl-badge--overlap statistic-badge",
-        attrs: { title: "Categories", "data-badge": _vm.categories }
-      },
-      [_vm._v("toc")]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass:
-          "material-icons mdl-badge mdl-badge--overlap statistic-badge",
-        attrs: { title: "Platform version", "data-badge": "1.4" }
-      },
-      [_vm._v("update")]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass:
-          "material-icons mdl-badge mdl-badge--overlap statistic-badge",
-        class: { "inactive-badge": !_vm.loaded },
-        attrs: {
-          title: "Memory usage",
-          id: "mem-badge",
-          "data-badge": _vm.memory
-        }
-      },
-      [_vm._v("memory")]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass:
-          "material-icons mdl-badge mdl-badge--overlap statistic-badge",
-        class: { "inactive-badge": !_vm.loaded },
-        attrs: {
-          title: "Storage usage",
-          id: "storage-badge",
-          "data-badge": _vm.storage
-        }
-      },
-      [_vm._v("storage")]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass:
-          "material-icons mdl-badge mdl-badge--overlap statistic-badge",
-        class: { "inactive-badge": !_vm.loaded },
-        attrs: {
-          title: "Current CPU load",
-          id: "cpu-badge",
-          "data-badge": _vm.cpu
-        }
-      },
-      [_vm._v("settings_applications")]
-    )
-  ])
+  return _c(
+    "div",
+    [
+      _c(
+        "md-badge",
+        { staticClass: "md-accent", attrs: { "md-content": _vm.users } },
+        [
+          _c(
+            "md-icon",
+            { staticClass: "md-size-2x", attrs: { title: "Registered users" } },
+            [_vm._v("account_box")]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "md-badge",
+        { staticClass: "md-accent", attrs: { "md-content": _vm.posts } },
+        [
+          _c(
+            "md-icon",
+            { staticClass: "md-size-2x", attrs: { title: "Total posts" } },
+            [_vm._v("mode_comment")]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "md-badge",
+        { staticClass: "md-accent", attrs: { "md-content": _vm.categories } },
+        [
+          _c(
+            "md-icon",
+            { staticClass: "md-size-2x", attrs: { title: "Categories" } },
+            [_vm._v("toc")]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "md-badge",
+        { staticClass: "md-accent", attrs: { "md-content": "2.0" } },
+        [
+          _c(
+            "md-icon",
+            { staticClass: "md-size-2x", attrs: { title: "Platform version" } },
+            [_vm._v("update")]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "md-badge",
+        { staticClass: "md-accent", attrs: { "md-content": _vm.memory } },
+        [
+          _c(
+            "md-icon",
+            { staticClass: "md-size-2x", attrs: { title: "Memory usage" } },
+            [_vm._v("memory")]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "md-badge",
+        { staticClass: "md-accent", attrs: { "md-content": _vm.storage } },
+        [
+          _c(
+            "md-icon",
+            { staticClass: "md-size-2x", attrs: { title: "Storage usage" } },
+            [_vm._v("storage")]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "md-badge",
+        { staticClass: "md-accent", attrs: { "md-content": _vm.cpu } },
+        [
+          _c(
+            "md-icon",
+            { staticClass: "md-size-2x", attrs: { title: "Current CPU load" } },
+            [_vm._v("settings")]
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -47826,7 +47859,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -47906,8 +47939,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 chart: {
                     height: 200,
                     animation: false,
-                    type: 'spline',
-                    backgroundColor: '#FAFAFA'
+                    type: 'spline'
                 },
                 title: {
                     text: ''

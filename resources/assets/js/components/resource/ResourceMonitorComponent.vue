@@ -1,12 +1,26 @@
 <template>
-    <div class="mdl-cell mdl-cell--12-col statistics">
-        <div title="Registered users" class="material-icons mdl-badge mdl-badge--overlap statistic-badge" :data-badge="users">account_box</div>
-        <div title="Total posts" class="material-icons mdl-badge mdl-badge--overlap statistic-badge" :data-badge="posts">mode_comment</div>
-        <div title="Categories" class="material-icons mdl-badge mdl-badge--overlap statistic-badge" :data-badge="categories">toc</div>
-        <div title="Platform version" class="material-icons mdl-badge mdl-badge--overlap statistic-badge" data-badge="1.4">update</div>
-        <div title="Memory usage" class="material-icons mdl-badge mdl-badge--overlap statistic-badge" v-bind:class="{'inactive-badge': !loaded}" id="mem-badge" :data-badge="memory">memory</div>
-        <div title="Storage usage" class="material-icons mdl-badge mdl-badge--overlap statistic-badge" v-bind:class="{'inactive-badge': !loaded}" id="storage-badge" :data-badge="storage">storage</div>
-        <div title="Current CPU load" class="material-icons mdl-badge mdl-badge--overlap statistic-badge" v-bind:class="{'inactive-badge': !loaded}" id="cpu-badge" :data-badge="cpu">settings_applications</div>
+    <div>
+        <md-badge :md-content="users" class="md-accent">
+            <md-icon title="Registered users" class="md-size-2x">account_box</md-icon>
+        </md-badge>
+        <md-badge :md-content="posts" class="md-accent">
+            <md-icon title="Total posts" class="md-size-2x">mode_comment</md-icon>
+        </md-badge>
+        <md-badge :md-content="categories" class="md-accent">
+            <md-icon title="Categories" class="md-size-2x">toc</md-icon>
+        </md-badge>
+        <md-badge md-content="2.0" class="md-accent">
+            <md-icon title="Platform version" class="md-size-2x">update</md-icon>
+        </md-badge>
+        <md-badge :md-content="memory" class="md-accent">
+            <md-icon title="Memory usage" class="md-size-2x">memory</md-icon>
+        </md-badge>
+        <md-badge :md-content="storage" class="md-accent">
+            <md-icon title="Storage usage" class="md-size-2x">storage</md-icon>
+        </md-badge>
+        <md-badge :md-content="cpu" class="md-accent">
+            <md-icon title="Current CPU load" class="md-size-2x">settings</md-icon>
+        </md-badge>
     </div>
 </template>
 
@@ -55,7 +69,4 @@
 </script>
 
 <style scoped>
-    .inactive-badge::after {
-        background: gray !important;
-    }
 </style>
