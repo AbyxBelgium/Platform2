@@ -13,17 +13,17 @@
                     <form>
                         <md-field>
                             <label for="email">E-mail:</label>
-                            <md-input name="email" id="email" type="email"></md-input>
+                            <md-input name="email" id="email" type="email" v-model="email"></md-input>
                         </md-field>
                         <md-field>
                             <label for="password">Password:</label>
-                            <md-input name="password" id="password" type="password"></md-input>
+                            <md-input name="password" id="password" type="password" v-model="password"></md-input>
                         </md-field>
                     </form>
                 </md-card-content>
                 <md-card-actions>
                     <md-button class="md-raised md-accent">Forgot password?</md-button>
-                    <md-button class="md-raised md-primary">Sign in</md-button>
+                    <md-button class="md-raised md-primary" @click="login">Sign in</md-button>
                 </md-card-actions>
             </div>
         </div>
@@ -32,7 +32,22 @@
 
 <script>
     export default {
-        name: "LoginComponent"
+        name: "LoginComponent",
+        data(){
+            return {
+                email: "",
+                password: ""
+            }
+        },
+        methods: {
+            login() {
+                console.log("LOGGING IN!");
+                this.$store.dispatch("login", {
+                    email: this.email,
+                    password: this.password
+                }).then(() => this.$router.push("/"));
+            }
+        }
     }
 </script>
 
@@ -41,5 +56,6 @@
         width: 200px;
         display: block;
         margin: auto;
+        padding-top: 20px;
     }
 </style>
