@@ -17,6 +17,7 @@ Vue.use(VueRouter);
 
 import AppComponent from './components/AppComponent.vue';
 import HomeComponent from './components/home/HomeComponent.vue';
+import LoginComponent from './components/authentication/LoginComponent';
 
 const router = new VueRouter({
     mode: 'history',
@@ -27,6 +28,11 @@ const router = new VueRouter({
             name: 'home',
             component: HomeComponent
         },
+        {
+            path: '/login',
+            name: 'login',
+            component: LoginComponent
+        }
     ],
 });
 

@@ -5,7 +5,9 @@
             <md-button>Refresh</md-button>
             <md-button>Create</md-button>
         </md-toolbar>
-        <router-view></router-view>
+        <div class="page-content">
+            <router-view></router-view>
+        </div>
     </div>
 </template>
 
@@ -16,5 +18,11 @@
 </script>
 
 <style scoped>
-
+    .page-content {
+        margin: auto;
+        max-width: 1400px;
+        padding-top: 20px;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
 </style>

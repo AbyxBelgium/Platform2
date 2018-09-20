@@ -1,10 +1,17 @@
 <template>
-    <p>DIT IS DE HOME COMPONENT!</p>
+    <div>
+        <resource-monitor-component></resource-monitor-component>
+        <resource-graph-component></resource-graph-component>
+    </div>
 </template>
 
 <script>
+    import ResourceMonitorComponent from "../resource/ResourceMonitorComponent";
+    import ResourceGraphComponent from "../resource/ResourceGraphComponent";
+
     export default {
-        name: "HomeComponent"
+        name: "HomeComponent",
+        components: {ResourceGraphComponent, ResourceMonitorComponent}
     }
 </script>
 
