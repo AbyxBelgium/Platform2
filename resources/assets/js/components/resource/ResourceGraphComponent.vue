@@ -10,7 +10,7 @@
 
     export default {
         name: 'ResourceGraphComponent',
-        props: ['token', 'steps', 'refreshRate'],
+        props: ['steps', 'refreshRate'],
         components: {
             highcharts: Chart
         },
@@ -23,7 +23,12 @@
                 this.chartOptions.series[2].data.push([currentTime - (this.steps - i) * this.refreshRate, 0]);
             }
 
-            setInterval(this.updateGraph, this.refreshRate);
+            this.interval = setInterval(this.updateGraph, this.refreshRate);
+        },
+        beforeDestroy: function() {
+            if (this.interval) {
+                clearTimeout(this.interval);
+            }
         },
         methods: {
             updateGraph() {
@@ -34,7 +39,7 @@
                 let config = {
                     headers: {
                         'Accept': 'application/json',
-                        'Authorization': 'Bearer ' + this.token
+                        'Authorization': 'Bearer ' + localStorage.getItem('token')
                     }
                 };
 
@@ -54,6 +59,7 @@
         },
         data() {
             return {
+                interval: undefined,
                 chartOptions: {
                     chart: {
                         height: 200,

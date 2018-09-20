@@ -1,7 +1,7 @@
 <template>
     <div>
-        <resource-monitor-component></resource-monitor-component>
-        <resource-graph-component></resource-graph-component>
+        <resource-monitor-component users="1" posts="1" categories="1" refresh-rate="2000"></resource-monitor-component>
+        <resource-graph-component refresh-rate="2000" steps="20"></resource-graph-component>
     </div>
 </template>
 

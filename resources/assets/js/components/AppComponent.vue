@@ -2,8 +2,7 @@
     <div>
         <md-toolbar class="md-primary" md-elevation="1">
             <h3 class="md-title" style="flex: 1">Backend</h3>
-            <md-button>Refresh</md-button>
-            <md-button>Create</md-button>
+            <md-button @click="logout">Logout</md-button>
         </md-toolbar>
         <div class="page-content">
             <router-view></router-view>
@@ -13,7 +12,12 @@
 
 <script>
     export default {
-        name: "AppComponent"
+        name: "AppComponent",
+        methods: {
+            logout() {
+                this.$store.dispatch('logout').then(() => this.$router.push('/login'));
+            }
+        }
     }
 </script>
 

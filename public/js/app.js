@@ -45688,10 +45688,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: "AppComponent"
+    name: "AppComponent",
+    methods: {
+        logout: function logout() {
+            var _this = this;
+
+            this.$store.dispatch('logout').then(function () {
+                return _this.$router.push('/login');
+            });
+        }
+    }
 });
 
 /***/ }),
@@ -45713,9 +45721,7 @@ var render = function() {
             _vm._v("Backend")
           ]),
           _vm._v(" "),
-          _c("md-button", [_vm._v("Refresh")]),
-          _vm._v(" "),
-          _c("md-button", [_vm._v("Create")])
+          _c("md-button", { on: { click: _vm.logout } }, [_vm._v("Logout")])
         ],
         1
       ),
@@ -45863,9 +45869,18 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("resource-monitor-component"),
+      _c("resource-monitor-component", {
+        attrs: {
+          users: "1",
+          posts: "1",
+          categories: "1",
+          "refresh-rate": "2000"
+        }
+      }),
       _vm._v(" "),
-      _c("resource-graph-component")
+      _c("resource-graph-component", {
+        attrs: { "refresh-rate": "2000", steps: "20" }
+      })
     ],
     1
   )
@@ -46698,18 +46713,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'ResourceMonitorComponent',
-    props: ['users', 'posts', 'categories', 'token', 'refreshRate'],
+    props: ['users', 'posts', 'categories', 'refreshRate'],
     data: function data() {
         return {
             memory: "0%",
             storage: "0%",
             cpu: "0%",
-            loaded: false
+            loaded: false,
+            interval: undefined
         };
     },
 
     created: function created() {
-        setInterval(this.updateResources, this.refreshRate);
+        this.interval = setInterval(this.updateResources, this.refreshRate);
     },
     methods: {
         updateResources: function updateResources() {
@@ -46718,7 +46734,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var config = {
                 headers: {
                     'Accept': 'application/json',
-                    'Authorization': 'Bearer ' + this.token
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
                 }
             };
 
@@ -46728,6 +46744,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.storage = response.data.storage + "%";
                 _this.cpu = response.data.cpu + "%";
             });
+        }
+    },
+    beforeDestroy: function beforeDestroy() {
+        if (this.interval) {
+            clearTimeout(this.interval);
         }
     }
 });
@@ -47805,7 +47826,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -47832,7 +47853,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'ResourceGraphComponent',
-    props: ['token', 'steps', 'refreshRate'],
+    props: ['steps', 'refreshRate'],
     components: {
         highcharts: __WEBPACK_IMPORTED_MODULE_0_highcharts_vue__["Chart"]
     },
@@ -47845,7 +47866,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.chartOptions.series[2].data.push([currentTime - (this.steps - i) * this.refreshRate, 0]);
         }
 
-        setInterval(this.updateGraph, this.refreshRate);
+        this.interval = setInterval(this.updateGraph, this.refreshRate);
+    },
+    beforeDestroy: function beforeDestroy() {
+        if (this.interval) {
+            clearTimeout(this.interval);
+        }
     },
     methods: {
         updateGraph: function updateGraph() {
@@ -47856,7 +47882,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var config = {
                 headers: {
                     'Accept': 'application/json',
-                    'Authorization': 'Bearer ' + this.token
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
                 }
             };
 
@@ -47875,6 +47901,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     data: function data() {
         return {
+            interval: undefined,
             chartOptions: {
                 chart: {
                     height: 200,

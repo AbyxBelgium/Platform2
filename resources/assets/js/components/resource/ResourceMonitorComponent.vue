@@ -15,24 +15,25 @@
 
     export default {
         name: 'ResourceMonitorComponent',
-        props: ['users', 'posts', 'categories', 'token', 'refreshRate'],
+        props: ['users', 'posts', 'categories', 'refreshRate'],
         data() {
             return {
                 memory: "0%",
                 storage: "0%",
                 cpu: "0%",
-                loaded: false
+                loaded: false,
+                interval: undefined
             }
         },
         created: function() {
-            setInterval(this.updateResources, this.refreshRate);
+            this.interval = setInterval(this.updateResources, this.refreshRate);
         },
         methods: {
             updateResources() {
                 let config = {
                     headers: {
                         'Accept': 'application/json',
-                        'Authorization': 'Bearer ' + this.token
+                        'Authorization': 'Bearer ' + localStorage.getItem('token')
                     }
                 };
 
@@ -43,6 +44,11 @@
                         this.storage = response.data.storage + "%";
                         this.cpu = response.data.cpu + "%";
                     });
+            }
+        },
+        beforeDestroy: function(){
+            if (this.interval) {
+                clearTimeout(this.interval);
             }
         }
     }
