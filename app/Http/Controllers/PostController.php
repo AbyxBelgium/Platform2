@@ -16,7 +16,7 @@ class PostController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['except' => 'show']);
+        $this->middleware('auth:api', ['except' => 'show']);
     }
 
     /**
@@ -27,7 +27,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = DB::table('posts')->orderByDesc('created_at')->simplePaginate(15);
-        return view('backend.pages.post.index', ["posts" => $posts]);
+        return response()->json(["posts" => $posts]);
     }
 
     /**

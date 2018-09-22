@@ -5,3 +5,12 @@ h4 {
   font-weight: 300;
 }
 
+/* Fix for table not showing up in pages */
+
+.md-table,
+.md-table-content {
+  -webkit-box-flex: 0 !important;
+      -ms-flex: none !important;
+          flex: none !important;
+}
+

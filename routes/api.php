@@ -26,5 +26,9 @@ Route::group(['middleware' => 'auth:api'], function() {
 // Custom API routes
 Route::get('/system-resources', 'Api\SystemResourceController@show');
 
+// Extensions
 Route::get('/extension/{appName}/{extensionName}', 'Api\ExtensionController@extensionView');
 Route::get('/extension/{appName}/{extensionName}/settings', 'Api\ExtensionController@extensionSettings');
+
+// Posts
+Route::get('/posts', 'PostController@index')->name('post/index');

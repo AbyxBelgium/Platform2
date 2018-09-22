@@ -12,7 +12,6 @@ import 'vue-material/dist/theme/default.css'
 import VueMaterial from 'vue-material'
 import VueRouter from 'vue-router'
 import Vuex from 'vuex';
-import * as axios from "axios"
 
 Vue.use(VueMaterial);
 Vue.use(VueRouter);
