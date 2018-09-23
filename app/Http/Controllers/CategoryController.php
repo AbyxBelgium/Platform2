@@ -30,7 +30,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = DB::table('categories')->simplePaginate(15);
-        return view('backend.pages.category.index', ['categories' => $categories]);
+        return response()->json($categories);
     }
 
     /**

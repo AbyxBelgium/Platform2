@@ -49422,7 +49422,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.page-control[data-v-0730df72] {\n    text-align: center;\n    margin-top: 10px;\n}\n.page-control > p[data-v-0730df72] {\n    display: inline;\n    position: relative;\n    top: 11px;\n}\n", ""]);
 
 // exports
 
@@ -49450,6 +49450,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -49457,10 +49488,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     name: "PostListComponent",
     data: function data() {
         return {
-            posts: [{
-                title: 'DIT IS EEN TITEL!',
-                id: 7
-            }]
+            posts: []
         };
     },
 
@@ -49476,7 +49504,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             };
 
             __WEBPACK_IMPORTED_MODULE_0_axios__["get"]('/api/posts?page=' + page, config).then(function (response) {
-                _this.posts = response.data.posts.data;
+                _this.posts = response.data.data;
             });
         }
     },
@@ -49494,36 +49522,114 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "md-table",
+    "div",
     [
       _c(
-        "md-table-row",
+        "md-table",
         [
-          _c("md-table-head", [_vm._v("Title")]),
+          _c(
+            "md-table-row",
+            [
+              _c("md-table-head", [_vm._v("Title")]),
+              _vm._v(" "),
+              _c("md-table-head", [_vm._v("Category")]),
+              _vm._v(" "),
+              _c("md-table-head", [_vm._v("Actions")])
+            ],
+            1
+          ),
           _vm._v(" "),
-          _c("md-table-head", [_vm._v("Category")]),
-          _vm._v(" "),
-          _c("md-table-head", [_vm._v("Actions")])
+          _vm._l(_vm.posts, function(post) {
+            return _c(
+              "md-table-row",
+              { key: post.id },
+              [
+                _c("md-table-cell", [
+                  _vm._v(
+                    "\n                " + _vm._s(post.title) + "\n            "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("md-table-cell", [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(post.category_id) +
+                      "\n            "
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "md-table-cell",
+                  [
+                    _c(
+                      "md-button",
+                      { staticClass: "md-icon-button md-raised md-accent" },
+                      [_c("md-icon", [_vm._v("delete")])],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "md-button",
+                      { staticClass: "md-icon-button md-raised md-accent" },
+                      [_c("md-icon", [_vm._v("edit")])],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "md-button",
+                      { staticClass: "md-icon-button md-raised md-accent" },
+                      [_c("md-icon", [_vm._v("visibility")])],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          })
         ],
-        1
+        2
       ),
       _vm._v(" "),
-      _vm._l(_vm.posts, function(post) {
-        return _c(
-          "md-table-row",
-          { key: post.id },
-          [
-            _c("md-table-cell", [_vm._v(_vm._s(post.title))]),
-            _vm._v(" "),
-            _c("md-table-cell"),
-            _vm._v(" "),
-            _c("md-table-cell")
-          ],
-          1
-        )
-      })
+      _c(
+        "div",
+        { staticClass: "page-control" },
+        [
+          _c(
+            "md-button",
+            { staticClass: "md-icon-button md-raised md-primary" },
+            [_c("md-icon", [_vm._v("skip_previous")])],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "md-button",
+            { staticClass: "md-icon-button md-raised md-primary" },
+            [_c("md-icon", [_vm._v("keyboard_arrow_left")])],
+            1
+          ),
+          _vm._v(" "),
+          _c("p", [_vm._v("Page 1 of 1")]),
+          _vm._v(" "),
+          _c(
+            "md-button",
+            { staticClass: "md-icon-button md-raised md-primary" },
+            [_c("md-icon", [_vm._v("keyboard_arrow_right")])],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "md-button",
+            { staticClass: "md-icon-button md-raised md-primary" },
+            [_c("md-icon", [_vm._v("skip_next")])],
+            1
+          )
+        ],
+        1
+      )
     ],
-    2
+    1
   )
 }
 var staticRenderFns = []

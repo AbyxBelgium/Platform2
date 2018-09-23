@@ -32,3 +32,6 @@ Route::get('/extension/{appName}/{extensionName}/settings', 'Api\ExtensionContro
 
 // Posts
 Route::get('/posts', 'PostController@index')->name('post/index');
+
+// Categories
+Route::get('/categories', 'CategoryController@index')->name('category/index');

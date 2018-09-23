@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
 
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Material+Icons">
-    <<!-- Own style -->
+    <!-- Own style -->
     <link rel="stylesheet" href="{{ asset('css/backend/app.css') }}">
 
     <!-- All supported icons -->

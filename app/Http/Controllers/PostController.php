@@ -27,7 +27,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = DB::table('posts')->orderByDesc('created_at')->simplePaginate(15);
-        return response()->json(["posts" => $posts]);
+        return response()->json($posts);
     }
 
     /**
