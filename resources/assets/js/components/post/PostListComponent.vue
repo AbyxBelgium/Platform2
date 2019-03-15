@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <md-table>
+    <list-component>
+        <md-table slot="table-content">
             <md-table-row>
                 <md-table-head>Title</md-table-head>
                 <md-table-head>Category</md-table-head>
@@ -26,29 +26,16 @@
                 </md-table-cell>
             </md-table-row>
         </md-table>
-        <div class="page-control">
-            <md-button class="md-icon-button md-raised md-primary">
-                <md-icon>skip_previous</md-icon>
-            </md-button>
-            <md-button class="md-icon-button md-raised md-primary">
-                <md-icon>keyboard_arrow_left</md-icon>
-            </md-button>
-            <p>Page 1 of 1</p>
-            <md-button class="md-icon-button md-raised md-primary">
-                <md-icon>keyboard_arrow_right</md-icon>
-            </md-button>
-            <md-button class="md-icon-button md-raised md-primary">
-                <md-icon>skip_next</md-icon>
-            </md-button>
-        </div>
-    </div>
+    </list-component>
 </template>
 
 <script>
     import * as axios from "axios"
+    import ListComponent from "../list/ListComponent";
 
     export default {
         name: "PostListComponent",
+        components: {ListComponent},
         data() {
             return {
                 posts: []
@@ -76,14 +63,4 @@
 </script>
 
 <style scoped>
-    .page-control {
-        text-align: center;
-        margin-top: 10px;
-    }
-
-    .page-control > p {
-        display: inline;
-        position: relative;
-        top: 11px;
-    }
 </style>
